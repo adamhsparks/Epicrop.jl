@@ -1,5 +1,12 @@
-module epicrop
+module Epicrop
+export SEIR
 
-# Write your package code here.
+using CSV
+using DataFrames
+using DataFramesMeta
+using Dates
+
+
+#' Susceptible-Exposed-Infectious-Removed (SEIR) crop disease model framework
 
 end
