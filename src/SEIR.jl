@@ -105,9 +105,6 @@ Returns a DataFrame with the following fields and values.
 
 # Examples
 ```jldoctest
-# Import weather for IRRI Zeigler Experiment Station in wet season 2000
- julia> wth = CSV.read("./data/POWER.csv", DataFrame)
-
  # provide suitable values for brown spot severity
  julia> RcA = [[collect(0:6) * 20],
   [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
@@ -116,6 +113,15 @@ Returns a DataFrame with the following fields and values.
  julia> RcW = [[collect(0:8) * 3],
               [0, 0.12, 0.20, 0.38, 0.46, 0.60, 0.73, 0.87, 1.0]]
  julia> emergence = "2000-07-15"
+
+ julia> using RCall
+
+ julia> wth = rcopy(R"nasapower::get_power(community = 'AG',
+  lonlat = c(151.81, -27.48),
+  pars = c('RH2M', 'T2M', 'PRECTOT'),
+  dates = c('2000-07-01', '2000-12-31'),
+  temporal_average = 'DAILY')")
+
 
  julia> SEIR(
    wth = wth,
@@ -158,6 +164,7 @@ function seir(wth,
 
     # set date formats
     emergence_day = Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
+    
     final_day = emergence_day + Dates.Day(duration)
     season = collect(emergence_day:Day(1):final_day)
 
@@ -178,36 +185,36 @@ function seir(wth,
       rtransfer = infection = diseased = senesced = removed = now_infectious =
       now_latent = sites = total_sites = rrlex = zeros(duration + 1)
 
-    for day in 0:duration
+    for d in 0:duration
       # State calculations
-      cs_1 = day + 1
-      if day == 0
+      cs_1 = d + 1
+      if d == 0
         # start crop growth
         sites[cs_1] = H0
         rsenesced[cs_1] = RRS * sites[cs_1]
       else
-        if day > i
+        if d > i
           removed_today = infectious[infday + 2]
         else
           removed_today = 0
 
-        sites[cs_1] = sites[day] + rgrowth[day] - infection[day] -
-          rsenesced[day]
-        rsenesced[cs_1] = removed_today + RRS * sites[cs_1]
-        senesced[cs_1] = senesced[day] + rsenesced[day]
+        sites[cs_1] = sites[d] + rgrowth[d] - infection[d] -
+          rsenesced[d]
+        rsenesced[cs_1] = removed_tod + RRS * sites[cs_1]
+        senesced[cs_1] = senesced[d] + rsenesced[d]
 
-        latency[cs_1] = infection[day]
-        latday = day - p + 1
+        latency[cs_1] = infection[d]
+        latd = d - p + 1
         latday = max(0, latday)
-        now_latent[day + 1] = sum(latency[latday:day + 1])
+        now_latent[d + 1] = sum(latency[latday:d + 1])
 
-        infectious[day + 1] = rtransfer[day]
-        infday = day - i + 1
+        infectious[d + 1] = rtransfer[d]
+        infday = d - i + 1
         infday = max(0, infday)
-        now_infectious[day + 1] = sum(infectious[infday:day + 1])
+        now_infectious[d + 1] = sum(infectious[infday:d + 1])
       end
 
-      cs_2 = day + 1
+      cs_2 = d + 1
       if sites[cs_2] < 0
         sites[cs_2] = 0
         break
@@ -216,29 +223,29 @@ function seir(wth,
         RHCoef[cs_2] = function 1
         
       cs_6
-    day + 1
+    d + 1
       cs_3 = cs_6
-      rc[cs_6] = RcOpt * afgen(RcA, day) *
-        afgen(RcT, wth$TEMP[day + 1]) * RHCoef[cs_3]
-      cs_4 = day + 1
+      rc[cs_6] = RcOpt * afgen(RcA, d) *
+        afgen(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
+      cs_4 = d + 1
       diseased[cs_3] = sum(infectious) +
         now_latent[cs_4] + removed[cs_4]
-      cs_5 = day + 1
+      cs_5 = d + 1
       removed[cs_4] = sum(infectious) - now_infectious[cs_5]
 
       cofr[cs_5] = 1 - (diseased[cs_5] / (sites[cs_5] + diseased[cs_5]))
 
-      if day == onset
+      if d == onset
         # initialisation of the disease
         infection[cs_5] = I0
-      else if day > onset
+      else if d > onset
                 infection[cs_5] = now_infectious[cs_5] *
           rc[cs_5] * (cofr[cs_5] ^ a)
       else
         infection[cs_5] = 0
       end
 
-      if day >=  p
+      if d >=  p
         rtransfer[cs_5] = latency[latday + 1]
       else
         rtransfer[cs_5] = 0
@@ -269,7 +276,7 @@ function seir(wth,
         )
       )
 
-    res[!, dates := dates[1:(day + 1)]]
+    res[!, dates := dates[1:(d + 1)]]
 
     setnames(
       res,
