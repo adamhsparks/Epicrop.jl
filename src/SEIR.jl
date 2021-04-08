@@ -197,6 +197,8 @@ function seir(wth,
           removed_today = infectious[infday + 2]
         else
           removed_today = 0
+        end
+      end
 
         sites[cs_1] = sites[d] + rgrowth[d] - infection[d] -
           rsenesced[d]
@@ -212,18 +214,18 @@ function seir(wth,
         infday = d - i + 1
         infday = max(0, infday)
         now_infectious[d + 1] = sum(infectious[infday:d + 1])
-      end
 
       cs_2 = d + 1
       if sites[cs_2] < 0
         sites[cs_2] = 0
         break
+      end
 
-      if wth[!, "RHUM"[cs_2] == rhlim | wth[!, "RAIN"[cs_2] >= rainlim
-        RHCoef[cs_2] = function 1
+      if wth[!, "RHUM"[cs_2] == rhlim] | wth[!, "RAIN"[cs_2] >= rainlim]
+        RHCoef[cs_2] = 1
+       end
         
-      cs_6
-    d + 1
+      cs_6 = d + 1
       cs_3 = cs_6
       rc[cs_6] = RcOpt * afgen(RcA, d) *
         afgen(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
@@ -234,13 +236,12 @@ function seir(wth,
       removed[cs_4] = sum(infectious) - now_infectious[cs_5]
 
       cofr[cs_5] = 1 - (diseased[cs_5] / (sites[cs_5] + diseased[cs_5]))
-
+      
+      # initialisation of disease
       if d == onset
-        # initialisation of the disease
         infection[cs_5] = I0
       else if d > onset
-                infection[cs_5] = now_infectious[cs_5] *
-          rc[cs_5] * (cofr[cs_5] ^ a)
+                infection[cs_5] = now_infectious[cs_5] * rc[cs_5] * (cofr[cs_5] ^ a)
       else
         infection[cs_5] = 0
       end
