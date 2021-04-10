@@ -75,12 +75,12 @@ Returns a DataFrame with the following fields and values.
   *et al.* 2012.
 - I0 initial number of infective sites. From Table 1 Savary
   *et al.* 2012.
-- RcA crop age curve for pathogen optimum. From Table 1 Savary
-  *et al.* 2012.
-- RcT temperature curve for pathogen optimum. From Table 1 Savary
-  *et al.* 2012.
-- RcW relative curve for pathogen optimum. From Table 1 Savary
-  *et al.* 2012.
+- RcA crop age modifier for *Rc* (the basic infection rate corrected for
+  removals). From Table 1 Savary *et al.* 2012.
+- RcT temperature modifier for *Rc* (the basic infection rate corrected for
+removals). From Table 1 Savary *et al.* 2012.
+- RcW wetness modifier for *Rc* (the basic infection rate corrected for
+removals). From Table 1 Savary *et al.* 2012.
 - RcOpt potential basic infection rate corrected for removals. From
   Table 1 Savary *et al.* 2012.
 - i duration of infectious period. From Table 1 Savary
@@ -132,7 +132,7 @@ julia> SEIR(
   RcT = RcT,
   RcW = RcW,
   RcOpt = 0.61,
-  p =  6,
+  p = 6,
   i = 19,
   H0 = 600,
   a = 1,
@@ -152,7 +152,6 @@ function seir(wth,
               I0 = 1,
               RcA,
               RcT,
-              RcW,
               RcOpt,
               p,
               i,
