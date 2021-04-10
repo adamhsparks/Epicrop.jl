@@ -20,9 +20,8 @@
         RRG,
         RRLEX)
 
-A Susceptible-Exposed-Infectious-Removed (SEIR) model framework originally used
-by specific disease models in EPIRICE to simulate severity of several rice
-diseases.
+A Susceptible-Exposed-Infectious-Removed (SEIR) model framework originally used by specific
+disease models in EPIRICE to simulate severity of several rice diseases.
 
 Given proper values it can be used with other pathosystems as well.
 
@@ -47,8 +46,8 @@ Returns a DataFrame with the following fields and values.
   |lon | Longitude value as provided by `wth` object |
 
 # Arguments
-- wth a data frame of weather on a daily time-step containing data with
-  the following field names.
+- wth a data frame of weather on a daily time-step containing data with the following field
+names.
   | Field | value |
   |-------|-------------|
   |YYYYMMDD | Date as Year Month Day (ISO8601) |
@@ -59,59 +58,52 @@ Returns a DataFrame with the following fields and values.
   |TDEW | Mean daily dew point temperature (°C) |
   |RHUM | Mean daily temperature (°C) |
   |RAIN | Mean daily rainfall (mm) |
-- emergence expected date of plant emergence entered in `YYYY-MM-DD`
- format. From Table 1 Savary *et al.* 2012.
-- onset expected number of days until the onset of disease after
- emergence date. From Table 1 Savary *et al.* 2012.
-- duration simulation duration (growing season length). From Table 1
-  Savary *et al.* 2012.
-- rhlim threshold to decide whether leaves are wet or not (usually
- 90 %). From Table 1 Savary *et al.* 2012.
-- rainlim threshold to decide whether leaves are wet or not. From Table
-  1 Savary *et al.* 2012.
-- wetness_type simulate RHmax or rain threshold (0) or leaf wetness
-  duration (1). From Table 1 Savary *et al.* 2012.
-- H0 initial number of plant's healthy sites. From Table 1 Savary
-  *et al.* 2012.
-- I0 initial number of infective sites. From Table 1 Savary
-  *et al.* 2012.
-- RcA crop age modifier for *Rc* (the basic infection rate corrected for
-  removals). From Table 1 Savary *et al.* 2012.
-- RcT temperature modifier for *Rc* (the basic infection rate corrected for
-removals). From Table 1 Savary *et al.* 2012.
+- emergence expected date of plant emergence entered in `YYYY-MM-DD` format. From Table 1
+Savary *et al.* 2012.
+- onset expected number of days until the onset of disease after emergence date. From Table
+1 Savary *et al.* 2012.
+- duration simulation duration (growing season length). From Table 1 Savary *et al.* 2012.
+- rhlim threshold to decide whether leaves are wet or not (usually 90 %). From Table 1
+Savary *et al.* 2012.
+- rainlim threshold to decide whether leaves are wet or not. From Table 1 Savary *et al.*
+2012.
+- wetness_type simulate RHmax or rain threshold (0) or leaf wetness duration (1). From Table
+1 Savary *et al.* 2012.
+- H0 initial number of plant's healthy sites. From Table 1 Savary *et al.* 2012.
+- I0 initial number of infective sites. From Table 1 Savary *et al.* 2012.
+- RcA crop age modifier for *Rc* (the basic infection rate corrected for removals). From
+Table 1 Savary *et al.* 2012.
+- RcT temperature modifier for *Rc* (the basic infection rate corrected for removals). From
+Table 1 Savary *et al.* 2012.
 - RcW wetness modifier for *Rc* (the basic infection rate corrected for
 removals). From Table 1 Savary *et al.* 2012.
-- RcOpt potential basic infection rate corrected for removals. From
-  Table 1 Savary *et al.* 2012.
-- i duration of infectious period. From Table 1 Savary
-  *et al.* 2012.
- - p duration of latent period. From Table 1 Savary *et al.* 2012.
- - Sx maximum number of sites. From Table 1 Savary *et al.* 2012.
- - a aggregation coefficient. From Table 1 Savary *et al.* 2012.
-- RRS relative rate of physiological senescence. From Table 1 Savary
-  *et al.* 2012.
- - RRG relative rate of growth. From Table 1 Savary *et al.* 2012.
-- RRLEX relative rate of lesion expansion. From Table 1 Savary
-  *et al.* 2015.
- - lesion_size ...  From Table 1 Savary *et al.* 2015.
+- RcOpt potential basic infection rate corrected for removals. From Table 1 Savary *et al.*
+2012. 
+- i duration of infectious period. From Table 1 Savary *et al.* 2012.
+- p duration of latent period. From Table 1 Savary *et al.* 2012.
+- Sx maximum number of sites. From Table 1 Savary *et al.* 2012.
+- a aggregation coefficient. From Table 1 Savary *et al.* 2012.
+- RRS relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
+- RRG relative rate of growth. From Table 1 Savary *et al.* 2012.
+- RRLEX relative rate of lesion expansion. From Table 1 Savary *et al.* 2015.
+- lesion_size ...  From Table 1 Savary *et al.* 2015.
 
 # References
-> Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. Crop
-Protection, Volume 34, 2012, Pages 6-17, ISSN 0261-2194 DOI: <http://dx.doi.org/10.1016/j.cropro.2011.11.009>.
+> Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping
+potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 2012, Pages 6-
+17, ISSN 0261-2194 DOI: <http://dx.doi.org/10.1016/j.cropro.2011.11.009>.
 
-> Savary, S., Stetkiewicz, S., Brun, F., and Willocquet, L. Modelling and  Mapping Potential Epidemics of Wheat Diseases—Examples on Leaf Rust and
-Septoria Tritici Blotch Using EPIWHEAT. European Journal of Plant Pathology  142, no. 4 (August 1, 2015): 771–90. DOI:
-<https://doi.org/10.1007/s10658-015-0650-7>.
+> Savary, S., Stetkiewicz, S., Brun, F., and Willocquet, L. Modelling and Mapping Potential
+Epidemics of Wheat Diseases—Examples on Leaf Rust and Septoria Tritici Blotch Using
+EPIWHEAT. *European Journal of Plant Pathology* 142, no. 4 (August 1, 2015):
+771–90. DOI: <https://doi.org/10.1007/s10658-015-0650-7>.
 
 # Examples
 ```jldoctest
 # provide suitable values for brown spot severity
-julia> RcA = [[collect(0:6) * 20],
-  [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
-julia> RcT = [[15 .+ (collect(0:5) * 5)],
-  [0, 0.06, 1.0, 0.85, 0.16, 0]]
-julia> RcW = [[collect(0:8) * 3],
-              [0, 0.12, 0.20, 0.38, 0.46, 0.60, 0.73, 0.87, 1.0]]
+julia> RcA = [[collect(0:6) * 20], [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
+julia> RcT = [[15 .+ (collect(0:5) * 5)], [0, 0.06, 1.0, 0.85, 0.16, 0]]
+julia> RcW = [[collect(0:8) * 3], [0, 0.12, 0.20, 0.38, 0.46, 0.60, 0.73, 0.87, 1.0]]
 julia> emergence = "2000-07-15"
 
 julia> using RCall
@@ -152,6 +144,7 @@ function seir(wth,
               I0 = 1,
               RcA,
               RcT,
+              RcW,
               RcOpt,
               p,
               i,
@@ -180,9 +173,9 @@ function seir(wth,
     season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
 
     # outputvars
-    cofr = rc = RHCoef = latency = infectious = severity = rsenesced = rgrowth =
-      rtransfer = infection = diseased = senesced = removed = now_infectious =
-      now_latent = sites = total_sites = rrlex = zeros(duration + 1)
+    cofr = rc = RHCoef = latency = infectious = severity = rsenesced = rgrowth = rtransfer =
+    infection = diseased = senesced = removed = now_infectious = now_latent = sites =
+    total_sites = rrlex = zeros(duration + 1)
 
     for d in 0:duration
       # State calculations
@@ -199,8 +192,7 @@ function seir(wth,
         end
       end
 
-        sites[cs_1] = sites[d] + rgrowth[d] - infection[d] -
-          rsenesced[d]
+        sites[cs_1] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
         rsenesced[cs_1] = removed_tod + RRS * sites[cs_1]
         senesced[cs_1] = senesced[d] + rsenesced[d]
 
@@ -226,11 +218,9 @@ function seir(wth,
         
       cs_6 = d + 1
       cs_3 = cs_6
-      rc[cs_6] = RcOpt * afgen(RcA, d) *
-        afgen(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
+      rc[cs_6] = RcOpt * afgen(RcA, d) * afgen(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
       cs_4 = d + 1
-      diseased[cs_3] = sum(infectious) +
-        now_latent[cs_4] + removed[cs_4]
+      diseased[cs_3] = sum(infectious) + now_latent[cs_4] + removed[cs_4]
       cs_5 = d + 1
       removed[cs_4] = sum(infectious) - now_infectious[cs_5]
 
@@ -251,9 +241,8 @@ function seir(wth,
         rtransfer[cs_5] = 0
       end
 
-      total_sites[cs_5] = diseased[cs_5] + sites[cs_5]
-      rgrowth[cs_5] = RRG * sites[cs_5] *
-        (1 - (total_sites[cs_5] / Sx))
+      total_sites[cs_5] = diseased[cs_5] + sites[cs_5] 
+      rgrowth[cs_5] = RRG * sites[cs_5] * (1 - (total_sites[cs_5] / Sx))
       severity[cs_5] = (diseased[cs_5] - removed[cs_5]) /
         (total_sites[cs_5] - removed[cs_5]) * 100
     end
