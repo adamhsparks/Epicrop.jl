@@ -177,7 +177,7 @@ function seir(wth,
       end
 
         sites[cs_1] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
-        rsenesced[cs_1] = removed_tod + RRS * sites[cs_1]
+        rsenesced[cs_1] = removed_today + RRS * sites[cs_1]
         senesced[cs_1] = senesced[d] + rsenesced[d]
 
         latency[cs_1] = infection[d]
