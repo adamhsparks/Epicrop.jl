@@ -35,8 +35,8 @@ Returns a DataFrame with the following fields and values.
   |infectious | Number of infectious sites present on day "x" |
   |removed | Number of removed sites present on day "x" |
   |senesced | Number of senesced sites present on day "x" |
-  |rateinf | Rate of infection. \cr
-  |rtransfer | Rate of transfer from latent to infectious sites""
+  |rateinf | Rate of infection. | 
+  |rtransfer | Rate of transfer from latent to infectious sites |
   |rgrowth | Rate of growth of healthy sites |
   |rsenesced | Rate of senescence of healthy sites |
   |rlex | Rate of lesion expansion |
