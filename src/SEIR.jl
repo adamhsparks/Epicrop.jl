@@ -10,15 +10,13 @@
         I0 = 1,
         RcA,
         RcT,
-        RcW,
         RcOpt,
         p,
         i,
         Sx,
         a,
         RRS,
-        RRG,
-        RRLEX)
+        RRG)
 
 A Susceptible-Exposed-Infectious-Removed (SEIR) model framework originally used by specific
 disease models in EPIRICE to simulate severity of several rice diseases.
@@ -75,8 +73,6 @@ Savary *et al.* 2012.
 Table 1 Savary *et al.* 2012.
 - RcT temperature modifier for *Rc* (the basic infection rate corrected for removals). From
 Table 1 Savary *et al.* 2012.
-- RcW wetness modifier for *Rc* (the basic infection rate corrected for
-removals). From Table 1 Savary *et al.* 2012.
 - RcOpt potential basic infection rate corrected for removals. From Table 1 Savary *et al.*
 2012. 
 - i duration of infectious period. From Table 1 Savary *et al.* 2012.
@@ -85,25 +81,17 @@ removals). From Table 1 Savary *et al.* 2012.
 - a aggregation coefficient. From Table 1 Savary *et al.* 2012.
 - RRS relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
 - RRG relative rate of growth. From Table 1 Savary *et al.* 2012.
-- RRLEX relative rate of lesion expansion. From Table 1 Savary *et al.* 2015.
-- lesion_size ...  From Table 1 Savary *et al.* 2015.
 
 # References
 > Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping
 potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 2012, Pages 6-
 17, ISSN 0261-2194 DOI: <http://dx.doi.org/10.1016/j.cropro.2011.11.009>.
 
-> Savary, S., Stetkiewicz, S., Brun, F., and Willocquet, L. Modelling and Mapping Potential
-Epidemics of Wheat Diseases—Examples on Leaf Rust and Septoria Tritici Blotch Using
-EPIWHEAT. *European Journal of Plant Pathology* 142, no. 4 (August 1, 2015):
-771–90. DOI: <https://doi.org/10.1007/s10658-015-0650-7>.
-
 # Examples
 ```jldoctest
 # provide suitable values for brown spot severity
 julia> RcA = [[collect(0:6) * 20], [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
 julia> RcT = [[15 .+ (collect(0:5) * 5)], [0, 0.06, 1.0, 0.85, 0.16, 0]]
-julia> RcW = [[collect(0:8) * 3], [0, 0.12, 0.20, 0.38, 0.46, 0.60, 0.73, 0.87, 1.0]]
 julia> emergence = "2000-07-15"
 
 julia> using RCall
@@ -114,7 +102,6 @@ julia> wth = rcopy(R"nasapower::get_power(community = 'AG',
   dates = c('2000-07-01', '2000-12-31'),
   temporal_average = 'DAILY')")
 
-
 julia> SEIR(
   wth = wth,
   emergence = emergence,
@@ -122,7 +109,6 @@ julia> SEIR(
   duration = 120,
   RcA = RcA,
   RcT = RcT,
-  RcW = RcW,
   RcOpt = 0.61,
   p = 6,
   i = 19,
@@ -144,15 +130,13 @@ function seir(wth,
               I0 = 1,
               RcA,
               RcT,
-              RcW,
               RcOpt,
               p,
               i,
               Sx,
               a,
               RRS,
-              RRG,
-              RRLEX)
+              RRG)
 
     # set date formats
     emergence_day = Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
