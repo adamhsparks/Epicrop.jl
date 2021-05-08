@@ -171,10 +171,8 @@ function seir(wth,
       else
         if d > i
           removed_today = infectious[infday + 2]
-        else
           removed_today = 0
         end
-      end
 
         sites[cs_1] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
         rsenesced[cs_1] = removed_today + RRS * sites[cs_1]
@@ -189,7 +187,8 @@ function seir(wth,
         infday = d - i + 1
         infday = max(0, infday)
         now_infectious[d + 1] = sum(infectious[infday:d + 1])
-
+      end
+      
       cs_2 = d + 1
       if sites[cs_2] < 0
         sites[cs_2] = 0
