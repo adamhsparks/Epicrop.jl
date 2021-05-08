@@ -230,23 +230,19 @@ function seir(wth,
         (total_sites[cs_5] - removed[cs_5]) * 100
     end
 
-    res =
-      data.table(
-        cbind(
-          0:duration,
-          sites,
-          now_latent,
-          now_infectious,
-          removed,
-          senesced,
-          infection,
-          rtransfer,
-          rgrowth,
-          rsenesced,
-          diseased,
-          severity
-        )
-      )
+    res = DataFrame(
+            0:duration,
+            sites,
+            now_latent,
+            now_infectious,
+            removed,
+            senesced,
+            infection,
+            rtransfer,
+            rgrowth,
+            rsenesced,
+            diseased,
+            severity)
 
     res[!, dates := dates[1:(d + 1)]]
 
@@ -280,31 +276,31 @@ function seir(wth,
 # Original author of afgen() function is Robert J. Hijmans, in R cropsim package
 # Adapted from R package cropsim for Epicrop package package by Adam H. Sparks
 # License GPL3
-afgen <- function(xy, x) {
-  d <- dim(xy)
-  if (x <= xy[1, 1]) {
-    res <- xy[1, 2]
-  } else if (x >= xy[d[1], 1]) {
-    res <- xy[d[1], 2]
-  } else {
-    a <- xy[xy[, 1] <= x,]
-    b <- xy[xy[, 1] >= x,]
-    if (length(a) == 2) {
-      int <- rbind(a, b[1,])
-    } else if (length(b) == 2) {
-      int <- rbind(a[dim(a)[1],], b)
-    } else {
-      int <- rbind(a[dim(a)[1],], b[1,])
-    }
-    if (x == int[1, 1]) {
-      res <- int[1, 2]
-    } else if (x == int[2, 1]) {
-      res <- int[2, 2]
-    } else {
-      res <- int[1, 2] + (x - int[1, 1]) *
-        ((int[2, 2] - int[1, 2]) /
-           (int[2, 1] - int[1, 1]))
-    }
-  }
-  return(res[[1]])
-}
+
+function afgen(xy, x)
+
+  d = size(xy)
+  if (x <= xy[1, 1])
+    res = xy[1, 2]
+  elseif (x >= xy[d[1], 1]) 
+    res = xy[d[1], 2]
+  else 
+    a = xy[xy[, 1] <= x,]
+    b = xy[xy[, 1] >= x,]
+    if (length(a) == 2)
+      int = rbind(a, b[1,])
+    elseif (length(b) == 2)
+      int = rbind(a[dim(a)[1],], b)
+    else
+      int = rbind(a[dim(a)[1],], b[1,])
+    end
+    if (x == int[1, 1]) 
+      res = int[1, 2]
+    elseif (x == int[2, 1])
+      res = int[2, 2]
+    else 
+      res = int[1, 2] + (x - int[1, 1]) *
+        ((int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
+    end
+    return res[[1]]
+end
