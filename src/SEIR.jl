@@ -201,7 +201,7 @@ function seir(wth,
         
       cs_6 = d + 1
       cs_3 = cs_6
-      rc[cs_6] = RcOpt * afgen(RcA, d) * afgen(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
+      rc[cs_6] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
       cs_4 = d + 1
       diseased[cs_3] = sum(infectious) + now_latent[cs_4] + removed[cs_4]
       cs_5 = d + 1
@@ -277,7 +277,7 @@ function seir(wth,
 # Adapted from R package cropsim for Epicrop package package by Adam H. Sparks
 # License GPL3
 
-function afgen(xy, x)
+function select_mod_val(xy, x)
 
   d = size(xy)
   if (x <= xy[1, 1])
