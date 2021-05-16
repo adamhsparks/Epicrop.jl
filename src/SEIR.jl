@@ -90,7 +90,7 @@ potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 201
 # Examples
 ```jldoctest
 # provide suitable values for brown spot severity
-julia> RcA = [collect(0:6) * 20]; [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
+julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1.0]
 julia> RcT = [[15 .+ (collect(0:5) * 5)], [0, 0.06, 1.0, 0.85, 0.16, 0]]
 julia> emergence = "2000-07-15"
 
