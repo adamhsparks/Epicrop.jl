@@ -90,7 +90,7 @@ potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 201
 # Examples
 ```jldoctest
 # provide suitable values for brown spot severity
-julia> RcA = [[collect(0:6) * 20], [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
+julia> RcA = [collect(0:6) * 20]; [0.35, 0.35, 0.35, 0.47, 0.59, 0.71, 1.0]]
 julia> RcT = [[15 .+ (collect(0:5) * 5)], [0, 0.06, 1.0, 0.85, 0.16, 0]]
 julia> emergence = "2000-07-15"
 
@@ -285,14 +285,15 @@ function select_mod_val(xy, x)
   elseif (x >= xy[d[1], 1]) 
     res = xy[d[1], 2]
   else 
-    a = xy[xy[, 1] <= x,]
-    b = xy[xy[, 1] >= x,]
+    a = xy[xy[:, 1] .<= x, :]
+    b = xy[xy[:, 1] .>= x, :]
     if (length(a) == 2)
-      int = rbind(a, b[1,])
+      int = [a, b[1,]]
+      ## Borked from here...
     elseif (length(b) == 2)
-      int = rbind(a[dim(a)[1],], b)
+      int = append!(a[size(a)[1]:size(a)[1], :], b)
     else
-      int = rbind(a[dim(a)[1],], b[1,])
+      int = append!(a[size(a)[1]:size(a)[1], :], b[1:1, :])
     end
     if (x == int[1, 1]) 
       res = int[1, 2]
