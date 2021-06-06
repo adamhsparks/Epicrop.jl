@@ -1,6 +1,6 @@
 # Epicrop.jl
 
-![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental-1)
+![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)
 
 A Julia version of the R [_epicrop_](https://github.com/adamhsparks/epicrop/) package.
 
