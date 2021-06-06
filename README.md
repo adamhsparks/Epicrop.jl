@@ -1,2 +1,9 @@
 # Epicrop.jl
-Julia package of the Epicrop modelling framework
+
+![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental-1)
+
+A Julia version of the R [_epicrop_](https://github.com/adamhsparks/epicrop/) package.
+
+Weather data fetching is not built-in with this package as it is with the R version, but can
+be implemented using [**RCall**](https://github.com/JuliaInterop/RCall.jl) and calling
+(_nasapower_)[https://github.com/ropensci/nasapower].
