@@ -3,6 +3,9 @@ uuid = "32d6000a-511b-47d2-815b-11ce148b4698"
 authors = ["Adam H. Sparks <adamhsparks@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+RCall = "6f49c342-dc21-5d91-9882-a32aef131414"
+
 [compat]
 julia = "1"
 
