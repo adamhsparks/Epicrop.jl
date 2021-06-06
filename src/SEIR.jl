@@ -96,11 +96,13 @@ julia> emergence = "2000-07-15"
 
 julia> using RCall
 
-julia> wth = rcopy(R"nasapower::get_power(community = 'AG',
+julia> wth = rcopy(
+  R"nasapower::get_power(community = 'AG',
   lonlat = c(151.81, -27.48),
   pars = c('RH2M', 'T2M', 'PRECTOT'),
   dates = c('2000-07-01', '2000-12-31'),
-  temporal_average = 'DAILY')")
+  temporal_average = 'DAILY')"
+  )
 
 julia> SEIR(
   wth = wth,
@@ -273,12 +275,10 @@ function seir(wth,
   end
 
 
-# Original author of afgen() function is Robert J. Hijmans, in R cropsim package
-# Adapted from R package cropsim for Epicrop package package by Adam H. Sparks
+# Original author of afgen() function is Robert J. Hijmans, in R cropsim package.
+# Adapted from R package epicrop for Julia Epicrop package package by Adam H. Sparks
 # License GPL3
-
 function select_mod_val(xy, x)
-
   d = size(xy)
   if (x <= xy[1, 1])
     res = xy[1, 2]
@@ -288,20 +288,20 @@ function select_mod_val(xy, x)
     a = xy[xy[:, 1] .<= x, :]
     b = xy[xy[:, 1] .>= x, :]
     if (length(a) == 2)
-      int = [a, b[1,]]
-      ## Borked from here...
+      int = [a, b[1, :]]
     elseif (length(b) == 2)
-      int = append!(a[size(a)[1]:size(a)[1], :], b)
+      int = vcat(a[size(a)[1], :]', b)
     else
-      int = append!(a[size(a)[1]:size(a)[1], :], b[1:1, :])
+      int = vcat(a[size(a)[1], :]', b[1, :]')
     end
     if (x == int[1, 1]) 
       res = int[1, 2]
     elseif (x == int[2, 1])
       res = int[2, 2]
     else 
-      res = int[1, 2] + (x - int[1, 1]) *
-        ((int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
+      res = int[1, 2] + (x - int[1, 1]) * (
+        (int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
     end
-    return res[[1]]
+    return res
+  end
 end
