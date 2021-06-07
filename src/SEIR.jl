@@ -140,6 +140,9 @@ function seir(wth,
               RRS,
               RRG)
 
+    # set up infday object
+    infday = 0
+    
     # set date formats
     emergence_day = Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
     
@@ -165,71 +168,67 @@ function seir(wth,
 
     for d in 0:duration
       # State calculations
-      cs_1 = d + 1
+      d1 = d + 1
       if d == 0
         # start crop growth
-        sites[cs_1] = H0
-        rsenesced[cs_1] = RRS * sites[cs_1]
+        sites[d1] = H0
+        rsenesced[d1] = RRS * sites[d1]
       else
         if d > i
           removed_today = infectious[infday + 2]
+        else
           removed_today = 0
         end
 
-        sites[cs_1] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
-        rsenesced[cs_1] = removed_today + RRS * sites[cs_1]
-        senesced[cs_1] = senesced[d] + rsenesced[d]
+        sites[d1] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
+        rsenesced[d1] = removed_today + RRS * sites[d1]
+        senesced[d1] = senesced[d] + rsenesced[d]
 
-        latency[cs_1] = infection[d]
+        latency[d1] = infection[d]
         latd = d - p + 1
         latday = max(0, latday)
-        now_latent[d + 1] = sum(latency[latday:d + 1])
+        now_latent[d1] = sum(latency[latday:d + 1])
 
-        infectious[d + 1] = rtransfer[d]
+        infectious[d1] = rtransfer[d]
         infday = d - i + 1
         infday = max(0, infday)
-        now_infectious[d + 1] = sum(infectious[infday:d + 1])
+        now_infectious[d1] = sum(infectious[infday:d + 1])
       end
       
-      cs_2 = d + 1
-      if sites[cs_2] < 0
-        sites[cs_2] = 0
+      if sites[d1] < 0
+        sites[d1] = 0
         break
       end
 
-      if wth[!, "RHUM"[cs_2] == rhlim] | wth[!, "RAIN"[cs_2] >= rainlim]
-        RHCoef[cs_2] = 1
+      if wth[!, "RHUM"[d1] == rhlim] | wth[!, "RAIN"[d1] >= rainlim]
+        RHCoef[d1] = 1
       end
         
-      cs_6 = d + 1
-      cs_3 = cs_6
-      rc[cs_6] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth$TEMP[d + 1]) * RHCoef[cs_3]
-      cs_4 = d + 1
-      diseased[cs_3] = sum(infectious) + now_latent[cs_4] + removed[cs_4]
-      cs_5 = d + 1
-      removed[cs_4] = sum(infectious) - now_infectious[cs_5]
+      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth$TEMP[d1]) * RHCoef[d1]
+      diseased[d1] = sum(infectious) + now_latent[d1] + removed[d1]
+      removed[d1] = sum(infectious) - now_infectious[d1]
 
-      cofr[cs_5] = 1 - (diseased[cs_5] / (sites[cs_5] + diseased[cs_5]))
+      cofr[d1] = 1 - (diseased[d1] / (sites[d1] + diseased[d1]))
       
       # initialisation of disease
       if d == onset
-        infection[cs_5] = I0
-      else if d > onset
-                infection[cs_5] = now_infectious[cs_5] * rc[cs_5] * (cofr[cs_5] ^ a)
+        infection[d1] = I0
+      elseif d > onset
+                infection[d1] = now_infectious[d1] * rc[d1] * (cofr[d1] ^ a)
       else
-        infection[cs_5] = 0
+        infection[d1] = 0
       end
 
       if d >=  p
-        rtransfer[cs_5] = latency[latday + 1]
+        rtransfer[d1] = latency[latday + 1]
       else
-        rtransfer[cs_5] = 0
+        rtransfer[d1] = 0
       end
 
-      total_sites[cs_5] = diseased[cs_5] + sites[cs_5] 
-      rgrowth[cs_5] = RRG * sites[cs_5] * (1 - (total_sites[cs_5] / Sx))
-      severity[cs_5] = (diseased[cs_5] - removed[cs_5]) /
-        (total_sites[cs_5] - removed[cs_5]) * 100
+      total_sites[d1] = diseased[d1] + sites[d1] 
+      rgrowth[d1] = RRG * sites[d1] * (1 - (total_sites[d1] / Sx))
+      severity[d1] = (diseased[d1] - removed[d1]) /
+        (total_sites[d1] - removed[d1]) * 100
     end
 
     res = DataFrame(
