@@ -104,11 +104,13 @@ julia> wth = rcopy(
   temporal_average = 'DAILY')"
   )
 
-julia> SEIR(
+julia> seir(
   wth = wth,
-  emergence = emergence,
+  emergence = "2000-07-15",
   onset = 20,
   duration = 120,
+  rhlim = 90,
+  rainlim = 5,
   RcA = RcA,
   RcT = RcT,
   RcOpt = 0.61,
@@ -121,15 +123,16 @@ julia> SEIR(
   RRG = 0.1
 )
 ```
+
 """
 function seir(wth,
               emergence,
               onset,
               duration,
-              rhlim = 90,
-              rainlim = 5,
+              rhlim,
+              rainlim,
               H0,
-              I0 = 1,
+              I0,
               RcA,
               RcT,
               RcOpt,
@@ -164,7 +167,7 @@ function seir(wth,
     # outputvars
     cofr = rc = RHCoef = latency = infectious = severity = rsenesced = rgrowth = rtransfer =
     infection = diseased = senesced = removed = now_infectious = now_latent = sites =
-    total_sites = rrlex = zeros(duration + 1)
+    total_sites = rrlex = lat = lon = zeros(duration + 1)
 
     for d in 0:duration
       # State calculations
@@ -245,7 +248,7 @@ function seir(wth,
             diseased,
             severity)
 
-    res[!, dates := dates[1:(d + 1)]]
+   # res[!, :dates] = dates[1:(d + 1)]]
 
     setnames(
       res,
@@ -268,8 +271,8 @@ function seir(wth,
 
     setcolorder(res, c("simday", "dates"))
 
-    res[!, lat := rep_len(wth[!, LAT], .N)]
-    res[!, lon := rep_len(wth[!, LON], .N)]
+    res[!, :lat] = wth[!, LAT]
+    res[!, :lon] = wth[!, LON]
     return res
   end
 
