@@ -165,7 +165,7 @@ function seir(wth,
     season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
 
     # outputvars
-    cofr = rc = RHCoef = latency = infectious = severity = rsenesced = rgrowth = rtransfer =
+    cofr = rc = RHCoef = latency = infectious = intensity = rsenesced = rgrowth = rtransfer =
     infection = diseased = senesced = removed = now_infectious = now_latent = sites =
     total_sites = rrlex = lat = lon = zeros(duration + 1)
 
@@ -230,7 +230,7 @@ function seir(wth,
 
       total_sites[d1] = diseased[d1] + sites[d1] 
       rgrowth[d1] = RRG * sites[d1] * (1 - (total_sites[d1] / Sx))
-      severity[d1] = (diseased[d1] - removed[d1]) /
+      intensity[d1] = (diseased[d1] - removed[d1]) /
         (total_sites[d1] - removed[d1]) * 100
     end
 
@@ -246,7 +246,7 @@ function seir(wth,
             rgrowth,
             rsenesced,
             diseased,
-            severity)
+            intensity)
 
    # res[!, :dates] = dates[1:(d + 1)]]
 
@@ -264,7 +264,7 @@ function seir(wth,
         "rgrowth",
         "rsenesced",
         "diseased",
-        "severity",
+        "intensity",
         "dates"
       )
     )
