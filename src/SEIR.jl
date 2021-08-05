@@ -203,7 +203,8 @@ function seir(wth,
         break
       end
 
-      if wth[!, "RHUM"[d1] >= rhlim] | wth[!, "RAIN"[d1] >= rainlim]
+   # This is broken
+      if (wth[!, :RH2M][d1] >= rhlim | wth[!, :PRECTOT][d1] >= rainlim)
         RHCoef[d1] = 1
       end
         
