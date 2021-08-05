@@ -204,11 +204,11 @@ function seir(wth,
       end
 
    # This is broken
-      if (wth[!, :RH2M][d1] >= rhlim | wth[!, :PRECTOT][d1] >= rainlim)
+      if (wth[!, :RH2M][d1] >= rhlim || wth[!, :PRECTOT][d1] >= rainlim)
         RHCoef[d1] = 1
       end
         
-      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth$TEMP[d1]) * RHCoef[d1]
+      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth[!, :TEMP][d1]) * RHCoef[d1]
       diseased[d1] = sum(infectious) + now_latent[d1] + removed[d1]
       removed[d1] = sum(infectious) - now_infectious[d1]
 
