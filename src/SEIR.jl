@@ -187,7 +187,7 @@ function seir(wth,
         senesced[d1] = senesced[d] + rsenesced[d]
 
         latency[d1] = infection[d]
-        latd = d - p + 1
+        latday = d - p + 1
         latday = max(0, latday)
         now_latent[d1] = sum(latency[latday:d + 1])
 
