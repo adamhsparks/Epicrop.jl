@@ -91,8 +91,7 @@ potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 201
 ```jldoctest
 # provide suitable values for brown spot severity
 julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1.0]
-julia> RcT = [[15 .+ (collect(0:5) * 5)], [0, 0.06, 1.0, 0.85, 0.16, 0]]
-julia> emergence = "2000-07-15"
+julia> RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 julia> using RCall
 
@@ -156,8 +155,8 @@ function seir(wth,
     emergence_doy = Dates.dayofyear(emergence_day)
 
     # check that the dates roughly align
-    if !(emergence_day >= wth[1, "YYYYMMDD"]) ||
-        final_day > findmax(wth[:, "YYYYMMDD"])[1]
+    if !(emergence_day >= wth[1, "YYYYMMDD"] ||
+        final_day > findmax(wth[:, "YYYYMMDD"])[1])
       error("incomplete weather data or dates do not align")
     end
 
@@ -203,12 +202,11 @@ function seir(wth,
         break
       end
 
-   # This is broken
       if (wth[!, :RH2M][d1] >= rhlim || wth[!, :PRECTOT][d1] >= rainlim)
         RHCoef[d1] = 1
       end
         
-      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth[!, :TEMP][d1]) * RHCoef[d1]
+      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth[!, :T2M][d1]) * RHCoef[d1]
       diseased[d1] = sum(infectious) + now_latent[d1] + removed[d1]
       removed[d1] = sum(infectious) - now_infectious[d1]
 
@@ -248,8 +246,6 @@ function seir(wth,
             rsenesced,
             diseased,
             intensity)
-
-   # res[!, :dates] = dates[1:(d + 1)]]
 
     setnames(
       res,
