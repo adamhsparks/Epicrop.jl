@@ -244,10 +244,9 @@ function seir(wth,
         rtransfer[d1] = 0
       end
 
-      total_sites[d1] = diseased[d1] + sites[d1] 
+      total_sites[d1] = diseased[d1] + sites[d1]
       rgrowth[d1] = RRG * sites[d1] * (1 - (total_sites[d1] / Sx))
-      intensity[d1] = (diseased[d1] - removed[d1]) /
-        (total_sites[d1] - removed[d1]) * 100
+      intensity[d1] = (diseased[d1] - removed[d1]) / (total_sites[d1] - removed[d1]) * 100
     end
 
     res = DataFrame(
@@ -314,8 +313,7 @@ function select_mod_val(xy, x)
     elseif (x == int[2, 1])
       res = int[2, 2]
     else 
-      res = int[1, 2] + (x - int[1, 1]) * (
-        (int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
+      res = int[1, 2] + (x - int[1, 1]) * ((int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
     end
     return res
   end
