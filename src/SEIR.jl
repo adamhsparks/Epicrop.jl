@@ -281,13 +281,12 @@ function select_mod_val(xy, x)
   d = size(xy)
   if (x <= xy[1, 1])
     res = xy[1, 2]
-  elseif (x >= xy[d[1], 1]) 
-    res = xy[d[1], 2]
+  elseif (x >= xy[d[1], 1])
   else 
     a = xy[xy[:, 1] .<= x, :]
     b = xy[xy[:, 1] .>= x, :]
     if (length(a) == 2)
-      int = [a, b[1, :]]
+      int = vcat(a, b[[1], :])
     elseif (length(b) == 2)
       int = vcat(a[size(a)[1], :]', b)
     else
