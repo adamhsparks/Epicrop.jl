@@ -162,16 +162,33 @@ function seir(wth,
 
     # subset weather data where date is greater than emergence minus one
     season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
+    
+    # output variables
+    cofr = zeros(duration + 1)
+    rc = zeros(duration + 1)
+    RHCoef = zeros(duration + 1)
+    latency = zeros(duration + 1)
+    infectious = zeros(duration + 1)
+    intensity = zeros(duration + 1)
+    rsenesced = zeros(duration + 1)
+    rgrowth = zeros(duration + 1)
+    rtransfer = zeros(duration + 1)
+    infection = zeros(duration + 1)
+    diseased = zeros(duration + 1)
+    senesced = zeros(duration + 1)
+    removed = zeros(duration + 1)
+    now_infectious = zeros(duration + 1)
+    now_latent = zeros(duration + 1)
+    sites = zeros(duration + 1)
+    total_sites = zeros(duration + 1)
+    rrlex = zeros(duration + 1)
+    lat = zeros(duration + 1)
+    lon = zeros(duration + 1)
 
-    # outputvars
-    cofr = rc = RHCoef = latency = infectious = intensity = rsenesced = rgrowth = rtransfer =
-    infection = diseased = senesced = removed = now_infectious = now_latent = sites =
-    total_sites = rrlex = lat = lon = zeros(duration + 1)
-
-    for d in 0:duration
+    for d in 1:length(duration)
       # State calculations
       d1 = d + 1
-      if d == 0
+      if d == 1
         # start crop growth
         sites[d1] = H0
         rsenesced[d1] = RRS * sites[d1]
