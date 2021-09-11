@@ -103,7 +103,7 @@ julia> wth = rcopy(
   temporal_average = 'DAILY')"
   )
 
-julia> seir(
+julia> SEIR(
   wth = wth,
   emergence = "2000-07-15",
   onset = 20,
@@ -290,9 +290,7 @@ function SEIR(wth,
   end
 
 
-# Original author of afgen() function is Robert J. Hijmans, in R cropsim package.
-# Adapted from R package epicrop for Julia Epicrop package package by Adam H. Sparks
-# License GPL3
+# Adapted from R package epicrop for SEIR.jl by Adam H. Sparks
 function select_mod_val(xy, x)
   d = size(xy)
   if (x <= xy[1, 1])
