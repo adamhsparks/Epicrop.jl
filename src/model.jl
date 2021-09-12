@@ -223,7 +223,7 @@ function SEIR(wth,
         RHCoef[d1] = 1
       end
         
-      rc[d1] = RcOpt * select_mod_val(RcA, d) * select_mod_val(RcT, wth[!, :T2M][d1]) * RHCoef[d1]
+      rc[d1] = RcOpt * select_mod_val(RcA, d1) * select_mod_val(RcT, wth[!, :T2M][d1]) * RHCoef[d1]
       diseased[d1] = sum(infectious) + now_latent[d1] + removed[d1]
       removed[d1] = sum(infectious) - now_infectious[d1]
 
