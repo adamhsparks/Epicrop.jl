@@ -290,30 +290,8 @@ function SEIR(wth,
     return res
   end
 
-
-# Adapted from R package epicrop for SEIR.jl by Adam H. Sparks
-function select_mod_val(xy, x)
-  d = size(xy)
-  if (x <= xy[1, 1])
-    res = xy[1, 2]
-  elseif (x >= xy[d[1], 1])
-  else 
-    a = xy[xy[:, 1] .<= x, :]
-    b = xy[xy[:, 1] .>= x, :]
-    if (length(a) == 2)
-      int = vcat(a, b[[1], :])
-    elseif (length(b) == 2)
-      int = vcat(a[size(a)[1], :]', b)
-    else
-      int = vcat(a[size(a)[1], :]', b[1, :]')
-    end
-    if (x == int[1, 1]) 
-      res = int[1, 2]
-    elseif (x == int[2, 1])
-      res = int[2, 2]
-    else 
-      res = int[1, 2] + (x - int[1, 1]) * ((int[2, 2] - int[1, 2]) / (int[2, 1] - int[1, 1]))
-    end
-    return res
+  function fn_Rc(Rc, x) 
+    itp = LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc = 0)
+    x = itp.(x)
+    return x
   end
-end
