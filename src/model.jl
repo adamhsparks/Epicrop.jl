@@ -90,21 +90,22 @@ potential epidemics of rice diseases globally. *Crop Protection*, Volume 34, 201
 # Examples
 ```jldoctest
 # provide suitable values for brown spot severity
-julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1.0]
+julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 julia> RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 julia> using RCall
 
-julia> wth = rcopy(
-  R"nasapower::get_power(community = 'AG',
-  lonlat = c(151.81, -27.48),
-  pars = c('RH2M', 'T2M', 'PRECTOT'),
-  dates = c('2000-07-01', '2000-12-31'),
-  temporal_average = 'DAILY')"
+julia> nasa_wth = rcopy(
+  R"nasapower::get_power(
+    community = 'AG',
+    lonlat = c(151.81, -27.48),
+    pars = c('RH2M', 'T2M', 'PRECTOTCORR'),
+    dates = c('2000-07-01', '2000-12-31'),
+    temporal_api = 'daily')"
   )
 
 julia> SEIR(
-  wth = wth,
+  wth = nasa_wth,
   emergence = "2000-07-15",
   onset = 20,
   duration = 120,
