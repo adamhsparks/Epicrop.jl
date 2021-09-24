@@ -106,26 +106,27 @@ julia> nasa_wth = rcopy(
 
 julia> SEIR(
   wth = nasa_wth,
-  emergence = "2000-07-15",
+  emergence = '2000-07-15',
   onset = 20,
   duration = 120,
   rhlim = 90,
   rainlim = 5,
+  H0 = 600,
+  I0 = 1,
   RcA = RcA,
   RcT = RcT,
   RcOpt = 0.61,
   p = 6,
   i = 19,
-  H0 = 600,
-  a = 1,
   Sx = 100000,
+  a = 1,
   RRS = 0.01,
   RRG = 0.1
 )
 ```
 
 """
-function SEIR(wth,
+function SEIR(;wth,
               emergence,
               onset,
               duration,
