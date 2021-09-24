@@ -253,42 +253,22 @@ function SEIR(;wth,
     end
 
     res = DataFrame(
-            0:duration,
-            sites,
-            now_latent,
-            now_infectious,
-            removed,
-            senesced,
-            infection,
-            rtransfer,
-            rgrowth,
-            rsenesced,
-            diseased,
-            intensity)
+            simday = 0:duration,
+            dates = season,
+            sites = sites,
+            latent = now_latent,
+            infectious = now_infectious,
+            removed = removed,
+            senseced = senesced,
+            rateinf = infection,
+            rtransfer = rtransfer,
+            rgrowth = rgrowth,
+            rsenesced = rsenesced,
+            diseased = diseased,
+            intensity = intensity,
+            lat = wth[!, :LAT],
+            lon = wth[!, :LON])
 
-    setnames(
-      res,
-      c(
-        "simday",
-        "sites",
-        "latent",
-        "infectious",
-        "removed",
-        "senesced",
-        "rateinf",
-        "rtransfer",
-        "rgrowth",
-        "rsenesced",
-        "diseased",
-        "intensity",
-        "dates"
-      )
-    )
-
-    setcolorder(res, c("simday", "dates"))
-
-    res[!, :lat] = wth[!, LAT]
-    res[!, :lon] = wth[!, LON]
     return res
   end
 
