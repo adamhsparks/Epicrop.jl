@@ -98,15 +98,17 @@ julia> using RCall
 julia> nasa_wth = rcopy(
   R"nasapower::get_power(
     community = 'AG',
-    lonlat = c(151.81, -27.48),
+    lonlat = c(121.25562, 14.6774),
     pars = c('RH2M', 'T2M', 'PRECTOTCORR'),
-    dates = c('2000-07-01', '2000-12-31'),
+    dates = c('2000-06-30', '2000-12-31'),
     temporal_api = 'daily')"
-  )
+    )
+
+julia> rename!(nasa_wth, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 
 julia> SEIR(
   wth = nasa_wth,
-  emergence = '2000-07-15',
+  emergence = "2000-07-01",
   onset = 20,
   duration = 120,
   rhlim = 90,
