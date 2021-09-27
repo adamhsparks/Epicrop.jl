@@ -206,27 +206,22 @@ function SEIR(;wth,
           removed_today = 0
         end
 
-        sites[d] = sites[d] + rgrowth[d] - infection[d] - rsenesced[d]
+        sites[d] = sites[d_1] + rgrowth[d_1] - infection[d_1] - rsenesced[d_1]
         rsenesced[d] = removed_today + RRS * sites[d]
-        senesced[d] = senesced[d] + rsenesced[d]
+        senesced[d] = senesced[d_1] + rsenesced[d_1]
 
-        latency[d] = infection[d]
-        latday = d - p + 1
-        latday = max(0, latday)
-        now_latent[d] = sum(latency[latday:d + 1])
+        latency[d] = infection[d_1]
+        latday = d - p
+        latday = max(1, latday)
+        now_latent[d] = sum(latency[latday:d])
 
-        infectious[d] = rtransfer[d]
-        infday = d - i + 1
-        infday = max(0, infday)
-        now_infectious[d] = sum(infectious[infday:d + 1])
+        infectious[d] = rtransfer[d_1]
+        infday = d - i
+        infday = max(1, infday)
+        now_infectious[d] = sum(infectious[infday:d])
       end
       
-      if sites[d] < 0
-        sites[d] = 0
-        break
-      end
-
-      if (wth[!, :RH2M][d] >= rhlim || wth[!, :PRECTOTCORR][d] >= rainlim)
+      if (wth[!, :RHUM][d] >= rhlim || wth[!, :RAIN][d] >= rainlim)
         RHCoef[d] = 1
       end
         
@@ -246,7 +241,7 @@ function SEIR(;wth,
       end
 
       if d >=  p
-        rtransfer[d] = latency[latday + 1]
+        rtransfer[d] = latency[latday]
       else
         rtransfer[d] = 0
       end
@@ -257,7 +252,7 @@ function SEIR(;wth,
     end
 
     res = DataFrame(
-            simday = 0:duration,
+            simday = 1:duration,
             dates = season,
             sites = sites,
             latent = now_latent,
