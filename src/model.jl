@@ -265,8 +265,9 @@ function SEIR(;wth,
             rsenesced = rsenesced,
             diseased = diseased,
             intensity = intensity,
-            lat = wth[!, :LAT],
-            lon = wth[!, :LON])
+            lat = wth[1, "LAT"],
+            lon = wth[1, "LON"]
+            )
 
     return res
   end
