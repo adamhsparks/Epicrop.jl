@@ -164,34 +164,36 @@ function SEIR(;wth,
       error("incomplete weather data or dates do not align")
     end
 
-    # subset weather data where date is greater than emergence minus one
+    # subset weather data where date is greater than emergence
     season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
     
     # output variables
-    cofr = zeros(duration + 1)
-    rc = zeros(duration + 1)
-    RHCoef = zeros(duration + 1)
-    latency = zeros(duration + 1)
-    infectious = zeros(duration + 1)
-    intensity = zeros(duration + 1)
-    rsenesced = zeros(duration + 1)
-    rgrowth = zeros(duration + 1)
-    rtransfer = zeros(duration + 1)
-    infection = zeros(duration + 1)
-    diseased = zeros(duration + 1)
-    senesced = zeros(duration + 1)
-    removed = zeros(duration + 1)
-    now_infectious = zeros(duration + 1)
-    now_latent = zeros(duration + 1)
-    sites = zeros(duration + 1)
-    total_sites = zeros(duration + 1)
-    rrlex = zeros(duration + 1)
-    lat = zeros(duration + 1)
-    lon = zeros(duration + 1)
-    Rc_age = fn_Rc(RcA, 1:duration + 1)
-    Rc_temp = fn_Rc(RcT, wth[!, :T2M])
+    cofr = zeros(duration)
+    rc = zeros(duration)
+    RHCoef = zeros(duration)
+    latency = zeros(duration)
+    infectious = zeros(duration)
+    intensity = zeros(duration)
+    rsenesced = zeros(duration)
+    rgrowth = zeros(duration)
+    rtransfer = zeros(duration)
+    infection = zeros(duration)
+    diseased = zeros(duration)
+    senesced = zeros(duration)
+    removed = zeros(duration)
+    now_infectious = zeros(duration)
+    now_latent = zeros(duration)
+    sites = zeros(duration)
+    total_sites = zeros(duration)
+    rrlex = zeros(duration)
+    lat = zeros(duration)
+    lon = zeros(duration)
+    Rc_age = fn_Rc(RcA, 1:duration)
+    Rc_temp = fn_Rc(RcT, wth[!, :TEMP])
 
-    for d in 1:length(duration)
+    for d in 1:duration
+      d_1 = d - 1
+      
       # State calculations
       if d == 1
         # start crop growth
