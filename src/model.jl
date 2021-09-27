@@ -94,6 +94,7 @@ julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 julia> RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 julia> using RCall
+julia> using DataFrames
 
 julia> nasa_wth = rcopy(
   R"nasapower::get_power(
