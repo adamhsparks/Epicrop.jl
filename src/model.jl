@@ -152,7 +152,7 @@ function SEIR(;wth,
     # set date formats
     emergence_day = Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
     
-    final_day = emergence_day + Dates.Day(duration)
+    final_day = emergence_day + Dates.Day(duration - 1)
     season = collect(emergence_day:Day(1):final_day)
 
     # convert emergence date into Julian date, sequential day in year
