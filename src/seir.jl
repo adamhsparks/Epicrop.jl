@@ -54,7 +54,8 @@ function run_seir_model(;
     emergence_doy = Dates.dayofyear(emergence_day)
 
     # check that the dates roughly align
-    if !(emergence_day >= wth[1, "YYYYMMDD"] || final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
+    if !(emergence_day >= wth[1, "YYYYMMDD"] || 
+        final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
     end
 
