@@ -1,11 +1,11 @@
 module Epicrop
 
 using DataFrames
-import Dates: Date
-import Interpolations: LinearInterpolation
+using Dates
+using Interpolations
 
 include("seir.jl")
 
-export SEIR
+export run_seir
 
 end # module
