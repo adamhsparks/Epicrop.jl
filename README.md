@@ -1,4 +1,4 @@
-# SEIR.jl
+# Epicrop.jl
 
 ![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)
 
