@@ -42,18 +42,14 @@ function run_seir_model(;
     RRS,
     RRG,
 )
-    # set up infday object
-    infday = 0
 
-    # set date formats
     emergence_day = Dates.Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
     final_day = emergence_day + Dates.Day(duration - 1)
     season = Base.collect(emergence_day:Dates.Day(1):final_day)
 
-    # convert emergence date into Julian date, sequential day in year
+    # Convert emergence date into Julian date, sequential day in year.
     emergence_doy = Dates.dayofyear(emergence_day)
 
-    # check that the dates roughly align
     if !(emergence_day >= wth[1, "YYYYMMDD"] || 
         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
@@ -67,10 +63,12 @@ function run_seir_model(;
         Base.error("I0 cannot be < 0, check your initial number of infective sites")
     end
 
-    # subset weather data where date is greater than emergence
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
-    # output variables
+    # Create `infday` for use in for loop below.
+    infday = 0
+
+    # Create vectors of preallocated output variables.
     cofr = Base.zeros(duration)
     rc = Base.zeros(duration)
     RHCoef = Base.zeros(duration)
@@ -94,9 +92,9 @@ function run_seir_model(;
     for d in 1:duration
         d_1 = d - 1
 
-        # State calculations
+        # Start of the state calculations.
         if d == 1
-            # start crop growth
+            # Start crop growth.
             sites[d] = H0
             rsenesced[d] = RRS * sites[d]
         else
@@ -131,7 +129,7 @@ function run_seir_model(;
 
         cofr[d] = 1 - (diseased[d] / (sites[d] + diseased[d]))
 
-        # initialisation of disease
+        # Initialise disease.
         if d == onset
             infection[d] = I0
         elseif d > onset
