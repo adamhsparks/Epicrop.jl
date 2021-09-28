@@ -31,9 +31,6 @@ optimal curve values for respective crop diseases.
 
 # Returns
 - A `DataFrame` with the model's output.
-
-# Throws
-- `NotFoundError`: I guess we could throw an error if `val` isn't found.
 """
 
 function run_seir_model(;
