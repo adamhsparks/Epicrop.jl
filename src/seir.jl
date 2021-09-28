@@ -62,8 +62,8 @@ function run_seir(;
     now_latent = Base.zeros(duration)
     sites = Base.zeros(duration)
     total_sites = Base.zeros(duration)
-    Rc_age = _fn_Rc(RcA, 1:duration)
-    Rc_temp = _fn_Rc(RcT, wth[!, :TEMP])
+    Rc_age = _fn_rc(RcA, 1:duration)
+    Rc_temp = _fn_rc(RcT, wth[!, :TEMP])
 
     for d = 1:duration
         d_1 = d - 1
@@ -146,8 +146,8 @@ function run_seir(;
     return res
 end
 
-function fn_Rc(Rc, x)
-    itp = LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc = 0)
+function _fn_rc(Rc, x)
+    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc = 0)
     x = itp.(x)
     return x
 end
