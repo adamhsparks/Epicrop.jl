@@ -1,3 +1,3 @@
 # SEIR.jl
 
-Documentation for SEIR.jl
+Documentation for Epicrop.jl
