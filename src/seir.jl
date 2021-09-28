@@ -91,7 +91,7 @@ function run_seir_model(;
     Rc_age = _fn_rc(RcA, 1:duration)
     Rc_temp = _fn_rc(RcT, wth[!, :TEMP])
 
-    for d = 1:duration
+    for d in 1:duration
         d_1 = d - 1
 
         # State calculations
