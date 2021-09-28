@@ -1,9 +1,5 @@
-# Epicrop.jl
+# Epicrop
 
-![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)
-
-A Julia version of the SEIR model from the R [_epicrop_](https://github.com/adamhsparks/epicrop/) package.
-
-Weather data fetching is not built-in with this package as it is with _epicrop_, but can
-be implemented using [**RCall**](https://github.com/JuliaInterop/RCall.jl) and calling
-[_nasapower_](https://github.com/ropensci/nasapower).
+[![Lifcycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-yellow.svg)]
+[![Build Status](https://github.com/adamshparks/Epicrop.jl/workflows/CI/badge.svg)](https://github.com/adamshparks/Epicrop.jl/actions)
+[![Coverage](https://codecov.io/gh/adamshparks/Epicrop.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/adamshparks/Epicrop.jl)
