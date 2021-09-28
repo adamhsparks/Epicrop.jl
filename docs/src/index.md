@@ -94,7 +94,7 @@ julia> nasa_wth = rcopy(
     temporal_api = 'daily')"
     )
 julia> rename!(nasa_wth, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-julia> SEIR(
+julia> run_seir_model(
   wth = nasa_wth,
   emergence = "2000-07-01",
   onset = 20,
