@@ -3,7 +3,6 @@ export SEIR
 
 using CSV
 using DataFrames
-using DataFramesMeta
 using Dates
 using Interpolations
 using RCall
