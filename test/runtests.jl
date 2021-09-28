@@ -1,6 +1,6 @@
-using epicrop
+using Epicrop 
 using Test
 
-@testset "epicrop.jl" begin
-    # Write your tests here.
+@testset "Epicrop.jl" begin
+    
 end

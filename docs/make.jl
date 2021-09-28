@@ -1,10 +1,10 @@
 using Documenter
-using SEIR
+using Epicrop 
 
 makedocs(
-    sitename = "SEIR",
+    sitename = "Epicrop",
     format = Documenter.HTML(),
-    modules = [SEIR]
+    modules = [Epicrop]
 )
 
 # Documenter can also automatically deploy documentation to gh-pages.
