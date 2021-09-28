@@ -1,4 +1,4 @@
-function SEIR(;
+function run_seir(;
     wth,
     emergence,
     onset,
