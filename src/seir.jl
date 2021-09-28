@@ -21,49 +21,49 @@ function run_seir(;
     infday = 0
 
     # set date formats
-    emergence_day = Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
+    emergence_day = Dates.Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
     final_day = emergence_day + Dates.Day(duration - 1)
-    season = collect(emergence_day:Day(1):final_day)
+    season = Base.collect(emergence_day:Dates.Day(1):final_day)
 
     # convert emergence date into Julian date, sequential day in year
     emergence_doy = Dates.dayofyear(emergence_day)
 
     # check that the dates roughly align
-    if !(emergence_day >= wth[1, "YYYYMMDD"] || final_day > findmax(wth[:, "YYYYMMDD"])[1])
+    if !(emergence_day >= wth[1, "YYYYMMDD"] || final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
     end
 
     if (H0 < 0)
-        error("H0 cannot be < 0, check your initial number of healthy sites")
+        Base.error("H0 cannot be < 0, check your initial number of healthy sites")
     end
 
     if (I0 < 0)
-        error("I0 cannot be < 0, check your initial number of infective sites")
+        Base.error("I0 cannot be < 0, check your initial number of infective sites")
     end
 
     # subset weather data where date is greater than emergence
-    season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
+    season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
     # output variables
-    cofr = zeros(duration)
-    rc = zeros(duration)
-    RHCoef = zeros(duration)
-    latency = zeros(duration)
-    infectious = zeros(duration)
-    intensity = zeros(duration)
-    rsenesced = zeros(duration)
-    rgrowth = zeros(duration)
-    rtransfer = zeros(duration)
-    infection = zeros(duration)
-    diseased = zeros(duration)
-    senesced = zeros(duration)
-    removed = zeros(duration)
-    now_infectious = zeros(duration)
-    now_latent = zeros(duration)
-    sites = zeros(duration)
-    total_sites = zeros(duration)
-    Rc_age = fn_Rc(RcA, 1:duration)
-    Rc_temp = fn_Rc(RcT, wth[!, :TEMP])
+    cofr = Base.zeros(duration)
+    rc = Base.zeros(duration)
+    RHCoef = Base.zeros(duration)
+    latency = Base.zeros(duration)
+    infectious = Base.zeros(duration)
+    intensity = Base.zeros(duration)
+    rsenesced = Base.zeros(duration)
+    rgrowth = Base.zeros(duration)
+    rtransfer = Base.zeros(duration)
+    infection = Base.zeros(duration)
+    diseased = Base.zeros(duration)
+    senesced = Base.zeros(duration)
+    removed = Base.zeros(duration)
+    now_infectious = Base.zeros(duration)
+    now_latent = Base.zeros(duration)
+    sites = Base.zeros(duration)
+    total_sites = Base.zeros(duration)
+    Rc_age = _fn_Rc(RcA, 1:duration)
+    Rc_temp = _fn_Rc(RcT, wth[!, :TEMP])
 
     for d = 1:duration
         d_1 = d - 1
@@ -86,13 +86,13 @@ function run_seir(;
 
             latency[d] = infection[d_1]
             latday = d - p
-            latday = max(1, latday)
-            now_latent[d] = sum(latency[latday:d])
+            latday = Base.max(1, latday)
+            now_latent[d] = Base.sum(latency[latday:d])
 
             infectious[d] = rtransfer[d_1]
             infday = d - i
-            infday = max(1, infday)
-            now_infectious[d] = sum(infectious[infday:d])
+            infday = Base.max(1, infday)
+            now_infectious[d] = Base.sum(infectious[infday:d])
         end
 
         if (wth[!, :RHUM][d] >= rhlim || wth[!, :RAIN][d] >= rainlim)
@@ -125,7 +125,7 @@ function run_seir(;
         intensity[d] = (diseased[d] - removed[d]) / (total_sites[d] - removed[d])
     end
 
-    res = DataFrame(
+    res = DataFrames.DataFrame(
         simday = 1:duration,
         dates = season,
         sites = sites,
