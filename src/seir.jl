@@ -1,6 +1,31 @@
-function run_seir(;
-    wth,
-    emergence,
+"""
+run_seir_model(
+    wth::DataFrame,
+    emergence::String,
+    onset::Int64,
+    duration::Int64,
+    rhlim::Int64,
+    rainlim::Int64,
+    H0::Int64,
+    I0::Int64,
+    RcA::Matrix{Float64},
+    RcT::Matrix{Float64},
+    RcOpt::Float64,
+    p::Int64,
+    i::Int64,
+    Sx::Int64,
+    a::Float64,
+    RRS::Float64,
+    RRG::Float64)
+
+Runs a Susceptible-Exposed-Infectious-Removed (SEIR) model using weather data and
+optimal curve values for respective crop diseases. 
+Returns a `DataFrame` with the model's output.
+"""
+
+function run_seir_model(;
+    wth::DataFrame,
+    emergence::Date,
     onset,
     duration,
     rhlim,
