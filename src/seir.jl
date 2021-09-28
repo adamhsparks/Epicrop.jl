@@ -20,7 +20,20 @@ run_seir_model(
 
 Runs a Susceptible-Exposed-Infectious-Removed (SEIR) model using weather data and
 optimal curve values for respective crop diseases. 
-Returns a `DataFrame` with the model's output.
+
+
+# Arguments
+- - `wth`::DataFrame`: a data frame of weather on a daily time-step 
+- `val::T`: the value to search for
+
+# Keywords
+- `verbose::Bool=true`: print out progress details
+
+# Returns
+- A `DataFrame` with the model's output.
+
+# Throws
+- `NotFoundError`: I guess we could throw an error if `val` isn't found.
 """
 
 function run_seir_model(;
@@ -129,7 +142,7 @@ function run_seir_model(;
 
         cofr[d] = 1 - (diseased[d] / (sites[d] + diseased[d]))
 
-        # Initialise disease.
+        # Initialise disease.   
         if d == onset
             infection[d] = I0
         elseif d > onset
