@@ -1,11 +1,11 @@
-module Epicrop 
-export SEIR
+module Epicrop
 
 using DataFrames
-using Dates
-using Interpolations
-using RCall
+import Dates: Date
+import Interpolations: LinearInterpolation
 
-#' Susceptible-Exposed-Infectious-Removed (SEIR) crop disease model framework
+include("seir.jl")
 
-end
+export SEIR
+
+end # module
