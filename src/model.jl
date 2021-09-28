@@ -165,6 +165,14 @@ function SEIR(;wth,
       error("incomplete weather data or dates do not align")
     end
 
+    if (H0 < 0)
+        error("H0 cannot be < 0, check your initial number of healthy sites")
+    end
+
+    if (I0 < 0)
+      error("I0 cannot be < 0, check your initial number of infective sites")
+    end     
+      
     # subset weather data where date is greater than emergence
     season_wth = wth[in(season - Day(1)).(wth.YYYYMMDD), :]
     
