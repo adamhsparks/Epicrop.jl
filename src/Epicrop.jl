@@ -14,4 +14,7 @@ include("seir.jl")
 
 export run_seir_model
 
+#re-exports from DataFrames.jl
+export DataFrame
+
 end # module
