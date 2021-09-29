@@ -1,41 +1,68 @@
 """
 run_seir_model(
-    wth::DataFrame,
-    emergence::String,
-    onset::Int64,
-    duration::Int64,
-    rhlim::Int64,
-    rainlim::Int64,
-    H0::Int64,
-    I0::Int64,
-    RcA::Matrix{Float64},
-    RcT::Matrix{Float64},
-    RcOpt::Float64,
-    p::Int64,
-    i::Int64,
-    Sx::Int64,
-    a::Float64,
-    RRS::Float64,
-    RRG::Float64)
+    wth,
+    emergence,
+    onset,
+    duration,
+    rhlim,
+    rainlim,
+    H0,
+    I0,
+    RcA,
+    RcT,
+    RcOpt,
+    p,
+    i,
+    Sx,
+    a,
+    RRS,
+    RRG)
 
 Runs a Susceptible-Exposed-Infectious-Removed (SEIR) model using weather data and
-optimal curve values for respective crop diseases. 
-
-
-# Arguments
-- - `wth`::DataFrame`: a data frame of weather on a daily time-step 
-- `val::T`: the value to search for
+optimal curve values for respective crop diseases.
 
 # Keywords
-- `verbose::Bool=true`: print out progress details
+- `wth`: a data frame of weather on a daily time-step.
+- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
+From Table 1 Savary *et al.* 2012.
+- `onset` expected number of days until the onset of disease after emergence date.
+From Table 1 Savary *et al.* 2012.
+- `duration`: simulation duration (growing season length).
+From Table 1 Savary *et al.* 2012.
+- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%).
+From Table 1 Savary *et al.* 2012.
+- `rainlim`: threshold to decide whether leaves are wet or not.
+From Table 1 Savary *et al.* 2012.
+- `H0`: initial number of plant's healthy sites.
+From Table 1 Savary *et al.* 2012.
+- `I0`: initial number of infective sites.
+From Table 1 Savary *et al.* 2012.
+- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals).
+From Table 1 Savary *et al.* 2012.
+- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals).
+From Table 1 Savary *et al.* 2012.
+- `RcOpt`: potential basic infection rate corrected for removals.
+From Table 1 Savary *et al.* 2012.
+- `i`: duration of infectious period.
+From Table 1 Savary *et al.* 2012.
+- `p`: duration of latent period.
+From Table 1 Savary *et al.* 2012.
+- `Sx`: maximum number of sites.
+From Table 1 Savary *et al.* 2012.
+- `a`: aggregation coefficient.
+From Table 1 Savary *et al.* 2012.
+- `RRS`: relative rate of physiological senescence.
+From Table 1 Savary *et al.* 2012.
+- `RRG`: relative rate of growth.
+From Table 1 Savary *et al.* 2012.
 
 # Returns
 - A `DataFrame` with the model's output.
 """
 
 function run_seir_model(;
-    wth::DataFrame,
-    emergence::Date,
+    wth,
+    emergence,
     onset,
     duration,
     rhlim,
@@ -60,7 +87,7 @@ function run_seir_model(;
     # Convert emergence date into Julian date, sequential day in year.
     emergence_doy = Dates.dayofyear(emergence_day)
 
-    if !(emergence_day >= wth[1, "YYYYMMDD"] || 
+    if !(emergence_day >= wth[1, "YYYYMMDD"] ||
         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
     end
@@ -139,7 +166,7 @@ function run_seir_model(;
 
         cofr[d] = 1 - (diseased[d] / (sites[d] + diseased[d]))
 
-        # Initialise disease.   
+        # Initialise disease.
         if d == onset
             infection[d] = I0
         elseif d > onset
