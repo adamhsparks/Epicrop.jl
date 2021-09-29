@@ -1,4 +1,4 @@
-# Epicrop
+# Epicrop.jl
 
 [![Lifcycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-yellow.svg)](https://img.shields.io/badge/Lifecycle-Experimental-yellow.svg)
 [![Build Status](https://github.com/adamshparks/Epicrop.jl/workflows/CI/badge.svg)](https://github.com/adamshparks/Epicrop.jl/actions)
