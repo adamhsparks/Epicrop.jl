@@ -1,5 +1,5 @@
 """
-run_seir_model(
+run_hlip_model(
     wth,
     emergence,
     onset,
@@ -18,7 +18,7 @@ run_seir_model(
     RRS,
     RRG)
 
-Runs a Susceptible-Exposed-Infectious-Removed (SEIR) model using weather data and
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
 optimal curve values for respective crop diseases.
 
 # Keywords
@@ -60,7 +60,7 @@ From Table 1 Savary *et al.* 2012.
 - A `DataFrame` with the model's output.
 """
 
-function run_seir_model(;
+function run_hlip_model(;
     wth,
     emergence,
     onset,
