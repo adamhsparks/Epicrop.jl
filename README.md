@@ -4,15 +4,11 @@
 [![Build Status](https://github.com/adamshparks/Epicrop.jl/workflows/CI/badge.svg)](https://github.com/adamshparks/Epicrop.jl/actions)
 [![Coverage](https://codecov.io/gh/adamshparks/Epicrop.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/adamshparks/Epicrop.jl)
 
-A Susceptible-Exposed-Infectious-Removed (SEIR) model for plant disease epidemic modeling.
+A Healthy-Latent-Infectious-Postinfectious (HLIP) model for unmanaged plant disease epidemic modeling.
 Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice
 diseases (Savary _et al._ 2012).
 Given proper values it can be used with other pathosystems as well.
 
-A Susceptible-Exposed-Infectious-Removed (SEIR) model for plant disease epidemic modeling.
-Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice diseases (Savary _et al._ 2012).
-Given proper values it can be used with other pathosystems as well.
-# Arguments
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
   | Field | value |
   |-------|-------------|
@@ -41,7 +37,7 @@ Given proper values it can be used with other pathosystems as well.
 - `RRS` relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
 - `RRG` relative rate of growth. From Table 1 Savary *et al.* 2012.
 
-`run_seir_model` returns a DataFrame with the following fields and values.
+`run_hlip_model` returns a DataFrame with the following fields and values.
   | Field | Value |
   |-------|-------------|
   |simday | Zero indexed day of simulation that was run |
@@ -81,7 +77,7 @@ julia> nasa_wth = rcopy(
     temporal_api = 'daily')"
     )
 julia> rename!(nasa_wth, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-julia> run_seir_model(
+julia> run_hlip_model(
   wth = nasa_wth,
   emergence = "2000-07-01",
   onset = 20,
