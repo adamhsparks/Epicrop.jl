@@ -1,11 +1,12 @@
 module Epicrop
 
-using DataFrames
-import Dates: Date
-import Interpolations: LinearInterpolation
+using DataFrames, Dates, Interpolations
 
-include("seir.jl")
+include("hlip.jl")
 
-export SEIR
+export run_hlip_model
+
+#re-exports from DataFrames.jl
+export DataFrame
 
 end # module
