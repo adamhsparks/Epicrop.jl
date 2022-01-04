@@ -4,7 +4,7 @@ using DataFrames, Dates, Interpolations
 
 include("hlip.jl")
 
-export run_hlip_model
+export hlipmodel
 
 #re-exports from DataFrames.jl
 export DataFrame
