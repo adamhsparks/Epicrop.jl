@@ -19,7 +19,7 @@ Until then you can install it with the following commands:
 ```julia
 julia> using Pkg
 
-julia> Pkg.clone("git://example.com/path/to/Package.jl.git")
+julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
 ```
 
 You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
