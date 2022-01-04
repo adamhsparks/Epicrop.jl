@@ -1,5 +1,9 @@
 ```@meta
 Author = "Adam H. Sparks"
+CurrentModule = Epicrop
+DocTestSetup = quote
+    using Epicrop
+end
 ```
 
 # Epicrop.jl
@@ -7,7 +11,7 @@ Author = "Adam H. Sparks"
 *Crop disease modeling in Julia.*
 ## Overview
 
-```@docs
+```@autodocs
 Modules = [Epicrop]
 Order   = [:module]
 ```
@@ -34,14 +38,14 @@ Modules = [Epicrop]
 ```
 ## Types
 
-```@docs
+```@autodocs
 Modules = [Epicrop]
 Order   = [:type]
 ```
 
 ## Methods
 
-```@docs
+```@autodocs
 Modules = [Epicrop]
 Order   = [:function]
 ```
