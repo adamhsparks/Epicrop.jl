@@ -2,6 +2,16 @@
 Author = "Adam H. Sparks"
 ```
 
+# Epicrop.jl
+
+*Crop disease modeling in Julia.*
+## Overview
+
+```@docs
+Modules = [Epicrop]
+Order   = [:module]
+```
+
 Epicrop.jl is a [Julia](https://julialang.org) package that can be used to simulate disease epidemics.
 If you have not yet installed Julia, [please follow the instructions for your operating system](https://julialang.org/downloads/platform/).
 
@@ -22,24 +32,16 @@ julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
 ```@index
 Modules = [Epicrop]
 ```
-
-## Overview
-
-```@autodocs
-Modules = [Epicrop]
-Order   = [:module]
-```
-
 ## Types
 
-```@autodocs
+```@docs
 Modules = [Epicrop]
 Order   = [:type]
 ```
 
 ## Methods
 
-```@autodocs
+```@docs
 Modules = [Epicrop]
 Order   = [:function]
 ```
