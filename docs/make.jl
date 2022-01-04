@@ -8,7 +8,7 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/adamhsparks/Epicrop.jl",
+    repo = "https://github.com/adamhsparks/Epicrop.jl",
     devbranch = "main"
 )
 
