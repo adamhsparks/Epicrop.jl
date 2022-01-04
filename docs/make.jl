@@ -2,12 +2,12 @@ using Documenter
 using Epicrop
 
 makedocs(
-    sitename = "Epicrop",
+    sitename = "Epicrop.jl",
     format = Documenter.HTML(),
     modules = [Epicrop]
 )
 
 deploydocs(
-    repo = "https://github.com/adamhsparks/Epicrop.jl",
+    repo = "github.com/adamhsparks/Epicrop.jl",
     devbranch = "main"
 )
