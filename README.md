@@ -1,7 +1,7 @@
 # Epicrop.jl
 
 [![Lifcycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-yellow.svg)](https://img.shields.io/badge/Lifecycle-Experimental-yellow.svg)
-[![Build Status](https://github.com/adamshparks/Epicrop.jl/workflows/CI/badge.svg)](https://github.com/adamshparks/Epicrop.jl/actions)
+[![CI](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml)
 [![Coverage](https://codecov.io/gh/adamshparks/Epicrop.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/adamshparks/Epicrop.jl)
 
 A Healthy-Latent-Infectious-Postinfectious (HLIP) model for unmanaged plant disease epidemic modeling.
