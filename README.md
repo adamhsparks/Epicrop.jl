@@ -78,6 +78,7 @@ It provides a single function, `run_hlip_model`, which takes the following argum
 # Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
+In this example, we will use the _nasapower_ package from R to fetch the weather data.
 
 ```julia
 julia> using RCall
