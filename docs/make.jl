@@ -4,7 +4,8 @@ using Epicrop
 makedocs(
     sitename = "Epicrop.jl",
     format = Documenter.HTML(),
-    modules = [Epicrop]
+    modules = [Epicrop],
+    doctest = true
 )
 
 deploydocs(
