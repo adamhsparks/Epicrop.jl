@@ -40,7 +40,8 @@ jobs:
   #    - uses: codecov/codecov-action@v1
   #      with:
   #        file: lcov.info
-  docs:
+
+    docs:
     name: Documentation
     runs-on: ubuntu-latest
     steps:
@@ -50,16 +51,9 @@ jobs:
           version: '1'
       - run: |
           julia --project=docs -e '
-            import Pkg; Pkg.add("Documenter")
             using Pkg
             Pkg.develop(PackageSpec(path=pwd()))
             Pkg.instantiate()'
-      - run: |
-          julia --project=docs -e '
-            import Pkg; Pkg.add("Documenter")
-            using Documenter: doctest
-            using Epicrop 
-            doctest(Epicrop)'
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
