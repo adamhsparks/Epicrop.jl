@@ -7,6 +7,11 @@ makedocs(
     modules = [Epicrop]
 )
 
+deploydocs(
+    repo = "github.com/adamhsparks/EPICROP.jl.git",
+    devbranch = "main"
+)
+
 # Documenter can also automatically deploy documentation to gh-pages.
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
 # for more information.
