@@ -8,6 +8,25 @@ A Healthy-Latent-Infectious-Postinfectious (HLIP) model for unmanaged plant dise
 Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice
 diseases (Savary _et al._ 2012).
 Given proper values it can be used with other pathosystems as well.
+## Installation
+
+Epicrop.jl is a Julia package.
+If you have not yet installed Julia, [please follow the instructions for your operating system](https://julialang.org/downloads/platform/).
+
+Epicrop.jl is not yet a registered Julia package, but I hope to have it in good enough condition to register it shortly.
+Until then you can install it with the following commands:
+
+```julia
+julia> using Pkg
+
+julia> Pkg.clone("git://example.com/path/to/Package.jl.git")
+```
+
+You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
+## Using Epicrop.jl
+
+Epicrop.jl is a package that can be used to simulate disease epidemics.
+It provides a single function, `run_hlip_model`, which takes the following arguments and returns a DataFrame of the results:
 
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
   | Field | value |
@@ -36,6 +55,7 @@ Given proper values it can be used with other pathosystems as well.
 - `a` aggregation coefficient. From Table 1 Savary *et al.* 2012.
 - `RRS` relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
 - `RRG` relative rate of growth. From Table 1 Savary *et al.* 2012.
+### Output
 
 `run_hlip_model` returns a DataFrame with the following fields and values.
   | Field | Value |
@@ -55,12 +75,8 @@ Given proper values it can be used with other pathosystems as well.
   |intensity | Number of diseased sites as a proportion of total sites |
   |lat | Latitude value as provided by `wth` object |
   |lon | Longitude value as provided by `wth` object |
+# Example
 
-# References
-Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
-
-# Examples
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
 
 ```jldoctest
@@ -96,3 +112,7 @@ julia> run_hlip_model(
   RRS = 0.01,
   RRG = 0.1
 )
+```
+# References
+Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
+17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
