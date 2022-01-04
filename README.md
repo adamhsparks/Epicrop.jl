@@ -77,26 +77,23 @@ It provides a single function, `run_hlip_model`, which takes the following argum
 # Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
-In this example, we will use the _nasapower_ package from R to fetch the weather data.
-You will need to have R installed on your system and also have installed the _nasapower_ package.
-Please refer to the [R documentation](https://cran.r-project.org/web/packages/nasapower/nasapower.pdf) for more information.
+In this example, we will download weather data for the International Rice Research Institute (IRRI) from the NASA POWER database using a pre-defined API call for this location for the 2010 wet season.
 
 ```julia
-julia> using RCall
 julia> using DataFrames
+
+julia> using CSV
+
+julia> w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100630&end=20101231&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+julia> rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
 julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
+
 julia> RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
-julia> nasa_wth = rcopy(
-  R"nasapower::get_power(
-    community = 'AG',
-    lonlat = c(121.25562, 14.6774),
-    pars = c('RH2M', 'T2M', 'PRECTOTCORR'),
-    dates = c('2000-06-30', '2000-12-31'),
-    temporal_api = 'daily')"
-    )
-julia> rename!(nasa_wth, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-julia> run_hlip_model(
-  wth = nasa_wth,
+
+julia> hlipmodel(
+  wth = w,
   emergence = "2000-07-01",
   onset = 20,
   duration = 120,
