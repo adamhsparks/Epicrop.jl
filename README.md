@@ -79,7 +79,7 @@ It provides a single function, `run_hlip_model`, which takes the following argum
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
 
-```jldoctest
+```julia
 julia> using RCall
 julia> using DataFrames
 julia> RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
