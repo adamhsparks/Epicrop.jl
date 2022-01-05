@@ -80,7 +80,7 @@ Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weathe
 In this example, we will download weather data for the International Rice Research Institute (IRRI) from the NASA POWER database using a pre-defined API call for this location for the 2010 wet season.
 
 ```julia
-using Epicrop, DataFrames, CSV
+using Epicrop, DataFrames, Dates, CSV
 
 w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 
