@@ -118,6 +118,8 @@ bs = hlipmodel(
 		RRG = 0.1
 )
 
+# set GR backend for plots
+gr()
 plot(bs.dates, bs.intensity)
 ```
 
