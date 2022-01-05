@@ -223,5 +223,4 @@ function _fn_rc(Rc, x)
     return x
 end
 
-
 end # module
