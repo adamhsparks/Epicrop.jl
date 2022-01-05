@@ -27,12 +27,9 @@ julia> using Pkg
 
 julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
 ```
-
-```@index
-```
 ## Methods
 
-```@docs
-Epicrop.hlipmodel
+```@autodocs
+hlipmodel
 ```
 
