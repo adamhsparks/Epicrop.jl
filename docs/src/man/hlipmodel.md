@@ -23,11 +23,7 @@ downloading weather data in conjunction with
 [RCall](https://github.com/JuliaInterop/RCall.jl).
 
 ```@example 1
-using Epicrop
-
-using DataFrames
-
-using CSV
+using Epicrop, DataFrames, CSV
 
 w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100630&end=20101231&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 
@@ -56,6 +52,8 @@ bs = hlipmodel(
 		RRS = 0.01,
 		RRG = 0.1
 )
+
+bs
 ```
 
 ## References
