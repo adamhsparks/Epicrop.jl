@@ -119,7 +119,8 @@ bs = hlipmodel(
 )
 
 # set plotly backend for plots
-ploty()
+plotly()
+
 plot(bs.dates, bs.intensity)
 ```
 
