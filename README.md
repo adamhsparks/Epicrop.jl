@@ -114,8 +114,6 @@ bs = hlipmodel(
 		RRS = 0.01,
 		RRG = 0.1
 )
-
-bs
 ```
 # References
 Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
