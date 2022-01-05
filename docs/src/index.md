@@ -29,18 +29,17 @@ julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
 ```
 
 ```@index
-Modules = [Epicrop]
 ```
 ## Types
 
-```@docs
+```@autodocs
 Modules = [Epicrop]
 Order   = [:type]
 ```
 
 ## Methods
 
-```@docs
+```@autodocs
 Modules = [Epicrop]
 Order   = [:function]
 ```
