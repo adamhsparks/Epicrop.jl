@@ -17,6 +17,8 @@ Predict an unmanaged epidemic of brown spot at the International Rice Research I
 (IRRI) Zeigler Experiment station in Los Baños, Calabarzon, Philippines.
 Weather data will be downloaded from the [NASA POWER](https://power.larc.nasa.gov) API for
 use in this example.
+As the model will run for 120 days, we will download weather data for for 120 days starting
+on July 01, 2010 and ending on October 28, 2010.
 To automate this process, you may find the R package,
 [nasapower](https://cran.r-project.org/web/packages/nasapower/index.html), useful for
 downloading weather data in conjunction with
@@ -25,9 +27,14 @@ downloading weather data in conjunction with
 ```@example 1
 using Epicrop, DataFrames, CSV
 
-w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100630&end=20101231&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 
+# rename the columns to match the expected column names for hlipmodel
 rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step=Day(1), length=120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
@@ -35,7 +42,7 @@ RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 bs = hlipmodel(
 		wth = w,
-		emergence = "2000-07-01",
+		emergence = "2010-07-01",
 		onset = 20,
 		duration = 120,
 		rhlim = 90,
