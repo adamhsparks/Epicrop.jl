@@ -25,7 +25,7 @@ You can copy and paste all commands to the REPL including the leading `julia>` p
 ## Using Epicrop.jl
 
 Epicrop.jl is a package that can be used to simulate disease epidemics.
-It provides a single function, `run_hlip_model`, which takes the following arguments and returns a DataFrame of the results:
+It provides a single function, `hlipmodel`, which takes the following arguments and returns a DataFrame of the results:
 
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
   | Field | value |
@@ -56,7 +56,7 @@ It provides a single function, `run_hlip_model`, which takes the following argum
 - `RRG` relative rate of growth. From Table 1 Savary *et al.* 2012.
 ### Output
 
-`run_hlip_model` returns a DataFrame with the following fields and values.
+`hlipmodel` returns a DataFrame with the following fields and values.
   | Field | Value |
   |-------|-------------|
   |simday | Zero indexed day of simulation that was run |
