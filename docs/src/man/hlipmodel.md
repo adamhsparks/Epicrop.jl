@@ -124,7 +124,7 @@ plotly()
 plot(bs.dates, bs.intensity)
 ```
 
-![](./assets/img/bs_plot.png)
+![](bs_plot.png)
 
 ## References
 
