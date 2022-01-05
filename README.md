@@ -77,7 +77,7 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
 # Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
-In this example, we will download weather data for the International Rice Research Institute (IRRI) from the NASA POWER database using a pre-defined API call for this location for the 2010 wet season.
+In this example, we will download weather data for the International Rice Research Institute (IRRI) from the [NASA POWER](https://power.larc.nasa.gov) database using a pre-defined API call for this location for the 2010 wet season.
 
 ```julia
 using Epicrop, DataFrames, Dates, CSV
