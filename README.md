@@ -18,7 +18,7 @@ Until then you can install it with the following commands:
 ```julia
 julia> using Pkg
 
-julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
+julia> Pkg.add(url = "https://github.com/adamhsparks/Epicrop.jl")
 ```
 
 You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
@@ -80,9 +80,7 @@ Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weathe
 In this example, we will download weather data for the International Rice Research Institute (IRRI) from the NASA POWER database using a pre-defined API call for this location for the 2010 wet season.
 
 ```julia
-julia> using DataFrames
-
-julia> using CSV
+julia> using Epicrop, DataFrames, CSV
 
 julia> w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100630&end=20101231&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 

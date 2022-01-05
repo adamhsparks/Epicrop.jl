@@ -25,5 +25,5 @@ Until then you can install it with the following commands:
 ```julia
 julia> using Pkg
 
-julia> Pkg.clone("https://github.com/adamhsparks/Epicrop.jl")
+julia> Pkg.add(url = "https://github.com/adamhsparks/Epicrop.jl")
 ```
