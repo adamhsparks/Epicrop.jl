@@ -6,10 +6,10 @@ Author = "Adam H. Sparks"
 
 Epicrop supplies one function, `hlipmodel` that can be used to predict unmanaged plant
 disease epidemics.
-Predefined values for the EPIRICE model can be found in Savary et al. (2012) for the
+Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the
 following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight, tungro.
 Given other parameters, the model framework is capable of modelling other diseases using the
-methods as described by Savary et al. (2012).
+methods as described by Savary _et al._ (2012).
 
 # Example Usage
 
@@ -60,4 +60,4 @@ bs = hlipmodel(
 
 ## References
 
-Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. Crop Protection, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
+Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
