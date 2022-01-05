@@ -1,2 +1,7 @@
 [deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Epicrop = "ba61b42c-0a63-478a-861d-cedeca8bda8f"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
