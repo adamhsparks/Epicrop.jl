@@ -33,38 +33,22 @@ hlipmodel(
 ```
 # Keywords
 - `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%).
-From Table 1 Savary *et al.* 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not.
-From Table 1 Savary *et al.* 2012.
-- `H0`: initial number of plant's healthy sites.
-From Table 1 Savary *et al.* 2012.
-- `I0`: initial number of infective sites.
-From Table 1 Savary *et al.* 2012.
-- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals).
-From Table 1 Savary *et al.* 2012.
-- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals).
-From Table 1 Savary *et al.* 2012.
-- `RcOpt`: potential basic infection rate corrected for removals.
-From Table 1 Savary *et al.* 2012.
-- `i`: duration of infectious period.
-From Table 1 Savary *et al.* 2012.
-- `p`: duration of latent period.
-From Table 1 Savary *et al.* 2012.
-- `Sx`: maximum number of sites.
-From Table 1 Savary *et al.* 2012.
-- `a`: aggregation coefficient.
-From Table 1 Savary *et al.* 2012.
-- `RRS`: relative rate of physiological senescence.
-From Table 1 Savary *et al.* 2012.
-- `RRG`: relative rate of growth.
-From Table 1 Savary *et al.* 2012.
+- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format. From Table 1 Savary *et al.* 2012.
+- `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary *et al.* 2012.
+- `duration`: simulation duration (growing season length). From Table 1 Savary *et al.* 2012.
+- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary *et al.* 2012.
+- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary *et al.* 2012.
+- `H0`: initial number of plant's healthy sites. From Table 1 Savary *et al.* 2012.
+- `I0`: initial number of infective sites. From Table 1 Savary *et al.* 2012.
+- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary *et al.* 2012.
+- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary *et al.* 2012.
+- `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary *et al.* 2012.
+- `i`: duration of infectious period. From Table 1 Savary *et al.* 2012.
+- `p`: duration of latent period. From Table 1 Savary *et al.* 2012.
+- `Sx`: maximum number of sites. From Table 1 Savary *et al.* 2012.
+- `a`: aggregation coefficient. From Table 1 Savary *et al.* 2012.
+- `RRS`: relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
+- `RRG`: relative rate of growth. From Table 1 Savary *et al.* 2012.
 
 # Returns
 - A `DataFrame` with the model's output.
