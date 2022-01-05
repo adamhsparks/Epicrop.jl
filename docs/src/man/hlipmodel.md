@@ -84,6 +84,10 @@ downloading weather data in conjunction with
 ```@example
 using Epicrop, DataFrames, Dates, CSV, Plots
 
+# set plotly as backend for Plots
+plotly()
+
+# download weather data from NASA POWER API
 w = CSV.read(download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 
 # rename the columns to match the expected column names for hlipmodel
