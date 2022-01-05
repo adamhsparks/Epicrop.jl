@@ -1,5 +1,5 @@
 """
-run_hlip_model(
+hlipmodel(
     wth,
     emergence,
     onset,
