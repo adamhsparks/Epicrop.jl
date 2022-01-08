@@ -72,6 +72,7 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
   |rsenesced | Rate of senescence of healthy sites |
   |diseased | Number of diseased (latent + infectious + removed) sites |
   |intensity | Number of diseased sites as a proportion of total sites |
+  |audpc | Area under the disease progress curve for the whole of simulated season |
   |lat | Latitude value as provided by `wth` object |
   |lon | Longitude value as provided by `wth` object |
 # Example

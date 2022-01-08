@@ -51,7 +51,26 @@ hlipmodel(
 - `RRG`: relative rate of growth. From Table 1 Savary *et al.* 2012.
 
 # Returns
-- A `DataFrame` with the model's output.
+- A `DataFrame` with the model's output with the following fields and values.
+
+  | Field | Value |
+  |-------|-------------|
+  |simday | Zero indexed day of simulation that was run |
+  |dates |  Date of simulation |
+  |sites | Total number of sites present on day "x" |
+  |latent | Number of latent sites present on day "x" |
+  |infectious | Number of infectious sites present on day "x" |
+  |removed | Number of removed sites present on day "x" |
+  |senesced | Number of senesced sites present on day "x" |
+  |rateinf | Rate of infection | 
+  |rtransfer | Rate of transfer from latent to infectious sites |
+  |rgrowth | Rate of growth of healthy sites |
+  |rsenesced | Rate of senescence of healthy sites |
+  |diseased | Number of diseased (latent + infectious + removed) sites |
+  |intensity | Number of diseased sites as a proportion of total sites |
+  |audpc | Area under the disease progress curve for the whole of simulated season |
+  |lat | Latitude value as provided by `wth` object |
+  |lon | Longitude value as provided by `wth` object |
 # Example Usage
 
 Predict an unmanaged epidemic of brown spot at the International Rice Research Institute
