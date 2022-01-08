@@ -232,9 +232,11 @@ end
 
 function _audpc(intensity)
     n = length(intensity) - 1
-    i0 = intensity[2:length(intensity)]
-    i1 = intensity[1:n]
-    out = sum(i0 + i1 / 2)
+    out = Base.zeros(n)
+
+    for i in 1:n
+        out[i] = intensity[i] + intensity[i + 1] / 2
+    end
 
     return sum(out)
     end
