@@ -209,10 +209,15 @@ function hlipmodel(;
         rgrowth = rgrowth,
         rsenesced = rsenesced,
         diseased = diseased,
-        intensity = intensity,
-        lat = wth[1, "LAT"],
-        lon = wth[1, "LON"],
+        intensity = intensity
     )
+
+    if :LAT in names(wth)
+        res = DataFrames.DataFrame(
+            lat = wth[1, "LAT"],
+            lon = wth[1, "LON"]
+        )
+    end
 
     return res
 end
