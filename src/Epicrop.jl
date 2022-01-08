@@ -235,7 +235,7 @@ function _audpc(intensity)
     out = Base.zeros(n)
 
     for i in 1:n
-        out[i] = intensity[i] + intensity[i + 1] / 2
+        out[i] = (intensity[i] + intensity[i + 1]) / 2
     end
 
     return sum(out)
