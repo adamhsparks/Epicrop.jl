@@ -40,5 +40,5 @@ using CSV
 
     @test nrow(bs) == 120
     @test ncol(bs) == 15
-    @test bs[120, 13] == 0.0843183
+    @test isapprox(bs[120, 13], 0.0843, atol = 0.0001)
 end
