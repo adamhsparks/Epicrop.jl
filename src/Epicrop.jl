@@ -217,7 +217,7 @@ function hlipmodel(;
 
     if hasproperty(wth, "LAT") && hasproperty(wth, "LON")
         res = DataFrames.DataFrame(
-            insertcols!(res, :LAT => wth[1, "LAT"], :LON => wth[1, "LON"])
+            insertcols!(res, :lat => wth[1, "LAT"], :lon => wth[1, "LON"])
         )
     end
 
