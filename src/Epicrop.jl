@@ -66,7 +66,8 @@ From Table 1 Savary *et al.* 2012.
 From Table 1 Savary *et al.* 2012.
 
 # Returns
-- A `DataFrame` with the model's output.
+A `DataFrame` with the model's output. Latitude and longitude are included for mapping
+purposes if they are present in the input weather data.
 
 """
 
@@ -196,6 +197,7 @@ function hlipmodel(;
         intensity[d] = (diseased[d] - removed[d]) / (total_sites[d] - removed[d])
     end
 
+
     res = DataFrames.DataFrame(
         simday = 1:duration,
         dates = season,
@@ -209,7 +211,8 @@ function hlipmodel(;
         rgrowth = rgrowth,
         rsenesced = rsenesced,
         diseased = diseased,
-        intensity = intensity
+        intensity = intensity,
+        audpc = _audpc(intensity)
     )
 
     if hasproperty(wth, "LAT") && hasproperty(wth, "LON")
@@ -226,5 +229,14 @@ function _fn_rc(Rc, x)
     x = itp.(x)
     return x
 end
+
+function _audpc(intensity)
+    n = length(intensity) - 1
+    i0 = intensity[2:length(intensity)]
+    i1 = intensity[1:n]
+    out = sum(i0 + i1 / 2)
+
+    return sum(out)
+    end
 
 end # module
