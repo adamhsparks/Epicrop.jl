@@ -212,7 +212,7 @@ function hlipmodel(;
         intensity = intensity
     )
 
-    if "LAT" & "LON" in names(wth)
+    if hasproperty(wth, "LAT") && hasproperty(wth, "LON")
         res = DataFrames.DataFrame(
             lat = wth[1, "LAT"],
             lon = wth[1, "LON"]
