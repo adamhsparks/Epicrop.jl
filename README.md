@@ -8,7 +8,7 @@ Epicrop.jl is a [Julia](https://julialang.org) package that can be used to simul
 If you have not yet installed Julia, [please follow the instructions for your operating system](https://julialang.org/downloads/platform/).
 
 This package provides a Healthy-Latent-Infectious-Postinfectious (HLIP) model for unmanaged plant disease epidemic modelling.
-Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice diseases (Savary _et al._ 2012).
+Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice diseases ([Savary _et al._ 2012](http://dx.doi.org/10.1016/j.cropro.2011.11.009)).
 Given proper values it can be used with other pathosystems as well.
 ## Installation
 
