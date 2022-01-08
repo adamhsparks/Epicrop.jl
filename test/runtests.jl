@@ -40,6 +40,6 @@ using Downloads
     )
 
     @test nrow(bs) == 120
-    @test ncol(bs) == 15
+    @test ncol(bs) == 16
     @test isapprox(bs[120, 13], 0.0843, atol = 0.0001)
 end
