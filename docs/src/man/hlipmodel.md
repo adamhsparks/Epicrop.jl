@@ -94,7 +94,7 @@ w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/
 rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 
 # add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step=Day(1), length=120))
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
 insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
