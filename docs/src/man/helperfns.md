@@ -20,7 +20,7 @@ bacterialblight(wth, emergence)
 ## Brown Spot
 
 A dynamic mechanistic simulation of rice brown spot, causal agent _Cochliobolus miyabeanus_.
-The model represents site size as 10 mm<sup>2</sup> of a rice plant's leaf.
+The model represents site size as 10 mm² of a rice plant's leaf.
 Default values for this disease model are derived from Table 2 (Savary _et al_. 2012).
 
 _Note_ The optimum temperature for brown spot as presented in Table 2 of Savary _et al._ 2012 has a typo.
@@ -33,7 +33,7 @@ brownspot(wth, emergence)
 ## Leaf Blast
 
 A dynamic mechanistic simulation of leaf blast disease of rice, causal agent _Magnaporthe oryzae_.
-The model represents site size as 45 mm<sup>2</sup> of a rice plant's leaf.
+The model represents site size as 45 mm² of a rice plant's leaf.
 
 _Note_ The optimum temperature for leaf blast as presented in Table 2 of Savary _et al._ 2012 has a typo.
 The optimal value should be 20 °C, not 25 °C as shown.
