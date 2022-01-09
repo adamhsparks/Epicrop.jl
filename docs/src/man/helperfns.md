@@ -13,7 +13,7 @@ A dynamic mechanistic simulation of bacterial blight disease of rice, causal age
 The model represents site size as 1 rice plant's leaf.
 Default values for this disease model are derived from Table 2 (_Savary et al. 2012_).
 
-```@docs
+```@autodocs
 bacterialblight(wth, emergence)
 ```
 
@@ -27,7 +27,7 @@ _Note_ The optimum temperature for brown spot as presented in Table 2 of Savary 
 The optimal value should be 25 °C, not 20 °C as shown.
 The correct value, 25 °C, is used in this implementation.
 
-```@docs
+```@autodocs
 brownspot(wth, emergence)
 ```
 ## Leaf Blast
@@ -39,7 +39,7 @@ _Note_ The optimum temperature for leaf blast as presented in Table 2 of Savary 
 The optimal value should be 20 °C, not 25 °C as shown.
 The correct value, 20 °C, is used in this implementation.
 
-```@docs
+```@autodocs
 leafblast(wth, emergence)
 ```
 
@@ -48,7 +48,7 @@ leafblast(wth, emergence)
 A dynamic mechanistic simulation of sheath blight disease of rice, causal agent _Rhizoctonia solani_ AG1-1A Kühn.
 The model represents site size as 1 rice plant's tiller.
 
-```@docs
+```@autodocs
 sheathblight(wth, emergence)
 ```
 
@@ -58,7 +58,7 @@ A dynamic mechanistic simulation of tungro disease of rice, causal agents _Rice 
 The model represents site size as 1 rice plant.
 Default values for this disease model are derived from Table 2 (Savary _et al._ 2012).
 
-```@docs
+```@autodocs
 tungro(wth, emergence)
 ```
 
