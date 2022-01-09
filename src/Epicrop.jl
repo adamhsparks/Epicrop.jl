@@ -2,7 +2,10 @@ module Epicrop
 
 using DataFrames, Dates, Interpolations
 
+include("helpers.jl")
+
 export hlipmodel
+export brownspot
 
 #re-exports from DataFrames.jl
 export DataFrame
