@@ -8,7 +8,8 @@ makedocs(
     pages = Any[
         "Home" => "index.md",
         "Manual" => Any[
-            "hlipmodel" => "man/hlipmodel.md"
+            "hlipmodel" => "man/hlipmodel.md",
+            "helper functions" => "man/helperfns.md"
         ]
     ]
 )
