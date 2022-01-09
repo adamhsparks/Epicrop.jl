@@ -6,6 +6,10 @@ using CSV
 using Downloads
 
 @testset "hlipmodel tests" begin
+    # sometimes the POWER data download fails, this sets the timeout to 60 seconds instead of 20
+    downloader = Downloads.Downloader()
+    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 60)
+
     w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
 
     # rename the columns to match the expected column names for hlipmodel
