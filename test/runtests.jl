@@ -8,7 +8,7 @@ using Downloads
 @testset "hlipmodel tests" begin
     # sometimes the POWER data download fails, this sets the timeout to 60 seconds instead of 20
     downloader = Downloads.Downloader()
-    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 60)
+    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 120)
 
     w = CSV.read(
         Downloads.download(
