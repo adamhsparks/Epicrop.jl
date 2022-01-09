@@ -42,4 +42,31 @@ using Downloads
     @test nrow(bs) == 120
     @test ncol(bs) == 16
     @test isapprox(bs[120, 13], 0.0843, atol = 0.0001)
+
+    # test helper functions for individual rice diseases
+    bbmodel = bacterialblight(wth = w, emergence = "2010-07-01")
+    @test nrow(bbmodel) == 120
+    @test ncol(bbmodel) == 16
+    @test isapprox(bbmodel[120, 13], 0.45708, atol = 0.0001)
+
+    bsmodel = brownspot(wth = w, emergence = "2010-07-01")
+    @test nrow(bsmodel) == 120
+    @test ncol(bsmodel) == 16
+    @test isapprox(bsmodel[120, 13], 0.0843, atol = 0.0001)
+
+    lbmodel = leafblast(wth = w, emergence = "2010-07-01")
+    @test nrow(lbmodel) == 120
+    @test ncol(lbmodel) == 16
+    @test isapprox(lbmodel[120, 13], 5.81269e-6, atol = 0.0001)
+
+    sbmodel = sheathblight(wth = w, emergence = "2010-07-01")
+    @test nrow(sbmodel) == 120
+    @test ncol(sbmodel) == 16
+    @test isapprox(sbmodel[120, 13], 0.78539, atol = 0.0001)
+
+    tmodel = tungro(wth = w, emergence = "2010-07-01")
+    @test nrow(tmodel) == 120
+    @test ncol(tmodel) == 16
+    @test isapprox(tmodel[120, 13], 0.07564, atol = 0.0001)
+
 end
