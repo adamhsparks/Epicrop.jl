@@ -243,9 +243,10 @@ function _audpc(intensity)
 
     for i in 1:n
         out[i] = (intensity[i] + intensity[i + 1]) / 2
+        sum(out)
     end
 
-    return sum(out)
+    return out
     end
 
 end # module
