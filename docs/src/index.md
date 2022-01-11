@@ -12,7 +12,6 @@ _Crop disease modeling in Julia._
 
 ## Overview
 
-
 Epicrop.jl is a [Julia](https://julialang.org) package that can be used to simulate disease epidemics.
 If you have not yet installed Julia, [please follow the instructions for your operating system](https://julialang.org/downloads/platform/).
 
