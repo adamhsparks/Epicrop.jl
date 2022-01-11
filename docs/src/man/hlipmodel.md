@@ -1,8 +1,8 @@
+# Modelling Crop Disease Epidemics
+
 ```@meta
 Author = "Adam H. Sparks"
 ```
-
-# Modelling Disease Epidemics
 
 Epicrop a basic function, `hlipmodel` that can be used to predict unmanaged plant disease epidemics.
 Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight, tungro and are included as helper functions that simplify running the model, `bacterialblight`, `brownspot`, `leafblast`, `sheathblight`, and `tungro`.
@@ -28,7 +28,8 @@ hlipmodel(
     RRS,
     RRG)
 ```
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
   | Field | value |
   |-------|-------------|
@@ -54,7 +55,8 @@ hlipmodel(
 - `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 - A `DataFrame` with the model's output with the following fields and values.
 
   | Field | Value |
@@ -75,7 +77,8 @@ hlipmodel(
   |audpc | Area under the disease progress curve for the whole of simulated season |
   |lat | Latitude value as provided by `wth` object |
   |lon | Longitude value as provided by `wth` object |
-# Example Usage
+
+## Example Usage
 
 Predict an unmanaged epidemic of brown spot at the International Rice Research Institute (IRRI) Zeigler Experiment station in Los Baños, Calabarzon, Philippines.
 Weather data will be downloaded from the [NASA POWER](https://power.larc.nasa.gov) API for use in this example.

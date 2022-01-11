@@ -10,6 +10,7 @@ If you have not yet installed Julia, [please follow the instructions for your op
 This package provides a Healthy-Latent-Infectious-Postinfectious (HLIP) model for unmanaged plant disease epidemic modelling.
 Originally this modelling framework was used by specific disease models in EPIRICE to simulate severity of several rice diseases ([Savary _et al._ 2012](http://dx.doi.org/10.1016/j.cropro.2011.11.009)).
 Given proper values it can be used with other pathosystems as well.
+
 ## Installation
 
 Epicrop.jl is not yet a registered Julia package, but I hope to have it in good enough condition to register it shortly.
@@ -22,6 +23,7 @@ julia> Pkg.add(url = "https://github.com/adamhsparks/Epicrop.jl")
 ```
 
 You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
+
 ## Using Epicrop.jl
 
 Epicrop.jl is a package that can be used to simulate disease epidemics.
@@ -51,6 +53,7 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
 - `a` aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS` relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG` relative rate of growth. From Table 1 Savary _et al._ 2012.
+
 ### Output
 
 `hlipmodel` returns a DataFrame with the following fields and values.
@@ -72,6 +75,7 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
   |audpc | Area under the disease progress curve for the whole of simulated season |
   |lat | Latitude value as provided by `wth` object |
   |lon | Longitude value as provided by `wth` object |
+  
 # Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
@@ -92,7 +96,7 @@ rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
 insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
-emergence = Dates.Date.(2010-07-01, Dates.DateFormat("yyyy-mm-dd"))
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
