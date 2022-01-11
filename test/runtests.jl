@@ -19,6 +19,8 @@ using Downloads
     # rename the columns to match the expected column names for hlipmodel
     rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 
+    emergence = Dates.Date("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
     # add columns for YYYYMMDD and lat/lon
     insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step=Day(1), length=120))
     insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
@@ -29,7 +31,7 @@ using Downloads
 
     bs = hlipmodel(
 		wth = w,
-		emergence = "2010-07-01",
+		emergence = emergence,
 		onset = 20,
 		duration = 120,
 		rhlim = 90,
@@ -52,27 +54,27 @@ using Downloads
     @test isapprox(bs[120, 13], 0.0843, atol = 0.0001)
 
     # test helper functions for individual rice diseases
-    bbmodel = bacterialblight(wth = w, emergence = "2010-07-01")
+    bbmodel = bacterialblight(wth = w, emergence = emergence)
     @test nrow(bbmodel) == 120
     @test ncol(bbmodel) == 16
     @test isapprox(bbmodel[120, 13], 0.45708, atol = 0.0001)
 
-    bsmodel = brownspot(wth = w, emergence = "2010-07-01")
+    bsmodel = brownspot(wth = w, emergence = emergence)
     @test nrow(bsmodel) == 120
     @test ncol(bsmodel) == 16
     @test isapprox(bsmodel[120, 13], 0.0843, atol = 0.0001)
 
-    lbmodel = leafblast(wth = w, emergence = "2010-07-01")
+    lbmodel = leafblast(wth = w, emergence = emergence)
     @test nrow(lbmodel) == 120
     @test ncol(lbmodel) == 16
     @test isapprox(lbmodel[120, 13], 5.81269e-6, atol = 0.0001)
 
-    sbmodel = sheathblight(wth = w, emergence = "2010-07-01")
+    sbmodel = sheathblight(wth = w, emergence = emergence)
     @test nrow(sbmodel) == 120
     @test ncol(sbmodel) == 16
     @test isapprox(sbmodel[120, 13], 0.78539, atol = 0.0001)
 
-    tmodel = tungro(wth = w, emergence = "2010-07-01")
+    tmodel = tungro(wth = w, emergence = emergence)
     @test nrow(tmodel) == 120
     @test ncol(tmodel) == 16
     @test isapprox(tmodel[120, 13], 0.07564, atol = 0.0001)
