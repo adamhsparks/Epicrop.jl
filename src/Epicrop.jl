@@ -69,13 +69,13 @@ A `DataFrame` with the model's output. Latitude and longitude are included for m
 
 function hlipmodel(;
     wth,
-    emergence{Dates.Date},
+    emergence,
     onset,
     duration,
     rhlim,
     rainlim,
-    H0{Int, Float64},
-    I0{Int, Float64},
+    H0,
+    I0,
     RcA,
     RcT,
     RcOpt,
