@@ -96,7 +96,7 @@ rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
 insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
-emergence = Dates.Date.(2010-07-01, Dates.DateFormat("yyyy-mm-dd"))
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
