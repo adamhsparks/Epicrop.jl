@@ -96,13 +96,15 @@ rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
 insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
+emergence = Dates.Date.(2010-07-01, Dates.DateFormat("yyyy-mm-dd"))
+
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
 RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 bs = hlipmodel(
 		wth = w,
-		emergence = "2010-07-01",
+		emergence = emergence,
 		onset = 20,
 		duration = 120,
 		rhlim = 90,
