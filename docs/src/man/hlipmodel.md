@@ -29,23 +29,30 @@ hlipmodel(
     RRG)
 ```
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format. From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length). From Table 1 Savary *et al.* 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary *et al.* 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary *et al.* 2012.
-- `H0`: initial number of plant's healthy sites. From Table 1 Savary *et al.* 2012.
-- `I0`: initial number of infective sites. From Table 1 Savary *et al.* 2012.
-- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary *et al.* 2012.
-- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary *et al.* 2012.
-- `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary *et al.* 2012.
-- `i`: duration of infectious period. From Table 1 Savary *et al.* 2012.
-- `p`: duration of latent period. From Table 1 Savary *et al.* 2012.
-- `Sx`: maximum number of sites. From Table 1 Savary *et al.* 2012.
-- `a`: aggregation coefficient. From Table 1 Savary *et al.* 2012.
-- `RRS`: relative rate of physiological senescence. From Table 1 Savary *et al.* 2012.
-- `RRG`: relative rate of growth. From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+  | Field | value |
+  |-------|-------------|
+  |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+  |DOY |  Consecutive day of year, commonly called "Julian date" |
+  |TEMP | Mean daily temperature (°C) |
+  |RHUM | Mean daily relative humidity (%) |
+  |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration`: simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
+- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
+- `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
+- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
+- `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
+- `Sx`: maximum number of sites. From Table 1 Savary _et al._ 2012.
+- `a`: aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
 
 # Returns
 - A `DataFrame` with the model's output with the following fields and values.
@@ -70,16 +77,11 @@ hlipmodel(
   |lon | Longitude value as provided by `wth` object |
 # Example Usage
 
-Predict an unmanaged epidemic of brown spot at the International Rice Research Institute
-(IRRI) Zeigler Experiment station in Los Baños, Calabarzon, Philippines.
-Weather data will be downloaded from the [NASA POWER](https://power.larc.nasa.gov) API for
-use in this example.
-As the model will run for 120 days, we will download weather data for for 120 days starting
-on July 01, 2010 and ending on October 28, 2010.
-To automate this process, you may find the R package,
-[nasapower](https://cran.r-project.org/web/packages/nasapower/index.html), useful for
-downloading weather data in conjunction with
-[RCall](https://github.com/JuliaInterop/RCall.jl).
+Predict an unmanaged epidemic of brown spot at the International Rice Research Institute (IRRI) Zeigler Experiment station in Los Baños, Calabarzon, Philippines.
+Weather data will be downloaded from the [NASA POWER](https://power.larc.nasa.gov) API for use in this example.
+As the model will run for 120 days, we will download weather data for for 120 days starting on July 01, 2010 and ending on October 28, 2010.
+To automate this process, you may find the R package, [nasapower](https://cran.r-project.org/web/packages/nasapower/index.html), useful for
+downloading weather data in conjunction with [RCall](https://github.com/JuliaInterop/RCall.jl).
 
 ```@example
 using Epicrop, DataFrames, Dates, CSV, Plots, Downloads
@@ -94,13 +96,15 @@ rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
 insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
 insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
 
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
 RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 bs = hlipmodel(
 		wth = w,
-		emergence = "2010-07-01",
+		emergence = emergence,
 		onset = 20,
 		duration = 120,
 		rhlim = 90,

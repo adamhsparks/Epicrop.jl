@@ -34,47 +34,36 @@ hlipmodel(
     RRS,
     RRG)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for respective crop diseases.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for respective crop diseases.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%).
-From Table 1 Savary *et al.* 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not.
-From Table 1 Savary *et al.* 2012.
-- `H0`: initial number of plant's healthy sites.
-From Table 1 Savary *et al.* 2012.
-- `I0`: initial number of infective sites.
-From Table 1 Savary *et al.* 2012.
-- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals).
-From Table 1 Savary *et al.* 2012.
-- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals).
-From Table 1 Savary *et al.* 2012.
-- `RcOpt`: potential basic infection rate corrected for removals.
-From Table 1 Savary *et al.* 2012.
-- `i`: duration of infectious period.
-From Table 1 Savary *et al.* 2012.
-- `p`: duration of latent period.
-From Table 1 Savary *et al.* 2012.
-- `Sx`: maximum number of sites.
-From Table 1 Savary *et al.* 2012.
-- `a`: aggregation coefficient.
-From Table 1 Savary *et al.* 2012.
-- `RRS`: relative rate of physiological senescence.
-From Table 1 Savary *et al.* 2012.
-- `RRG`: relative rate of growth.
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
+- `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration`: simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
+- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
+- `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
+- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
+- `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
+- `Sx`: maximum number of sites. From Table 1 Savary _et al._ 2012.
+- `a`: aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with the model's output. Latitude and longitude are included for mapping
-purposes if they are present in the input weather data.
+A `DataFrame` with the model's output. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 
 """
 
@@ -98,14 +87,14 @@ function hlipmodel(;
     RRG,
 )
 
-    emergence_day = Dates.Date.(emergence, Dates.DateFormat("yyyy-mm-dd"))
-    final_day = emergence_day + Dates.Day(duration - 1)
-    season = Base.collect(emergence_day:Dates.Day(1):final_day)
+    if !(typeof(emergence) == Dates.Date)
+        error("emergence must be a Date object")
+    end
 
-    # Convert emergence date into Julian date, sequential day in year.
-    emergence_doy = Dates.dayofyear(emergence_day)
+    final_day = emergence + Dates.Day(duration - 1)
+    season = Base.collect(emergence:Dates.Day(1):final_day)
 
-    if !(emergence_day >= wth[1, "YYYYMMDD"] ||
+    if !(emergence >= wth[1, "YYYYMMDD"] ||
         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
     end

@@ -6,21 +6,21 @@ bacterialblight(
     duration,
     )
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for rice bacterial blight.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with predictions for bacterial blight severity. Latitude and longitude are
-included for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for bacterial blight severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function bacterialblight(;
@@ -67,21 +67,21 @@ brownspot(
     duration,
     )
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for rice brown spot.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included
-for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function brownspot(;
@@ -124,21 +124,21 @@ leafblast(
     duration,
     )
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for rice leaf blast.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included
-for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function leafblast(;
@@ -188,21 +188,21 @@ sheathblight(
     duration,
     )
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for rice sheath blight.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included
-for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function sheathblight(;
@@ -245,21 +245,21 @@ tungro(
     duration,
     )
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and
-optimal curve values for rice tungro.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_ viruses.
 
 # Keywords
-- `wth`: a data frame of weather on a daily time-step.
-- `emergence`: expected date of plant emergence entered in `YYYY-MM-DD` format.
-From Table 1 Savary *et al.* 2012.
-- `onset` expected number of days until the onset of disease after emergence date.
-From Table 1 Savary *et al.* 2012.
-- `duration`: simulation duration (growing season length).
-From Table 1 Savary *et al.* 2012.
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RHUM | Mean daily relative humidity (%) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 # Returns
-A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included
-for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function tungro(;
