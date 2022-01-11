@@ -94,9 +94,6 @@ function hlipmodel(;
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
 
-    # Convert emergence date into Julian date, sequential day in year.
-    emergence_doy = Dates.dayofyear(emergence)
-
     if !(emergence >= wth[1, "YYYYMMDD"] ||
         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         error("incomplete weather data or dates do not align")
