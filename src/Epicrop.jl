@@ -69,13 +69,13 @@ A `DataFrame` with the model's output. Latitude and longitude are included for m
 
 function hlipmodel(;
     wth,
-    emergence,
+    emergence{Dates.Date},
     onset,
     duration,
     rhlim,
     rainlim,
-    H0,
-    I0,
+    H0{Int, Float64},
+    I0{Int, Float64},
     RcA,
     RcT,
     RcOpt,
@@ -86,6 +86,10 @@ function hlipmodel(;
     RRS,
     RRG,
 )
+
+    if !(typeof(emergence) == Dates.Date)
+        error("emergence must be a Date object")
+    end
 
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
