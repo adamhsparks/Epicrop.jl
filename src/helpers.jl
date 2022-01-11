@@ -8,7 +8,8 @@ bacterialblight(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -19,7 +20,8 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |RAIN | Mean daily rainfall (mm) |
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 A `DataFrame` with predictions for bacterial blight severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
@@ -69,7 +71,8 @@ brownspot(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -80,7 +83,8 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |RAIN | Mean daily rainfall (mm) |.
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
@@ -126,7 +130,8 @@ leafblast(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -137,7 +142,8 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |RAIN | Mean daily rainfall (mm) |.
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
@@ -190,7 +196,8 @@ sheathblight(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -201,7 +208,8 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |RAIN | Mean daily rainfall (mm) |
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
@@ -247,7 +255,8 @@ tungro(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_ viruses.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -258,7 +267,8 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |RAIN | Mean daily rainfall (mm) |
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-# Returns
+## Returns
+
 A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 

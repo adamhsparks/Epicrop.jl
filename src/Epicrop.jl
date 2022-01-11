@@ -36,7 +36,8 @@ hlipmodel(
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for respective crop diseases.
 
-# Keywords
+## Keywords
+
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
@@ -62,9 +63,9 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
 - `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
 
-# Returns
-A `DataFrame` with the model's output. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+## Returns
 
+A `DataFrame` with the model's output. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
 """
 
 function hlipmodel(;
