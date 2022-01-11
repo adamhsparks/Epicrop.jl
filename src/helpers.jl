@@ -2,8 +2,7 @@
 """
 bacterialblight(
     wth,
-    emergence,
-    duration,
+    emergence
     )
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
@@ -65,8 +64,7 @@ end
 """
 brownspot(
     wth,
-    emergence,
-    duration,
+    emergence
     )
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
@@ -124,8 +122,7 @@ end
 """
 leafblast(
     wth,
-    emergence,
-    duration,
+    emergence
     )
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice leaf blast caused by _Magnaporthe oryzae_.
@@ -190,8 +187,7 @@ end
 """
 sheathblight(
     wth,
-    emergence,
-    duration,
+    emergence
     )
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
@@ -249,8 +245,7 @@ end
 """
 tungro(
     wth,
-    emergence,
-    duration,
+    emergence
     )
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_ viruses.
