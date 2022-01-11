@@ -53,6 +53,95 @@ using Downloads
     @test ncol(bs) == 16
     @test isapprox(bs[120, 13], 0.0843, atol = 0.0001)
 
+# check for stop if supplied args are inappropiate
+@testset "emergence is a Date object" begin
+    @test_throws DomainError hlipmodel(
+		wth = w,
+		emergence = "2010-07-01",
+		onset = 20,
+		duration = 120,
+		rhlim = 90,
+		rainlim = 5,
+		H0 = 600,
+		I0 = 1,
+		RcA = RcA,
+		RcT = RcT,
+		RcOpt = 0.61,
+		p = 6,
+		i = 19,
+		Sx = 100000,
+		a = 1,
+		RRS = 0.01,
+		RRG = 0.1
+        )
+end
+
+@testset "weather data align with duration and emergence" begin
+    @test_throws DomainError hlipmodel(
+		wth = w,
+		emergence = Dates.Date("2000-07-01", Dates.DateFormat("yyyy-mm-dd")),
+		onset = 20,
+		duration = 120,
+		rhlim = 90,
+		rainlim = 5,
+		H0 = 600,
+		I0 = 1,
+		RcA = RcA,
+		RcT = RcT,
+		RcOpt = 0.61,
+		p = 6,
+		i = 19,
+		Sx = 100000,
+		a = 1,
+		RRS = 0.01,
+		RRG = 0.1
+        )
+end
+
+@testset "H0 must be > 0" begin
+    @test_throws DomainError hlipmodel(
+		wth = w,
+		emergence = emergence,
+		onset = 20,
+		duration = 120,
+		rhlim = 90,
+		rainlim = 5,
+		H0 = -600,
+		I0 = 1,
+		RcA = RcA,
+		RcT = RcT,
+		RcOpt = 0.61,
+		p = 6,
+		i = 19,
+		Sx = 100000,
+		a = 1,
+		RRS = 0.01,
+		RRG = 0.1
+        )
+end
+
+@testset "I0 must be > 0" begin
+    @test_throws DomainError hlipmodel(
+		wth = w,
+		emergence = emergence,
+		onset = 20,
+		duration = 120,
+		rhlim = 90,
+		rainlim = 5,
+		H0 = 600,
+		I0 = -1,
+		RcA = RcA,
+		RcT = RcT,
+		RcOpt = 0.61,
+		p = 6,
+		i = 19,
+		Sx = 100000,
+		a = 1,
+		RRS = 0.01,
+		RRG = 0.1
+        )
+end
+
     # test helper functions for individual rice diseases
     bbmodel = bacterialblight(wth = w, emergence = emergence)
     @test nrow(bbmodel) == 120

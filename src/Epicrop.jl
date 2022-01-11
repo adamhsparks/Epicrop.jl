@@ -89,7 +89,7 @@ function hlipmodel(;
 )
 
     if !(typeof(emergence) == Dates.Date)
-        error("emergence must be a Date object")
+        throw(DomainError(emergence, "emergence must be a Date object"))
     end
 
     final_day = emergence + Dates.Day(duration - 1)
@@ -97,15 +97,17 @@ function hlipmodel(;
 
     if !(emergence >= wth[1, "YYYYMMDD"] ||
         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
-        error("incomplete weather data or dates do not align")
+        throw(DomainError(wth, "incomplete weather data or dates do not align"))
     end
 
     if (H0 < 0)
-        Base.error("H0 cannot be < 0, check your initial number of healthy sites")
+        throw(DomainError(H0,
+            "H0 cannot be < 0, check your initial number of healthy sites"))
     end
 
     if (I0 < 0)
-        Base.error("I0 cannot be < 0, check your initial number of infective sites")
+        throw(DomainError(I0,
+            "I0 cannot be < 0, check your initial number of infective sites"))
     end
 
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
