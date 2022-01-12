@@ -231,14 +231,15 @@ end
 
 function _audpc(intensity)
     n = length(intensity) - 1
-    out = Base.zeros(n)
+    intvec = Base.zeros(n)
+    out = 0
 
     for i in 1:n
-        out[i] = (intensity[i] + intensity[i + 1]) / 2
-        out = sum(out)
+        intvec[i] = (intensity[i] + intensity[i + 1]) / 2
+        out = sum(intvec)
     end
 
     return out
-    end
+end
 
 end # module
