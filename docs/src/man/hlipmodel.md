@@ -124,15 +124,7 @@ bs = hlipmodel(
 		RRS = 0.01,
 		RRG = 0.1
 )
-
-# set plotly backend for plots
-plotly()
-
-plot(bs.dates, bs.intensity, legend = false)
 ```
-
-![](bs_plot.png)
-
 ## References
 
 Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
