@@ -13,13 +13,13 @@ Given proper values it can be used with other pathosystems as well.
 
 ## Installation
 
-Epicrop.jl is not yet a registered Julia package, but I hope to have it in good enough condition to register it shortly.
-Until then you can install it with the following commands:
+Epicrop.jl is is a registered Julia package.
+You can install it with the following commands:
 
 ```julia
 julia> using Pkg
 
-julia> Pkg.add(url = "https://github.com/adamhsparks/Epicrop.jl")
+julia> Pkg.add("Epicrop.jl")
 ```
 
 You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
