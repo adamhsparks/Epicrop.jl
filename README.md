@@ -1,6 +1,5 @@
 # Epicrop.jl
 
-[![Lifcycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-blue.svg)](https://img.shields.io/badge/Lifecycle-Maturing-blue.svg)
 [![CI](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/adamhsparks/Epicrop.jl/branch/main/graph/badge.svg?token=Mmj7JbzCQK)](https://codecov.io/gh/adamhsparks/Epicrop.jl)
 
