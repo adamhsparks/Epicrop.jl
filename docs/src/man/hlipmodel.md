@@ -128,7 +128,7 @@ bs = hlipmodel(
 # set plotly backend for plots
 plotly()
 
-plot(bs.dates, bs.intensity)
+plot(bs.dates, bs.intensity, legend = false)
 ```
 
 ![](bs_plot.png)
