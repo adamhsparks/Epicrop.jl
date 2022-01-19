@@ -112,24 +112,26 @@ function hlipmodel(;
 
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
-    _hliploop(
-        season = season,
-        season_wth = season_wth,
-        onset = onset,
-        duration = duration,
-        rhlim = rhlim,
-        rainlim = rainlim,
-        H0 = H0,
-        I0 = I0,
-        RcA = RcA,
-        RcT = RcT,
-        RcOpt = RcOpt,
-        p = p,
-        i = i,
-        Sx = Sx,
-        a = a,
-        RRS = RRS,
-        RRG = RRG
+    return(
+        _hliploop(
+            season = season,
+            season_wth = season_wth,
+            onset = onset,
+            duration = duration,
+            rhlim = rhlim,
+            rainlim = rainlim,
+            H0 = H0,
+            I0 = I0,
+            RcA = RcA,
+            RcT = RcT,
+            RcOpt = RcOpt,
+            p = p,
+            i = i,
+            Sx = Sx,
+            a = a,
+            RRS = RRS,
+            RRG = RRG
+        )
     )
 end
 
