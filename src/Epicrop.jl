@@ -112,6 +112,46 @@ function hlipmodel(;
 
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
+    _hliploop(
+        season = season,
+        season_wth = season_wth,
+        onset = onset,
+        duration = duration,
+        rhlim = rhlim,
+        rainlim = rainlim,
+        H0 = H0,
+        I0 = I0,
+        RcA = RcA,
+        RcT = RcT,
+        RcOpt = RcOpt,
+        p = p,
+        i = i,
+        Sx = Sx,
+        a = a,
+        RRS = RRS,
+        RRG = RRG
+    )
+end
+
+function _hliploop(;
+    season,
+    season_wth,
+    onset,
+    duration,
+    rhlim,
+    rainlim,
+    H0,
+    I0,
+    RcA,
+    RcT,
+    RcOpt,
+    p,
+    i,
+    Sx,
+    a,
+    RRS,
+    RRG)
+
     # Create `infday` for use in for loop below.
     infday = 0
 
@@ -134,7 +174,7 @@ function hlipmodel(;
     sites = Base.zeros(duration)
     total_sites = Base.zeros(duration)
     Rc_age = _fn_rc(RcA, 1:duration)
-    Rc_temp = _fn_rc(RcT, wth[!, :TEMP])
+    Rc_temp = _fn_rc(RcT, season_wth[!, :TEMP])
 
     for d in 1:duration
         d_1 = d - 1
@@ -166,7 +206,7 @@ function hlipmodel(;
             now_infectious[d] = Base.sum(infectious[infday:d])
         end
 
-        if (wth[!, :RHUM][d] >= rhlim || wth[!, :RAIN][d] >= rainlim)
+        if (season_wth[!, :RHUM][d] >= rhlim || season_wth[!, :RAIN][d] >= rainlim)
             RHCoef[d] = 1
         end
 
@@ -214,9 +254,9 @@ function hlipmodel(;
         audpc = _audpc(intensity)
     )
 
-    if hasproperty(wth, "LAT") && hasproperty(wth, "LON")
+    if hasproperty(season_wth, "LAT") && hasproperty(season_wth, "LON")
         res = DataFrames.DataFrame(
-            insertcols!(res, :lat => wth[1, "LAT"], :lon => wth[1, "LON"])
+            insertcols!(res, :lat => season_wth[1, "LAT"], :lon => season_wth[1, "LON"])
         )
     end
 
@@ -232,7 +272,7 @@ end
 function _audpc(intensity)
     n = length(intensity) - 1
     intvec = Base.zeros(n)
-    out = 0
+    out = 0.0
 
     for i in 1:n
         intvec[i] = (intensity[i] + intensity[i + 1]) / 2
