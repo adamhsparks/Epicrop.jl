@@ -1,6 +1,6 @@
 # Epicrop.jl Release Notes
 
-## v0.1.1-DEV
+## v0.1.2
 
 * Remove `Using Plots` from `hlipmodel` example
 

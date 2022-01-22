@@ -1,7 +1,7 @@
 name = "Epicrop"
 uuid = "ba61b42c-0a63-478a-861d-cedeca8bda8f"
 authors = ["Adam Sparks <adamhsparks@gmail.com> and contributors"]
-version = "0.1.1-DEV"
+version = "0.1.2"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
