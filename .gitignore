@@ -8,3 +8,5 @@
 
 # Local History for Visual Studio Code
 .history/
+CITATION.bib.bak
+.gitignore
