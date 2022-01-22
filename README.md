@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/adamhsparks/Epicrop.jl/branch/main/graph/badge.svg?token=Mmj7JbzCQK)](https://codecov.io/gh/adamhsparks/Epicrop.jl)
+[![DOI](https://zenodo.org/badge/347936071.svg)](https://zenodo.org/badge/latestdoi/347936071)
+
 
 Epicrop.jl is a [Julia](https://julialang.org) package that can be used to simulate disease epidemics.
 If you have not yet installed Julia, [please follow the instructions for your operating system](https://julialang.org/downloads/platform/).
