@@ -63,6 +63,8 @@ Default values for this disease model are derived from Table 2 (Savary _et al._ 
 tungro(wth, emergence)
 ```
 
-# References
+## References
 
-Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
+Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
+
+Serge Savary, Stacia Stetkiewicz, François Brun, and Laetitia Willocquet. (2015) Modelling and Mapping Potential Epidemics of Wheat Diseases—Examples on Leaf Rust and Septoria Tritici Blotch Using EPIWHEAT. _European Journal of Plant Pathology_ Volume 142, Pages 771–90. [doi.org/10.1007/s10658-015-0650-7](https://doi.org/10.1007/s10658-015-0650-7).

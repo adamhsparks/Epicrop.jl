@@ -6,7 +6,7 @@ Author = "Adam H. Sparks"
 
 Epicrop provides a basic function, `hlipmodel`, that can be used to predict unmanaged plant disease epidemics given the proper inputs.
 Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight, tungro and are included as helper functions that simplify running the model, `bacterialblight`, `brownspot`, `leafblast`, `sheathblight`, and `tungro`.
-Given other parameters, the model framework is capable of modelling other diseases using the methods as described by Savary _et al._ (2012).
+Given other parameters, the model framework is capable of modelling other diseases using the methods as described by Savary _et al._ (2012, 2015).
 
 ```julia
 hlipmodel(
@@ -28,6 +28,7 @@ hlipmodel(
     RRS,
     RRG)
 ```
+
 ## Keywords
 
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
@@ -38,15 +39,19 @@ hlipmodel(
   |TEMP | Mean daily temperature (°C) |
   |RHUM | Mean daily relative humidity (%) |
   |RAIN | Mean daily rainfall (mm) |
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `emergence`: expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
 - `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
 - `duration`: simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `rhlim`: relative threshold for leaf wetness (usually 90%). **This should not be used in conjunction with `RcW`**.
+    From Table 1 Savary _et al._ 2012.
+- `rainlim`: rainfall threshold for leaf wetness (usually 5mm). **This should not be used in conjunction with `RcW`**.
+    From Table 1 Savary _et al._ 2012.
 - `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
 - `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
 - `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcW`: wetness modifier for *Rc* (the basic infection rate corrected for removals). **This should not be used in conjunction with `rhlim` or `rainlim`**.
+    From Table 1 Savary _et al._ 2015.
 - `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
@@ -54,6 +59,7 @@ hlipmodel(
 - `a`: aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `RRLEX`: relative rate of lesion expansion. From Table 1 Savary _et al._ 2015.
 
 ## Returns
 
@@ -116,15 +122,20 @@ bs = hlipmodel(
 		I0 = 1,
 		RcA = RcA,
 		RcT = RcT,
+    RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+    RRLEX = 0
 )
 ```
+
 ## References
 
 Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
+
+Serge Savary, Stacia Stetkiewicz, François Brun, and Laetitia Willocquet. (2015) Modelling and Mapping Potential Epidemics of Wheat Diseases—Examples on Leaf Rust and Septoria Tritici Blotch Using EPIWHEAT. _European Journal of Plant Pathology_ Volume 142, Pages 771–90. [doi.org/10.1007/s10658-015-0650-7](https://doi.org/10.1007/s10658-015-0650-7).
