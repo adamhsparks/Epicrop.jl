@@ -50,13 +50,15 @@ return(
         I0 = 1,
         RcA = RcA,
         RcT = RcT,
+        RcW = 0,
         RcOpt = 0.97,
         p = 5,
         i = 30,
         Sx = 3200,
         a = 4,
         RRS = 0.01,
-        RRG = 0.1
+        RRG = 0.1,
+        RRLEX = 0
     )
 )
 end
@@ -107,13 +109,15 @@ return(
         I0 = 1,
         RcA = RcA,
         RcT = RcT,
+        RcW = 0,
         RcOpt = 0.61,
         p = 6,
         i = 19,
         Sx = 100000,
         a = 1,
         RRS = 0.01,
-        RRG = 0.1
+        RRG = 0.1,
+        RRLEX = 0
     )
 )
 end
@@ -172,13 +176,15 @@ return(
         I0 = 1,
         RcA = RcA,
         RcT = RcT,
+        RcW = 0,
         RcOpt = 1.14,
         p = 5,
         i = 20,
         Sx = 30000,
         a = 1,
         RRS = 0.01,
-        RRG = 0.1
+        RRG = 0.1,
+        RRLEX = 0
     )
 )
 end
@@ -231,13 +237,15 @@ return(
         I0 = 1,
         RcA = RcA,
         RcT = RcT,
+        RcW = 0,
         RcOpt = 0.46,
         p = 3,
         i = 120,
         Sx = 800,
         a = 2.8,
         RRS = 0.005,
-        RRG = 0.2
+        RRG = 0.2,
+        RRLEX = 0
     )
 )
 end
@@ -289,13 +297,15 @@ return(
         I0 = 1,
         RcA = RcA,
         RcT = RcT,
+        RcW = 0,
         RcOpt = 0.18,
         p = 6,
         i = 120,
         Sx = 100,
         a = 1,
         RRS = 0.01,
-        RRG = 0.1
+        RRG = 0.1,
+        RRLEX = 0
     )
 )
 end
