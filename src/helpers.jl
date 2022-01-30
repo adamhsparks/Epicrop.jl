@@ -309,3 +309,123 @@ return(
     )
 )
 end
+
+
+"""
+striticiblotch(
+    wth,
+    emergence
+    )
+
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for wheat _Septoria tritici_ blotch disease caused by _Mycosphaerella graminicola_.
+
+## Keywords
+
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2015.
+
+## Returns
+
+A `DataFrame` with predictions for wheat _Septoria tritici_ blotch severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+"""
+
+function striticiblotch(;
+    wth,
+    emergence
+)
+
+RcA = []
+
+RcT = []
+
+RcW = [0 0.23; 1 0.36; 2 0.68; 3 0.93; 4 1]
+
+return(
+    hlipmodel(
+        wth = wth,
+        emergence = emergence,
+        onset = 20,
+        duration = 120,
+        rhlim = 0,
+        rainlim = 0,
+        H0 = 250,
+        I0 = 1,
+        RcA = RcA,
+        RcT = RcT,
+        RcW = RcW,
+        RcOpt = 1.17,
+        p = 11,
+        i = 10,
+        Sx = 174000,
+        a = 1,
+        RRS = 0.01,
+        RRG = 0.1,
+        RRLEX = 0.09
+    )
+)
+end
+
+
+"""
+brownrust(
+    wth,
+    emergence
+    )
+
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for wheat brown or leaf rust caused by _Puccinia triticina_.
+
+## Keywords
+
+- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+    | Field | value |
+    |-------|-------------|
+    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
+    |DOY |  Consecutive day of year, commonly called "Julian date" |
+    |TEMP | Mean daily temperature (°C) |
+    |RAIN | Mean daily rainfall (mm) |
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2015.
+
+## Returns
+
+A `DataFrame` with predictions for wheat brown/leaf rust severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+"""
+
+function brownrust(;
+    wth,
+    emergence
+)
+
+RcA = []
+
+RcT = []
+
+return(
+    hlipmodel(
+        wth = wth,
+        emergence = emergence,
+        onset = 20,
+        duration = 120,
+        rhlim = 0,
+        rainlim = 0,
+        H0 = 250,
+        I0 = 1,
+        RcA = RcA,
+        RcT = RcT,
+        RcW = 1.472,
+        RcOpt = 0.18,
+        p = 7,
+        i = 15,
+        Sx = 750000,
+        a = 1,
+        RRS = 0.01,
+        RRG = 0.1,
+        RRLEX = 0
+    )
+)
+end
