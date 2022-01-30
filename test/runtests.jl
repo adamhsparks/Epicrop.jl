@@ -40,13 +40,15 @@ using Downloads
 		I0 = 1,
 		RcA = RcA,
 		RcT = RcT,
+        RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+        RRLEX = 0
     )
 
     @test nrow(bs) == 120
@@ -66,13 +68,15 @@ using Downloads
 		I0 = 1,
 		RcA = RcA,
 		RcT = RcT,
+        RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+        RRLEX = 0
         )
 end
 
@@ -88,13 +92,15 @@ end
 		I0 = 1,
 		RcA = RcA,
 		RcT = RcT,
+        RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+        RRLEX = 0
         )
 end
 
@@ -110,13 +116,15 @@ end
 		I0 = 1,
 		RcA = RcA,
 		RcT = RcT,
+        RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+        RRLEX = 0
         )
 end
 
@@ -132,13 +140,15 @@ end
 		I0 = -1,
 		RcA = RcA,
 		RcT = RcT,
+        RcW = 0,
 		RcOpt = 0.61,
 		p = 6,
 		i = 19,
 		Sx = 100000,
 		a = 1,
 		RRS = 0.01,
-		RRG = 0.1
+		RRG = 0.1,
+        RRLEX = 0
         )
 end
 
