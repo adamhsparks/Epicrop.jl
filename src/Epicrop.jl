@@ -26,13 +26,15 @@ hlipmodel(
     I0,
     RcA,
     RcT,
+    RcW,
     RcOpt,
     p,
     i,
     Sx,
     a,
     RRS,
-    RRG)
+    RRG,
+    RRLEX)
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for respective crop diseases.
 
@@ -49,12 +51,16 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
 - `emergence`: expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
 - `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
 - `duration`: simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `rhlim`: relative threshold for leaf wetness (usually 90%). **This should not be used in conjunction with `RcW`**.
+    From Table 1 Savary _et al._ 2012.
+- `rainlim`: rainfall threshold for leaf wetness (usually 5mm). **This should not be used in conjunction with `RcW`**.
+    From Table 1 Savary _et al._ 2012.
 - `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
 - `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
 - `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcW`: wetness modifier for *Rc* (the basic infection rate corrected for removals). **This should not be used in conjunction with `rhlim` or `rainlim`**.
+    From Table 1 Savary _et al._ 2015.
 - `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
@@ -62,6 +68,7 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
 - `a`: aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `RRLEX`: relative rate of lesion expansion. From Table 1 Savary _et al._ 2015.
 
 ## Returns
 
@@ -79,6 +86,7 @@ function hlipmodel(;
     I0,
     RcA,
     RcT,
+    RcW,
     RcOpt,
     p,
     i,
@@ -86,6 +94,7 @@ function hlipmodel(;
     a,
     RRS,
     RRG,
+    RRLEX
 )
 
     if !(typeof(emergence) == Dates.Date)
@@ -124,13 +133,15 @@ function hlipmodel(;
             I0 = I0,
             RcA = RcA,
             RcT = RcT,
+            RcW = RcW,
             RcOpt = RcOpt,
             p = p,
             i = i,
             Sx = Sx,
             a = a,
             RRS = RRS,
-            RRG = RRG
+            RRG = RRG,
+            RRLEX = RRLEX
         )
     )
 end
@@ -146,13 +157,16 @@ function _hliploop(;
     I0,
     RcA,
     RcT,
+    RcW,
     RcOpt,
     p,
     i,
     Sx,
     a,
     RRS,
-    RRG)
+    RRG,
+    RRLEX
+    )
 
     # Create `infday` for use in for loop below.
     infday = 0
@@ -177,6 +191,9 @@ function _hliploop(;
     total_sites = Base.zeros(duration)
     Rc_age = _fn_rc(RcA, 1:duration)
     Rc_temp = _fn_rc(RcT, season_wth[!, :TEMP])
+    if (RcW != 0)
+        Rc_wet = _fn_rc(RcW, _isitwet(season_wth[:, "RAIN"]))
+    end
 
     for d in 1:duration
         d_1 = d - 1
@@ -208,13 +225,17 @@ function _hliploop(;
             now_infectious[d] = Base.sum(infectious[infday:d])
         end
 
-        if (season_wth[!, :RHUM][d] >= rhlim || season_wth[!, :RAIN][d] >= rainlim)
-            RHCoef[d] = 1
+        if (RcW == 0)
+            if (season_wth[!, :RHUM][d] >= rhlim || season_wth[!, :RAIN][d] >= rainlim)
+                RHCoef[d] = 1
+            end
+            rc[d] = RcOpt * (Rc_age[d] * Rc_temp[d] * RHCoef[d])
+        else
+            rc[d] = RcOpt * (Rc_age[d] * Rc_temp[d] * Rc_wet[d])
         end
 
-        rc[d] = RcOpt * (Rc_age[d] * Rc_temp[d] * RHCoef[d])
-        diseased[d] = sum(infectious) + now_latent[d] + removed[d]
-        removed[d] = sum(infectious) - now_infectious[d]
+        diseased[d] = Base.sum(infectious) + now_latent[d] + removed[d]
+        removed[d] = Base.sum(infectious) - now_infectious[d]
 
         cofr[d] = 1 - (diseased[d] / (sites[d] + diseased[d]))
 
@@ -223,6 +244,9 @@ function _hliploop(;
             infection[d] = I0
         elseif d > onset
             infection[d] = now_infectious[d] * rc[d] * (cofr[d]^a)
+            if RRLEX > 0
+                infection[d] = infection[d] + (RRLEX * infection[d] * cofr[d])
+            end
         else
             infection[d] = 0
         end
@@ -235,6 +259,7 @@ function _hliploop(;
 
         total_sites[d] = diseased[d] + sites[d]
         rgrowth[d] = RRG * sites[d] * (1 - (total_sites[d] / Sx))
+
         intensity[d] = (diseased[d] - removed[d]) / (total_sites[d] - removed[d])
     end
 
@@ -278,10 +303,27 @@ function _audpc(intensity)
 
     for i in 1:n
         intvec[i] = (intensity[i] + intensity[i + 1]) / 2
-        out = sum(intvec)
+        out = Base.sum(intvec)
     end
 
     return out
+end
+
+function _isitwet(_season_wth)
+    wet = Int.(_season_wth[!, "RAIN"] .> 0)
+    wet = _movingsum(wet, 4)
+    return(wet)
+end
+
+function _movingsum(a, width)
+    b = Vector{eltype(a)}(undef, length(a) - width + 1)
+    s = sum(@view a[1:width])
+    for i in 1:length(b) - 1
+        b[i] = s
+        s += a[width + i] - a[i]
+    end
+    b[end] = s
+    return b
 end
 
 end # module
