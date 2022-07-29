@@ -44,7 +44,7 @@ using Test
 		p = 6,
 		i = 19,
 		Sx = 100000,
-		a = 1,
+		a = 1.0,
 		RRS = 0.01,
 		RRG = 0.1
     )
@@ -55,7 +55,7 @@ using Test
 
 # check for stop if supplied args are inappropiate
 @testset "emergence is a Date object" begin
-    @test_throws DomainError hlipmodel(
+    @test_throws TypeError hlipmodel(
 		wth = w,
 		emergence = "2010-07-01",
 		onset = 20,
@@ -70,7 +70,7 @@ using Test
 		p = 6,
 		i = 19,
 		Sx = 100000,
-		a = 1,
+		a = 1.0,
 		RRS = 0.01,
 		RRG = 0.1
         )
@@ -92,7 +92,7 @@ end
 		p = 6,
 		i = 19,
 		Sx = 100000,
-		a = 1,
+		a = 1.0,
 		RRS = 0.01,
 		RRG = 0.1
         )
@@ -114,7 +114,7 @@ end
 		p = 6,
 		i = 19,
 		Sx = 100000,
-		a = 1,
+		a = 1.0,
 		RRS = 0.01,
 		RRG = 0.1
         )
@@ -136,7 +136,7 @@ end
 		p = 6,
 		i = 19,
 		Sx = 100000,
-		a = 1,
+		a = 1.0,
 		RRS = 0.01,
 		RRG = 0.1
         )
