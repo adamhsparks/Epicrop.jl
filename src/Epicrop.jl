@@ -1,6 +1,8 @@
 module Epicrop
 
-using DataFrames, Dates, Interpolations
+using DataFrames
+using Dates
+using Interpolations
 
 include("helpers.jl")
 
