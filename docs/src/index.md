@@ -27,6 +27,7 @@ You can install it with the following commands:
 ```julia
 julia> ] add Epicrop 
 ```
+
 ## Usage
 
 You can either specify the parameters directly or use the helper functions to simplify the process of running the model for specific rice diseases as published in Savary _et al._ (2012).
