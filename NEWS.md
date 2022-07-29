@@ -1,5 +1,11 @@
 # Epicrop.jl Release Notes
 
+## v0.2.0
+
+* Enforce data types for user-provided parameter inputs
+
+* Reformat code
+
 ## v0.1.2
 
 * Remove `Using Plots` from `hlipmodel` example
