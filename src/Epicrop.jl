@@ -87,14 +87,14 @@ function hlipmodel(;
     Sx::Int64,
     a::Float64,
     RRS::Float64,
-    RRG::Float64,
+    RRG::Float64
 )
 
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
 
     if !(emergence >= wth[1, "YYYYMMDD"] ||
-        final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
+         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         throw(DomainError(wth, "incomplete weather data or dates do not align"))
     end
 
@@ -110,26 +110,26 @@ function hlipmodel(;
 
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
-    return(
+    return (
         _hliploop(
-            season = season,
-            season_wth = season_wth,
-            onset = onset,
-            duration = duration,
-            rhlim = rhlim,
-            rainlim = rainlim,
-            H0 = H0,
-            I0 = I0,
-            RcA = RcA,
-            RcT = RcT,
-            RcOpt = RcOpt,
-            p = p,
-            i = i,
-            Sx = Sx,
-            a = a,
-            RRS = RRS,
-            RRG = RRG
-        )
+        season=season,
+        season_wth=season_wth,
+        onset=onset,
+        duration=duration,
+        rhlim=rhlim,
+        rainlim=rainlim,
+        H0=H0,
+        I0=I0,
+        RcA=RcA,
+        RcT=RcT,
+        RcOpt=RcOpt,
+        p=p,
+        i=i,
+        Sx=Sx,
+        a=a,
+        RRS=RRS,
+        RRG=RRG
+    )
     )
 end
 
@@ -238,20 +238,20 @@ function _hliploop(;
 
 
     res = DataFrames.DataFrame(
-        simday = 1:duration,
-        dates = season,
-        sites = sites,
-        latent = now_latent,
-        infectious = now_infectious,
-        removed = removed,
-        senseced = senesced,
-        rateinf = infection,
-        rtransfer = rtransfer,
-        rgrowth = rgrowth,
-        rsenesced = rsenesced,
-        diseased = diseased,
-        intensity = intensity,
-        audpc = _audpc(intensity)
+        simday=1:duration,
+        dates=season,
+        sites=sites,
+        latent=now_latent,
+        infectious=now_infectious,
+        removed=removed,
+        senseced=senesced,
+        rateinf=infection,
+        rtransfer=rtransfer,
+        rgrowth=rgrowth,
+        rsenesced=rsenesced,
+        diseased=diseased,
+        intensity=intensity,
+        audpc=_audpc(intensity)
     )
 
     if hasproperty(season_wth, "LAT") && hasproperty(season_wth, "LON")
@@ -264,7 +264,7 @@ function _hliploop(;
 end
 
 function _fn_rc(Rc, x)
-    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc = 0)
+    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc=0)
     x = itp.(x)
     return x
 end
@@ -275,7 +275,7 @@ function _audpc(intensity)
     out = 0.0
 
     for i in 1:n
-        intvec[i] = (intensity[i] + intensity[i + 1]) / 2
+        intvec[i] = (intensity[i] + intensity[i+1]) / 2
         out = sum(intvec)
     end
 
