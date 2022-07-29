@@ -14,6 +14,24 @@ The model represents site size as 1 rice plant's leaf.
 Default values for this disease model are derived from Table 2 (_Savary et al. 2012_).
 
 ```@autodocs
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
+
+# download weather data from NASA POWER API
+w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+# rename the columns to match the expected column names for hlipmodel
+rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 bacterialblight(wth, emergence)
 ```
 
@@ -28,6 +46,24 @@ The optimal value should be 25 °C, not 20 °C as shown.
 The correct value, 25 °C, is used in this implementation.
 
 ```@autodocs
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
+
+# download weather data from NASA POWER API
+w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+# rename the columns to match the expected column names for hlipmodel
+rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 brownspot(wth, emergence)
 ```
 
@@ -41,6 +77,24 @@ The optimal value should be 20 °C, not 25 °C as shown.
 The correct value, 20 °C, is used in this implementation.
 
 ```@autodocs
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
+
+# download weather data from NASA POWER API
+w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+# rename the columns to match the expected column names for hlipmodel
+rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 leafblast(wth, emergence)
 ```
 
@@ -50,6 +104,24 @@ A dynamic mechanistic simulation of sheath blight disease of rice, causal agent 
 The model represents site size as 1 rice plant's tiller.
 
 ```@autodocs
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
+
+# download weather data from NASA POWER API
+w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+# rename the columns to match the expected column names for hlipmodel
+rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 sheathblight(wth, emergence)
 ```
 
@@ -60,9 +132,27 @@ The model represents site size as 1 rice plant.
 Default values for this disease model are derived from Table 2 (Savary _et al._ 2012).
 
 ```@autodocs
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
+
+# download weather data from NASA POWER API
+w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
+
+# rename the columns to match the expected column names for hlipmodel
+rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+
+# add columns for YYYYMMDD and lat/lon
+insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
+insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+
+emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
 tungro(wth, emergence)
 ```
 
-# References
+## References
 
 Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).

@@ -4,7 +4,7 @@
 Author = "Adam H. Sparks"
 ```
 
-Epicrop provides a basic function, `hlipmodel`, that can be used to predict unmanaged plant disease epidemics given the proper inputs.
+Epicrop.jl provides a basic function, `hlipmodel`, that can be used to predict unmanaged plant disease epidemics given the proper inputs.
 Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight, tungro and are included as helper functions that simplify running the model, `bacterialblight`, `brownspot`, `leafblast`, `sheathblight`, and `tungro`.
 Given other parameters, the model framework is capable of modelling other diseases using the methods as described by Savary _et al._ (2012).
 
@@ -28,6 +28,7 @@ hlipmodel(
     RRS,
     RRG)
 ```
+
 ## Keywords
 
 - `wth` a data frame of weather on a daily time-step containing data with the following field names.
@@ -45,8 +46,8 @@ hlipmodel(
 - `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
 - `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
 - `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcA`: crop age modifier for _Rc_ (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: temperature modifier for _Rc_ (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
@@ -68,7 +69,7 @@ hlipmodel(
   |infectious | Number of infectious sites present on day "x" |
   |removed | Number of removed sites present on day "x" |
   |senesced | Number of senesced sites present on day "x" |
-  |rateinf | Rate of infection | 
+  |rateinf | Rate of infection |
   |rtransfer | Rate of transfer from latent to infectious sites |
   |rgrowth | Rate of growth of healthy sites |
   |rsenesced | Rate of senescence of healthy sites |
@@ -87,7 +88,11 @@ To automate this process, you may find the R package, [nasapower](https://cran.r
 downloading weather data in conjunction with [RCall](https://github.com/JuliaInterop/RCall.jl).
 
 ```@example
-using Epicrop, DataFrames, Dates, CSV, Downloads
+using CSV
+using DataFrames
+using Dates
+using Downloads
+using Epicrop
 
 # download weather data from NASA POWER API
 w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
@@ -106,25 +111,26 @@ RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
 bs = hlipmodel(
-		wth = w,
-		emergence = emergence,
-		onset = 20,
-		duration = 120,
-		rhlim = 90,
-		rainlim = 5,
-		H0 = 600,
-		I0 = 1,
-		RcA = RcA,
-		RcT = RcT,
-		RcOpt = 0.61,
-		p = 6,
-		i = 19,
-		Sx = 100000,
-		a = 1,
-		RRS = 0.01,
-		RRG = 0.1
+  wth = w,
+  emergence = emergence,
+  onset = 20,
+  duration = 120,
+  rhlim = 90,
+  rainlim = 5,
+  H0 = 600,
+  I0 = 1,
+  RcA = RcA,
+  RcT = RcT,
+  RcOpt = 0.61,
+  p = 6,
+  i = 19,
+  Sx = 100000,
+  a = 1.0,
+  RRS = 0.01,
+  RRG = 0.1
 )
 ```
+
 ## References
 
 Serge Savary, Andrew Nelson, Laetitia Willocquet, Ireneo Pangga and Jorrel Aunario (2012). Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](https://doi.org/10.1016/j.cropro.2011.11.009).
