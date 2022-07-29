@@ -93,8 +93,7 @@ function hlipmodel(;
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
 
-    if !(emergence >= wth[1, "YYYYMMDD"] ||
-         final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
+    if !(emergence >= wth[1, "YYYYMMDD"] || final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
         throw(DomainError(wth, "incomplete weather data or dates do not align"))
     end
 
