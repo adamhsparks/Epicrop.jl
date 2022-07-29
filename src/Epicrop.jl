@@ -40,7 +40,7 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
 
 ## Keywords
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
     | Field | value |
     |-------|-------------|
     |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
@@ -48,22 +48,22 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |
-- `emergence`: expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
-- `onset` expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
-- `duration`: simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
-- `rhlim`: threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
-- `rainlim`: threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
-- `H0`: initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
-- `I0`: initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcOpt`: potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
-- `i`: duration of infectious period. From Table 1 Savary _et al._ 2012.
-- `p`: duration of latent period. From Table 1 Savary _et al._ 2012.
-- `Sx`: maximum number of sites. From Table 1 Savary _et al._ 2012.
-- `a`: aggregation coefficient. From Table 1 Savary _et al._ 2012.
-- `RRS`: relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
-- `RRG`: relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
+- `onset`: `Int64`,  expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration`: `Int64`,  simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
+- `rhlim`: `Int64`, threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim`: `Int64`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `H0`: `Int64`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
+- `I0`: `Int64`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
+- `RcA`: `Matrix{Float64}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `i`: `Int64`, duration of infectious period. From Table 1 Savary _et al._ 2012.
+- `p`: `Int64`, duration of latent period. From Table 1 Savary _et al._ 2012.
+- `Sx`: `Int64`, maximum number of sites. From Table 1 Savary _et al._ 2012.
+- `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG`: `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.
 
 ## Returns
 
