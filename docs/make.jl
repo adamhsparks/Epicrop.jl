@@ -1,4 +1,9 @@
-using Documenter, Epicrop, DataFrames, Dates, CSV, Plots
+using CSV
+using DataFrames
+using Dates
+using Documenter
+using Epicrop
+using Plots
 
 makedocs(
     sitename = "Epicrop.jl",
