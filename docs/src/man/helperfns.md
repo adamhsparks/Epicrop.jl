@@ -13,25 +13,7 @@ A dynamic mechanistic simulation of bacterial blight disease of rice, causal age
 The model represents site size as 1 rice plant's leaf.
 Default values for this disease model are derived from Table 2 (_Savary et al. 2012_).
 
-```@example
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
+```@docs
 bacterialblight(wth, emergence)
 ```
 
@@ -45,25 +27,7 @@ _Note_ The optimum temperature for brown spot as presented in Table 2 of Savary 
 The optimal value should be 25 °C, not 20 °C as shown.
 The correct value, 25 °C, is used in this implementation.
 
-```@example
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
+```@docs
 brownspot(wth, emergence)
 ```
 
@@ -76,25 +40,7 @@ _Note_ The optimum temperature for leaf blast as presented in Table 2 of Savary 
 The optimal value should be 20 °C, not 25 °C as shown.
 The correct value, 20 °C, is used in this implementation.
 
-```@example
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
+```@docs
 leafblast(wth, emergence)
 ```
 
@@ -103,25 +49,7 @@ leafblast(wth, emergence)
 A dynamic mechanistic simulation of sheath blight disease of rice, causal agent _Rhizoctonia solani_ AG1-1A Kühn.
 The model represents site size as 1 rice plant's tiller.
 
-```@example
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
+```@docs
 sheathblight(wth, emergence)
 ```
 
@@ -131,25 +59,7 @@ A dynamic mechanistic simulation of tungro disease of rice, causal agents _Rice 
 The model represents site size as 1 rice plant.
 Default values for this disease model are derived from Table 2 (Savary _et al._ 2012).
 
-```@example
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(Downloads.download("https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"), DataFrame, header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
+```@docs
 tungro(wth, emergence)
 ```
 
