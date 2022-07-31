@@ -5,6 +5,7 @@ using Dates
 using Interpolations
 
 include("helpers.jl")
+include("hlipmodel.jl")
 
 export hlipmodel
 export bacterialblight
