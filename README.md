@@ -14,11 +14,12 @@ Given proper values it can be used with other pathosystems as well.
 
 ## Installation
 
-Epicrop.jl is is a registered Julia package.
+Epicrop.jl is a registered Julia package.
 You can install it with the following commands:
 
 ```julia
-julia> ] add Epicrop 
+julia> using Pkg
+julia> Pkg.add("Epicrop")
 ```
 
 You can copy and paste all commands to the REPL including the leading `julia>` prompts - they will automatically be stripped away by Julia.
@@ -74,8 +75,8 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
   |audpc | Area under the disease progress curve for the whole of simulated season |
   |lat | Latitude value as provided by `wth` object |
   |lon | Longitude value as provided by `wth` object |
-  
-# Example
+
+## Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
 In this example, we will download weather data for the International Rice Research Institute (IRRI) from the [NASA POWER](https://power.larc.nasa.gov) database using a pre-defined API call for this location for the 2010 wet season.
@@ -121,6 +122,8 @@ bs = hlipmodel(
 		RRG = 0.1
 )
 ```
-# References
+
+## References
+
 Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
 17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
