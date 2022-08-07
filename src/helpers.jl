@@ -84,7 +84,8 @@ end
 """
     brownspot(wth, emergence)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
+values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
 ## Keywords
 
@@ -96,13 +97,14 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |.
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
+2012.
 
 ## Returns
 
-A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included for
+    mapping purposes if they are present in the input weather data.
 """
-
 function brownspot(;
     wth,
     emergence
@@ -139,7 +141,8 @@ end
 """
     leafblast(wth, emergence)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice leaf blast caused by _Magnaporthe oryzae_.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
+values for rice leaf blast caused by _Magnaporthe oryzae_.
 
 ## Keywords
 
@@ -151,13 +154,14 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |.
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
+2012.
 
 ## Returns
 
-A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included for
+mapping purposes if they are present in the input weather data.
 """
-
 function leafblast(;
     wth,
     emergence
@@ -193,7 +197,8 @@ end
 """
     sheathblight(wth, emergence)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
+values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
 ## Keywords
 
@@ -205,13 +210,14 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
+2012.
 
 ## Returns
 
-A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included for
+mapping purposes if they are present in the input weather data.
 """
-
 function sheathblight(;
     wth,
     emergence
@@ -247,7 +253,9 @@ end
 """
     tungro(wth, emergence)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_ viruses.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
+values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_
+viruses.
 
 ## Keywords
 
@@ -259,13 +267,14 @@ Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data 
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
+2012.
 
 ## Returns
 
-A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included for mapping
+purposes if they are present in the input weather data.
 """
-
 function tungro(;
     wth,
     emergence
