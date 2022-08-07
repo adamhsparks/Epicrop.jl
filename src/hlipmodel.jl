@@ -221,7 +221,7 @@ function _hliploop(;
         latent=now_latent,
         infectious=now_infectious,
         removed=removed,
-        senseced=senesced,
+        senesced=senesced,
         rateinf=infection,
         rtransfer=rtransfer,
         rgrowth=rgrowth,
