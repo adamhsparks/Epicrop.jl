@@ -53,7 +53,7 @@ corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1
 Savary _et al._ 2012.
 - `p`: `Int64`, duration of latent period. From Table 1 Savary _et al._ 2012.
-- `i`: `Int64`, duration of infectious period. From Table 1 Savary _et al._ 2012.
+
 - `Sx`: `Int64`, maximum number of sites. From Table 1 Savary _et al._ 2012.
 - `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._
@@ -82,8 +82,9 @@ function hlipmodel(;
     Sx::Int64,
     a::Float64,
     RRS::Float64,
-    RRG::Float64,
+    RRG::Float64
 )
+
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
 
@@ -92,22 +93,19 @@ function hlipmodel(;
     end
 
     if (H0 < 0)
-        throw(
-            DomainError(H0, "H0 cannot be < 0, check your initial number of healthy sites")
-        )
+        throw(DomainError(H0,
+            "H0 cannot be < 0, check your initial number of healthy sites"))
     end
 
     if (I0 < 0)
-        throw(
-            DomainError(
-                I0, "I0 cannot be < 0, check your initial number of infective sites"
-            ),
-        )
+        throw(DomainError(I0,
+            "I0 cannot be < 0, check your initial number of infective sites"))
     end
 
     season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
-    return (_hliploop(;
+    return (
+        _hliploop(
         season=season,
         season_wth=season_wth,
         onset=onset,
@@ -124,8 +122,9 @@ function hlipmodel(;
         Sx=Sx,
         a=a,
         RRS=RRS,
-        RRG=RRG,
-    ))
+        RRG=RRG
+    )
+    )
 end
 
 function _hliploop(;
@@ -145,8 +144,7 @@ function _hliploop(;
     Sx,
     a,
     RRS,
-    RRG,
-)
+    RRG)
 
     # Create `infday` for use in for loop below.
     infday = 0
@@ -182,7 +180,7 @@ function _hliploop(;
             rsenesced[d] = RRS * sites[d]
         else
             if d > i
-                removed_today = infectious[infday + 1]
+                removed_today = infectious[infday+1]
             else
                 removed_today = 0
             end
@@ -232,7 +230,8 @@ function _hliploop(;
         intensity[d] = (diseased[d] - removed[d]) / (total_sites[d] - removed[d])
     end
 
-    res = DataFrames.DataFrame(;
+
+    res = DataFrames.DataFrame(
         simday=1:duration,
         dates=season,
         sites=sites,
@@ -246,7 +245,7 @@ function _hliploop(;
         rsenesced=rsenesced,
         diseased=diseased,
         intensity=intensity,
-        audpc=_audpc(intensity),
+        audpc=_audpc(intensity)
     )
 
     if hasproperty(season_wth, "LAT") && hasproperty(season_wth, "LON")
@@ -259,7 +258,7 @@ function _hliploop(;
 end
 
 function _fn_rc(Rc, x)
-    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2]; extrapolation_bc=0)
+    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc=0)
     x = itp.(x)
     return x
 end
@@ -270,7 +269,7 @@ function _audpc(intensity)
     out = 0.0
 
     for i in 1:n
-        intvec[i] = (intensity[i] + intensity[i + 1]) / 2
+        intvec[i] = (intensity[i] + intensity[i+1]) / 2
         out = sum(intvec)
     end
 
