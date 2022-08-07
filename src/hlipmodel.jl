@@ -1,5 +1,22 @@
 """
-    hlipmodel(; wth, emergence, onset, duration, rhlim, rainlim, H0, I0, RcA, RcT, RcOpt, p, i, Sx, a, RRS, RRG)
+    hlipmodel(; wth,
+                emergence,
+                onset,
+                duration,
+                rhlim,
+                rainlim,
+                H0,
+                I0,
+                RcA,
+                RcT,
+                RcOpt,
+                p,
+                i,
+                Sx,
+                a,
+                RRS,
+                RRG
+            )
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for respective crop diseases.
