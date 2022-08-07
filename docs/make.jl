@@ -3,13 +3,12 @@ using DataFrames
 using Dates
 using Documenter
 using Epicrop
-using Plots
 
 makedocs(
     sitename = "Epicrop.jl",
     format = Documenter.HTML(),
     modules = [Epicrop],
-    doctest = true,
+    #doctest = true,
     pages = Any[
         "Home" => "index.md",
         "Manual" => Any[
