@@ -52,8 +52,8 @@ for removals). From Table 1 Savary _et al._ 2012.
 corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1
 Savary _et al._ 2012.
-- `i`: `Int64`, duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `p`: `Int64`, duration of latent period. From Table 1 Savary _et al._ 2012.
+- `i`: `Int64`, duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `Sx`: `Int64`, maximum number of sites. From Table 1 Savary _et al._ 2012.
 - `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._
