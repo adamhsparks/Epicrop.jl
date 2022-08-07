@@ -21,7 +21,7 @@ field names.
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary
 _et al._ 2012.
 
-```jldoctest
+```julia
 using CSV
 using DataFrames
 using Dates
