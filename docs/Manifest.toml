@@ -171,7 +171,7 @@ version = "2.2.3+0"
 
 [[deps.Epicrop]]
 deps = ["CSV", "DataFrames", "Dates", "Interpolations"]
-git-tree-sha1 = "685b8b8d3f44da5be1388891713c43e38c0daf08"
+git-tree-sha1 = "14a2953b9d12cdce411e3207a057556dbcc80152"
 repo-rev = "main"
 repo-url = "https://github.com/adamhsparks/Epicrop.jl"
 uuid = "ba61b42c-0a63-478a-861d-cedeca8bda8f"
