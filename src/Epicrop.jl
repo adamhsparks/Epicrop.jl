@@ -14,7 +14,4 @@ export leafblast
 export sheathblight
 export tungro
 
-#re-exports from DataFrames.jl
-export DataFrame
-
 end # module
