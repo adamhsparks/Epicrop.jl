@@ -4,6 +4,9 @@ using Dates
 using Downloads
 using Epicrop
 using Test
+using Aqua
+
+Aqua.test_all(Epicrop)
 
 @testset "hlipmodel tests" begin
     # sometimes the POWER data download fails, this sets the timeout to 60 seconds instead of 20
