@@ -48,8 +48,8 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
 - `RcA` crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcT` temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcOpt` potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012. 
-- `i` duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `p` duration of latent period. From Table 1 Savary _et al._ 2012.
+- `i` duration of infectious period. From Table 1 Savary _et al._ 2012.
 - `Sx` maximum number of sites. From Table 1 Savary _et al._ 2012.
 - `a` aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS` relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
@@ -126,5 +126,4 @@ bs = hlipmodel(
 
 ## References
 
-Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
+Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).
