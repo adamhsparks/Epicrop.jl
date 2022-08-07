@@ -4,21 +4,17 @@ using Dates
 using Documenter
 using Epicrop
 
-makedocs(
-    sitename = "Epicrop.jl",
-    format = Documenter.HTML(),
-    modules = [Epicrop],
+makedocs(;
+    sitename="Epicrop.jl",
+    format=Documenter.HTML(),
+    modules=[Epicrop],
     #doctest = true,
-    pages = Any[
+    pages=Any[
         "Home" => "index.md",
         "Manual" => Any[
-            "hlipmodel" => "man/hlipmodel.md",
-            "helper functions" => "man/helperfns.md"
-        ]
-    ]
+            "hlipmodel" => "man/hlipmodel.md", "helper functions" => "man/helperfns.md"
+        ],
+    ],
 )
 
-deploydocs(
-    repo = "github.com/adamhsparks/Epicrop.jl.git",
-    devbranch = "main"
-)
+deploydocs(; repo="github.com/adamhsparks/Epicrop.jl.git", devbranch="main")
