@@ -1,22 +1,23 @@
 """
-    hlipmodel(; wth,
-                emergence,
-                onset,
-                duration,
-                rhlim,
-                rainlim,
-                H0,
-                I0,
-                RcA,
-                RcT,
-                RcOpt,
-                p,
-                i,
-                Sx,
-                a,
-                RRS,
-                RRG
-            )
+    hlipmodel(
+        wth::DataFrames.DataFrame,
+        emergence::Dates.Date,
+        onset::Int64,
+        duration::Int64,
+        rhlim::Int64,
+        rainlim::Int64,
+        H0::Int64,
+        I0::Int64,
+        RcA::Matrix{Float64},
+        RcT::Matrix{Float64},
+        RcOpt::Float64,
+        p::Int64,
+        i::Int64,
+        Sx::Int64,
+        a::Float64,
+        RRS::Float64,
+        RRG::Float64,
+    )
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for respective crop diseases.
@@ -65,7 +66,7 @@ Savary _et al._ 2012.
 A `DataFrame` with the model's output. Latitude and longitude are included for mapping
 purposes if they are present in the input weather data.
 """
-function hlipmodel(;
+function hlipmodel(
     wth::DataFrames.DataFrame,
     emergence::Dates.Date,
     onset::Int64,
@@ -82,7 +83,7 @@ function hlipmodel(;
     Sx::Int64,
     a::Float64,
     RRS::Float64,
-    RRG::Float64
+    RRG::Float64,
 )
 
     final_day = emergence + Dates.Day(duration - 1)
