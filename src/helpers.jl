@@ -1,6 +1,6 @@
 
 """
-    bacterialblight(; wth::DataFrame, emergence::Dates.Date)
+    bacterialblight(wth::DataFrame, emergence::Dates.Date)
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
@@ -21,38 +21,12 @@ field names.
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary
 _et al._ 2012.
 
-```julia
-using CSV
-using DataFrames
-using Dates
-using Downloads
-using Epicrop
-
-# download weather data from NASA POWER API
-w = CSV.read(
-    Downloads.download(
-        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"),
-        DataFrame,
-        header = 12)
-
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
-
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
-
-e = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
-
-bacterialblight(wth = w, emergence = e)
-```
-
 ## Returns
 
-A `DataFrame` with predictions for bacterial blight severity. Latitude and longitude are
-included for mapping purposes if they are present in the input weather data.
+A `DataFrames.DataFrame` with predictions for bacterial blight severity. Latitude and
+longitude are included for mapping purposes if they are present in the input weather data.
 """
-function bacterialblight(; wth::DataFrame, emergence::Dates.Date)
+function bacterialblight(wth::DataFrame, emergence::Dates.Date)
     RcA = [
         0 1
         10 1
@@ -71,7 +45,7 @@ function bacterialblight(; wth::DataFrame, emergence::Dates.Date)
 
     RcT = [16 0; 19 0.29; 22 0.44; 25 0.90; 28 0.90; 31 1; 34 0.88; 37 0.01; 40 0]
 
-    return (hlipmodel(;
+    hlipmodel(
         wth=wth,
         emergence=emergence,
         onset=20,
@@ -89,18 +63,19 @@ function bacterialblight(; wth::DataFrame, emergence::Dates.Date)
         a=4.0,
         RRS=0.01,
         RRG=0.1,
-    ))
+    )
 end
 
 """
-    brownspot(wth, emergence)
+    brownspot(wth::DataFrames.DataFrame, emergence::Dates.Date)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
-values for rice brown spot caused by _Cochliobolus miyabeanus_.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
+curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
 ## Keywords
 
-- `wth`: a data frame of weather on a daily time-step containing data with the following field names.
+- `wth`: a data frame of weather on a daily time-step containing data with the following
+field names.
     | Field | value |
     |-------|-------------|
     |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
@@ -108,20 +83,20 @@ values for rice brown spot caused by _Cochliobolus miyabeanus_.
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |.
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
-2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary
+_et al._ 2012.
 
 ## Returns
 
-A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included for
-    mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for brown spot severity. Latitude and longitude are included
+for mapping purposes if they are present in the input weather data.
 """
-function brownspot(; wth, emergence)
+function brownspot(wth::DataFrames.DataFrame, emergence::Dates.Date)
     RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
 
     RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
 
-    return (hlipmodel(;
+    hlipmodel(
         wth=wth,
         emergence=emergence,
         onset=20,
@@ -139,18 +114,19 @@ function brownspot(; wth, emergence)
         a=1.0,
         RRS=0.01,
         RRG=0.1,
-    ))
+    )
 end
 
 """
-    leafblast(wth, emergence)
+    leafblast(wth::DataFrames.DataFrame, emergence::Dates.Date)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
-values for rice leaf blast caused by _Magnaporthe oryzae_.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
+curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
 ## Keywords
 
-- `wth`: a data frame of weather on a daily time-step containing data with the following field names.
+- `wth`: a data frame of weather on a daily time-step containing data with the following
+field names.
     | Field | value |
     |-------|-------------|
     |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
@@ -158,15 +134,15 @@ values for rice leaf blast caused by _Magnaporthe oryzae_.
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |.
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
-2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary
+_et al._ 2012.
 
 ## Returns
 
-A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included for
-mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for leaf blast severity. Latitude and longitude are included
+for mapping purposes if they are present in the input weather data.
 """
-function leafblast(; wth, emergence)
+function leafblast(wth::DataFrames.DataFrame, emergence::Dates.Date)
     RcA = [
         0 1
         5 1
@@ -187,7 +163,7 @@ function leafblast(; wth, emergence)
     ]
     RcT = [10 0; 15 0.5; 20 1; 25 0.6; 30 0.2; 35 0.05; 40 0.01; 45 0]
 
-    return (hlipmodel(;
+    hlipmodel(
         wth=wth,
         emergence=emergence,
         onset=20,
@@ -205,18 +181,19 @@ function leafblast(; wth, emergence)
         a=1.0,
         RRS=0.01,
         RRG=0.1,
-    ))
+    )
 end
 
 """
-    sheathblight(wth, emergence)
+    sheathblight(wth::DataFrames.DataFrame, emergence::Dates.Date)
 
-Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
-values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
+Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
+curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
 ## Keywords
 
-- `wth`: a data frame of weather on a daily time-step containing data with the following field names.
+- `wth`: a data frame of weather on a daily time-step containing data with the following
+field names.
     | Field | value |
     |-------|-------------|
     |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
@@ -224,15 +201,15 @@ values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
     |TEMP | Mean daily temperature (°C) |
     |RHUM | Mean daily relative humidity (%) |
     |RAIN | Mean daily rainfall (mm) |
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._
-2012.
+- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary
+_et al._ 2012.
 
 ## Returns
 
-A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are included for
-mapping purposes if they are present in the input weather data.
+A `DataFrame` with predictions for sheath blight severity. Latitude and longitude are
+included for mapping purposes if they are present in the input weather data.
 """
-function sheathblight(; wth, emergence)
+function sheathblight(wth::DataFrames.DataFrame, emergence::Dates.Date)
     RcA = [
         0 0.84
         10 0.84
@@ -251,7 +228,7 @@ function sheathblight(; wth, emergence)
 
     RcT = [12 0; 16 0.42; 20 94; 24 0.94; 28 1; 32 0.85; 36 0.64; 40 0]
 
-    return (hlipmodel(;
+    hlipmodel(
         wth=wth,
         emergence=emergence,
         onset=30,
@@ -269,11 +246,11 @@ function sheathblight(; wth, emergence)
         a=2.8,
         RRS=0.005,
         RRG=0.2,
-    ))
+    )
 end
 
 """
-    tungro(wth, emergence)
+    tungro(wth::DataFrames.DataFrame, emergence::Dates.Date)
 
 Runs a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal curve
 values for rice tungro disease caused by _Rice Tungro Spherical_ and _Rice Tungro Bacilliform_
@@ -297,7 +274,7 @@ viruses.
 A `DataFrame` with predictions for tungro incidence. Latitude and longitude are included for mapping
 purposes if they are present in the input weather data.
 """
-function tungro(; wth, emergence)
+function tungro(wth::DataFrames.DataFrame, emergence::Dates.Date)
     RcA = [0 1; 15 1; 30 0.98; 45 0.73; 60 0.51; 75 0.34; 90 0; 105 0; 120 0]
 
     RcT = [
@@ -315,7 +292,7 @@ function tungro(; wth, emergence)
         40 0
     ]
 
-    return (hlipmodel(;
+    hlipmodel(
         wth=wth,
         emergence=emergence,
         onset=30,
@@ -333,5 +310,5 @@ function tungro(; wth, emergence)
         a=1.0,
         RRS=0.01,
         RRG=0.1,
-    ))
+    )
 end
