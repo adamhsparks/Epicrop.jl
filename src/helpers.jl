@@ -1,20 +1,18 @@
 
 """
-    bacterialblight(wth::DataFrames.AbstractDataFrames.AbstractDataFrame, emergence::Dates.Date)
+    bacterialblight(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 
 ## Arguments
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 ## Examples
@@ -60,21 +58,19 @@ function bacterialblight(wth::DataFrames.AbstractDataFrame, emergence::Dates.Dat
 end
 
 """
-    brownspot(wth::DataFrames.AbstractDataFrames.AbstractDataFrame, emergence::Dates:Date)
+    brownspot(wth::DataFrames.AbstractDataFrame, emergence::Dates:Date)
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
 ## Arguments
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |.
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 ## Examples
@@ -128,14 +124,12 @@ curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
 ## Arguments
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |.
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 ## Examples
@@ -188,14 +182,12 @@ curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
 ## Arguments
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 ## Examples
@@ -249,14 +241,12 @@ _Rice Tungro Bacilliform_ viruses.
 
 ## Arguments
 
-- `wth` a data frame of weather on a daily time-step containing data with the following field names.
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
 

@@ -1,6 +1,6 @@
 """
     hlipmodel(
-        wth::DataFrames.AbstractDataFrames.AbstractDataFrame,
+        wth::DataFrames.AbstractDataFrame,
         emergence::Dates.Date,
         onset::Int,
         duration::Int,
@@ -24,41 +24,26 @@ curve values for respective crop diseases.
 
 ## Keywords
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data
-with the following field names.
-
-    | Field | value |
-    |-------|-------------|
-    |YYYYMMDD | Date as Year Month Day, YYYY-MM-DD, (ISO8601) |
-    |DOY |  Consecutive day of year, commonly called "Julian date" |
-    |TEMP | Mean daily temperature (°C) |
-    |RHUM | Mean daily relative humidity (%) |
-    |RAIN | Mean daily rainfall (mm) |
-
-- `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date`
-object. From Table 1 Savary _et al._ 2012.
-- `onset`: `Int`,  expected number of days until the onset of disease after emergence
-date. From Table 1 Savary _et al._ 2012.
-- `duration`: `Int`,  simulation duration (growing season length). From Table 1
-Savary _et al._ 2012.
-- `rhlim`: `Int`, threshold to decide whether leaves are wet or not (usually 90%). From
-Table 1 Savary _et al._ 2012.
-- `rainlim`: `Int`, threshold to decide whether leaves are wet or not. From Table 1 Savary
-_et al._ 2012.
+- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY``:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)`
+    - `RHUM`: Mean daily relative humidity (%)
+    - `RAIN`: Mean daily rainfall (mm)
+- `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
+- `onset`: `Int`,  expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration`: `Int`,  simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
+- `rhlim`: `Int`, threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim`: `Int`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
 - `H0`: `Int`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
 - `I0`: `Int`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: `Matrix{AbstractFloat}`, crop age modifier for *Rc* (the basic infection rate corrected
-for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: `Matrix{AbstractFloat}`, temperature modifier for *Rc* (the basic infection rate
-corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcOpt`: `AbstractFloat`, potential basic infection rate corrected for removals. From Table 1
-Savary _et al._ 2012.
+- `RcA`: `Matrix{AbstractFloat}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: `Matrix{AbstractFloat}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt`: `AbstractFloat`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `p`: `Int`, duration of latent period. From Table 1 Savary _et al._ 2012.
-
 - `Sx`: `Int`, maximum number of sites. From Table 1 Savary _et al._ 2012.
 - `a`: `AbstractFloat`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
-- `RRS`: `AbstractFloat`, relative rate of physiological senescence. From Table 1 Savary _et al._
-2012.
+- `RRS`: `AbstractFloat`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: `AbstractFloat`, relative rate of growth. From Table 1 Savary _et al._ 2012.
 
 ## Returns
@@ -67,7 +52,7 @@ A `DataFrame` with the model's output. Latitude and longitude are included for m
 purposes if they are present in the input weather data.
 """
 function hlipmodel(
-    wth::DataFrames.AbstractDataFrames.DataFrame,
+    wth::DataFrames.AbstractDataFrame,
     emergence::Dates.Date,
     onset::Int,
     duration::Int,

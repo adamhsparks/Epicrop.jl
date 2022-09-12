@@ -1,10 +1,12 @@
 
 module Epicrop
 
+using DataFrames
+using Dates
+using Interpolations
+
 include("hlipmodel.jl")
 include("helpers.jl")
-
-using DataFrames, Dates, Interpolations
 
 export hlipmodel,
     bacterialblight,
