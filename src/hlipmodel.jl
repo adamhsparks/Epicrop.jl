@@ -293,19 +293,19 @@ function _hliploop(;
 end
 
 function _fn_rc(Rc, x)
-    itp = Interpolations.LinearInterpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc=0)
-    x = itp.(x)
+    itp=Interpolations.linear_interpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc=Line())
+    x=itp.(x)
     return x
 end
 
 function _audpc(intensity)
-    n = length(intensity) - 1
-    intvec = Base.zeros(n)
-    out = 0.0
+    n=length(intensity) - 1
+    intvec=Base.zeros(n)
+    out=0.0
 
     for i in 1:n
-        intvec[i] = (intensity[i] + intensity[i+1]) / 2
-        out = sum(intvec)
+        intvec[i]=(intensity[i] + intensity[i+1]) / 2
+        out=sum(intvec)
     end
 
     return out
