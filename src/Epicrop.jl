@@ -1,6 +1,7 @@
 
 module Epicrop
 
+using CSV
 using DataFrames
 using Dates
 using Interpolations
