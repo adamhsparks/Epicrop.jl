@@ -8,15 +8,15 @@
         rainlim::Int,
         H0::Int,
         I0::Int,
-        RcA::Matrix{AbstractFloat},
-        RcT::Matrix{AbstractFloat},
-        RcOpt::AbstractFloat,
+        RcA::Matrix{Float64},
+        RcT::Matrix{Float64},
+        RcOpt::Float64,
         p::Int,
         i::Int,
         Sx::Int,
-        a::AbstractFloat,
-        RRS::AbstractFloat,
-        RRG::AbstractFloat,
+        a::Float64,
+        RRS::Float64,
+        RRG::Float64,
     )
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
@@ -37,21 +37,70 @@ curve values for respective crop diseases.
 - `rainlim`: `Int`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
 - `H0`: `Int`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
 - `I0`: `Int`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: `Matrix{AbstractFloat}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: `Matrix{AbstractFloat}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcOpt`: `AbstractFloat`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `RcA`: `Matrix{Float64}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT`: `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `p`: `Int`, duration of latent period. From Table 1 Savary _et al._ 2012.
 - `Sx`: `Int`, maximum number of sites. From Table 1 Savary _et al._ 2012.
-- `a`: `AbstractFloat`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
-- `RRS`: `AbstractFloat`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
-- `RRG`: `AbstractFloat`, relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG`: `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.
+
+## Examples
+
+Using data saved from NASA POWER for Los Baños, Calabarzon, PH.
+
+```jldoctest
+julia> using DataFrames
+
+julia> using CSV
+
+julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
+
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
+
+julia> RcA=[0 0.35;
+            20 0.35;
+            40 0.35;
+            60 0.47;
+            80 0.59;
+            100 0.71;
+            120 1.0]
+
+julia> RcT=[15 0.0;
+            20 0.06;
+            25 1.0;
+            30 0.85;
+            35 0.16;
+            40 0.0]
+
+julia> bs=hlipmodel(;
+        wth=w,
+        emergence=emergence,
+        onset=20,
+        duration=120,
+        rhlim=90,
+        rainlim=5,
+        H0=600,
+        I0=1,
+        RcA=RcA,
+        RcT=RcT,
+        RcOpt=0.61,
+        p=6,
+        i=19,
+        Sx=100000,
+        a=1.0,
+        RRS=0.01,
+        RRG=0.1
+)
+```
 
 ## Returns
 
 A `DataFrame` with the model's output. Latitude and longitude are included for mapping
 purposes if they are present in the input weather data.
 """
-function hlipmodel(
+function hlipmodel(;
     wth::DataFrames.AbstractDataFrame,
     emergence::Dates.Date,
     onset::Int,
@@ -60,21 +109,21 @@ function hlipmodel(
     rainlim::Int,
     H0::Int,
     I0::Int,
-    RcA::Matrix{AbstractFloat},
-    RcT::Matrix{AbstractFloat},
-    RcOpt::AbstractFloat,
+    RcA::Matrix{Float64},
+    RcT::Matrix{Float64},
+    RcOpt::Float64,
     p::Int,
     i::Int,
     Sx::Int,
-    a::AbstractFloat,
-    RRS::AbstractFloat,
-    RRG::AbstractFloat,
+    a::Float64,
+    RRS::Float64,
+    RRG::Float64,
 )
 
-    final_day = emergence + Dates.Day(duration - 1)
-    season = Base.collect(emergence:Dates.Day(1):final_day)
+    final_day=emergence + Dates.Day(duration)
+    season=Base.collect(emergence:Dates.Day(1):final_day)
 
-    if !(emergence >= wth[1, "YYYYMMDD"] || final_day > Base.findmax(wth[:, "YYYYMMDD"])[1])
+    if !(Base.in(emergence, wth.YYYYMMDD) || Base.in(final_day, wth.YYYYMMDD))
         throw(DomainError(wth, "incomplete weather data or dates do not align"))
     end
 
