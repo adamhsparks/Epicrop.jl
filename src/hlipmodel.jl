@@ -137,7 +137,7 @@ function hlipmodel(;
             "I0 cannot be < 0, check your initial number of infective sites"))
     end
 
-    season_wth = wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
+    season_wth=wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
 
     return (
         _hliploop(
@@ -182,91 +182,91 @@ function _hliploop(;
     RRG)
 
     # Create `infday` for use in for loop below.
-    infday = 0
+    infday=0
 
     # Create vectors of preallocated output variables.
-    cofr = Base.zeros(duration)
-    rc = Base.zeros(duration)
-    RHCoef = Base.zeros(duration)
-    latency = Base.zeros(duration)
-    infectious = Base.zeros(duration)
-    intensity = Base.zeros(duration)
-    rsenesced = Base.zeros(duration)
-    rgrowth = Base.zeros(duration)
-    rtransfer = Base.zeros(duration)
-    infection = Base.zeros(duration)
-    diseased = Base.zeros(duration)
-    senesced = Base.zeros(duration)
-    removed = Base.zeros(duration)
-    now_infectious = Base.zeros(duration)
-    now_latent = Base.zeros(duration)
-    sites = Base.zeros(duration)
-    total_sites = Base.zeros(duration)
-    Rc_age = _fn_rc(RcA, 1:duration)
-    Rc_temp = _fn_rc(RcT, season_wth[!, :TEMP])
+    cofr=Base.zeros(duration)
+    rc=Base.zeros(duration)
+    RHCoef=Base.zeros(duration)
+    latency=Base.zeros(duration)
+    infectious=Base.zeros(duration)
+    intensity=Base.zeros(duration)
+    rsenesced=Base.zeros(duration)
+    rgrowth=Base.zeros(duration)
+    rtransfer=Base.zeros(duration)
+    infection=Base.zeros(duration)
+    diseased=Base.zeros(duration)
+    senesced=Base.zeros(duration)
+    removed=Base.zeros(duration)
+    now_infectious=Base.zeros(duration)
+    now_latent=Base.zeros(duration)
+    sites=Base.zeros(duration)
+    total_sites=Base.zeros(duration)
+    Rc_age=_fn_rc(RcA, 1:duration)
+    Rc_temp=_fn_rc(RcT, season_wth[!, :TEMP])
 
     for d in 1:duration
-        d_1 = d - 1
+        d_1=d - 1
 
         # Start of the state calculations.
         if d == 1
             # Start crop growth.
-            sites[d] = H0
-            rsenesced[d] = RRS * sites[d]
+            sites[d]=H0
+            rsenesced[d]=RRS * sites[d]
         else
             if d > i
-                removed_today = infectious[infday+1]
+                removed_today=infectious[infday+1]
             else
-                removed_today = 0
+                removed_today=0
             end
 
-            sites[d] = sites[d_1] + rgrowth[d_1] - infection[d_1] - rsenesced[d_1]
-            rsenesced[d] = removed_today + RRS * sites[d]
-            senesced[d] = senesced[d_1] + rsenesced[d_1]
+            sites[d]=sites[d_1] + rgrowth[d_1] - infection[d_1] - rsenesced[d_1]
+            rsenesced[d]=removed_today + RRS * sites[d]
+            senesced[d]=senesced[d_1] + rsenesced[d_1]
 
-            latency[d] = infection[d_1]
-            latday = d - p
-            latday = Base.max(1, latday)
-            now_latent[d] = Base.sum(latency[latday:d])
+            latency[d]=infection[d_1]
+            latday=d - p
+            latday=Base.max(1, latday)
+            now_latent[d]=Base.sum(latency[latday:d])
 
-            infectious[d] = rtransfer[d_1]
-            infday = d - i
-            infday = Base.max(1, infday)
-            now_infectious[d] = Base.sum(infectious[infday:d])
+            infectious[d]=rtransfer[d_1]
+            infday=d - i
+            infday=Base.max(1, infday)
+            now_infectious[d]=Base.sum(infectious[infday:d])
         end
 
         if (season_wth[!, :RHUM][d] >= rhlim || season_wth[!, :RAIN][d] >= rainlim)
-            RHCoef[d] = 1
+            RHCoef[d]=1
         end
 
-        rc[d] = RcOpt * (Rc_age[d] * Rc_temp[d] * RHCoef[d])
-        diseased[d] = sum(infectious) + now_latent[d] + removed[d]
-        removed[d] = sum(infectious) - now_infectious[d]
+        rc[d]=RcOpt * (Rc_age[d] * Rc_temp[d] * RHCoef[d])
+        diseased[d]=sum(infectious) + now_latent[d] + removed[d]
+        removed[d]=sum(infectious) - now_infectious[d]
 
-        cofr[d] = 1 - (diseased[d] / (sites[d] + diseased[d]))
+        cofr[d]=1 - (diseased[d] / (sites[d] + diseased[d]))
 
         # Initialise disease.
         if d == onset
-            infection[d] = I0
+            infection[d]=I0
         elseif d > onset
-            infection[d] = now_infectious[d] * rc[d] * (cofr[d]^a)
+            infection[d]=now_infectious[d] * rc[d] * (cofr[d]^a)
         else
-            infection[d] = 0
+            infection[d]=0
         end
 
         if d >= p
-            rtransfer[d] = latency[latday]
+            rtransfer[d]=latency[latday]
         else
-            rtransfer[d] = 0
+            rtransfer[d]=0
         end
 
-        total_sites[d] = diseased[d] + sites[d]
-        rgrowth[d] = RRG * sites[d] * (1 - (total_sites[d] / Sx))
-        intensity[d] = (diseased[d] - removed[d]) / (total_sites[d] - removed[d])
+        total_sites[d]=diseased[d] + sites[d]
+        rgrowth[d]=RRG * sites[d] * (1 - (total_sites[d] / Sx))
+        intensity[d]=(diseased[d] - removed[d]) / (total_sites[d] - removed[d])
     end
 
 
-    res = DataFrames.DataFrame(
+    res=DataFrames.DataFrame(
         simday=1:duration,
         dates=season,
         sites=sites,
@@ -284,7 +284,7 @@ function _hliploop(;
     )
 
     if hasproperty(season_wth, "LAT") && hasproperty(season_wth, "LON")
-        res = DataFrames.DataFrame(
+        res=DataFrames.DataFrame(
             insertcols!(res, :lat => season_wth[1, "LAT"], :lon => season_wth[1, "LON"])
         )
     end
