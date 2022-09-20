@@ -47,7 +47,7 @@ using Test
 
     @test nrow(bs) == 120
     @test ncol(bs) == 16
-    @test isapprox(bs[120, 13], 0.0843, atol=0.0001)
+    @test isapprox(bs[120, 13], 0.03413, atol=0.0001)
 
     # check for stop if supplied args are inappropriate
     @testset "emergence is a Date object" begin
@@ -142,12 +142,12 @@ using Test
     bbmodel = bacterialblight(w, emergence)
     @test nrow(bbmodel) == 120
     @test ncol(bbmodel) == 16
-    @test isapprox(bbmodel[120, 13], 0.45708, atol=0.0001)
+    @test isapprox(bbmodel[120, 13], 0.4715, atol=0.0001)
 
     bsmodel = brownspot(w, emergence)
     @test nrow(bsmodel) == 120
     @test ncol(bsmodel) == 16
-    @test isapprox(bsmodel[120, 13], 0.0843, atol=0.0001)
+    @test isapprox(bsmodel[120, 13], 0.0341, atol=0.0001)
 
     lbmodel = leafblast(w, emergence)
     @test nrow(lbmodel) == 120
@@ -157,11 +157,11 @@ using Test
     sbmodel = sheathblight(w, emergence)
     @test nrow(sbmodel) == 120
     @test ncol(sbmodel) == 16
-    @test isapprox(sbmodel[120, 13], 0.78539, atol=0.0001)
+    @test isapprox(sbmodel[120, 13], 0.7726, atol=0.0001)
 
     tmodel = tungro(w, emergence)
     @test nrow(tmodel) == 120
     @test ncol(tmodel) == 16
-    @test isapprox(tmodel[120, 13], 0.07564, atol=0.0001)
+    @test isapprox(tmodel[120, 13], 0.0585, atol=0.0001)
 
 end
