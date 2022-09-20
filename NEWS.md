@@ -1,8 +1,21 @@
 # Epicrop.jl Release Notes
 
-## v0.2.0
+## v1.0.0
+
+### Major changes
 
 * Enforce data types for user-provided parameter inputs
+
+* Helper functions now use positional arguments rather than keyword
+
+### Bug fixes
+
+* Update Interpolations.jl to remove the uses of the deprecated function `LinearInterpolation()` and use `linear_interpolation()` instead.
+This fixes a bug (that did not appear to affect the functionality) and should be more performant.
+
+### Minor changes
+
+* Include example weather data set from the NASA POWER data base for examples and testing
 
 * Reformat code
 
