@@ -121,7 +121,7 @@ function hlipmodel(;
     RRG::Float64,
 )
 
-    final_day=emergence + Dates.Day(duration)
+    final_day=emergence + Dates.Day(duration - 1)
     season=Base.collect(emergence:Dates.Day(1):final_day)
 
     if !(Base.in(emergence, wth.YYYYMMDD) || Base.in(final_day, wth.YYYYMMDD))
@@ -138,7 +138,8 @@ function hlipmodel(;
             "I0 cannot be < 0, check your initial number of infective sites"))
     end
 
-    season_wth=wth[Base.in(season - Dates.Day(1)).(wth.YYYYMMDD), :]
+    season_wth=wth[Base.in(season).(wth.YYYYMMDD), :]
+
 
     return (
         _hliploop(
