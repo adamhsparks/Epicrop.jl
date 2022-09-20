@@ -18,15 +18,19 @@ curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 ## Examples
 
 ```jldoctest
+julia> using Epicrop
+
 julia> using DataFrames
+
+julia> using Dates
 
 julia> using CSV
 
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-julia> emergence=Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-julia> bacterialblight(weather, emergence)
+julia> bacterialblight(w, emergence)
 ```
 
 ## Returns
@@ -102,15 +106,19 @@ curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 ## Examples
 
 ```jldoctest
+julia> using Epicrop
+
 julia> using DataFrames
 
 julia> using CSV
 
+julia> using Dates
+
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-julia> emergence=Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-julia> brownspot(weather, emergence)
+julia> brownspot(w, emergence)
 ```
 
 ## Returns
@@ -178,15 +186,19 @@ curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 ## Examples
 
 ```jldoctest
+julia> using Epicrop
+
 julia> using DataFrames
+
+julia> using Dates
 
 julia> using CSV
 
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-julia> emergence=Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-julia> leafblast(weather, emergence)
+julia> leafblast(w, emergence)
 ```
 
 ## Returns
@@ -264,15 +276,19 @@ curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 ## Examples
 
 ```jldoctest
+julia> using Epicrop
+
 julia> using DataFrames
+
+julia> using Dates
 
 julia> using CSV
 
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-julia> emergence=Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-julia> sheathblight(weather, emergence)
+julia> sheathblight(w, emergence)
 ```
 
 ## Returns
@@ -345,19 +361,22 @@ _Rice Tungro Bacilliform_ viruses.
     - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
 
-
 ## Examples
 
 ```jldoctest
+julia> using Epicrop
+
 julia> using DataFrames
+
+julia> using Dates
 
 julia> using CSV
 
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-julia> emergence=Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-julia> tungro(weather, emergence)
+julia> tungro(w, emergence)
 ```
 
 ## Returns
