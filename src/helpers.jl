@@ -213,7 +213,7 @@ function leafblast(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
         70 0.03;
         75 0.02]
     RcT=[10 0.0;
-        5 0.5;
+        15 0.5;
         20 1.0;
         25 0.6;
         30 0.2;
