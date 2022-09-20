@@ -295,7 +295,8 @@ function _hliploop(;
 end
 
 function _fn_rc(Rc, x)
-    itp=Interpolations.linear_interpolation(Rc[:, 1], Rc[:, 2], extrapolation_bc=Line())
+    itp=Interpolations.linear_interpolation(Rc[:, 1], Rc[:, 2],
+        extrapolation_bc=Interpolations.Line())
     x=itp.(x)
     return x
 end
