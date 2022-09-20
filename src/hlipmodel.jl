@@ -55,6 +55,7 @@ julia> using DataFrames
 
 julia> using CSV
 
+julia> using Dates
 julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
 julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
