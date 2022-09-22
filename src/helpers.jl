@@ -5,15 +5,28 @@
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 
-## Arguments
+## Input
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `wth` -- `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with predictions for bacterial blight severity.
+Latitude and longitude are included for mapping purposes if they are present in the input
+weather data.
+See [`hlipmodel`](@ref) for a full description of the return values.
+
+## Notes
+
+This is one of a family of helper functions.
+Also see [`brownspot`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref) and
+[`tungro`](@ref).
 
 ## Examples
 
@@ -32,16 +45,6 @@ julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 julia> bacterialblight(w, emergence)
 ```
-
-## Returns
-
-A `DataFrame` with predictions for bacterial blight severity.
-Latitude and longitude are included for mapping purposes if they are present in the input weather data.
-See [`hlipmodel`](@ref) for a full description of the return values.
-
-## Also see
-
-[`brownspot`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref), [`tungro`](@ref)
 """
 function bacterialblight(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
@@ -98,15 +101,25 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
-## Arguments
+## Input
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `wth` -- `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with predictions for brown spot severity.
+Latitude and longitude are included for mapping purposes if they are present in the input weather data.
+See [`hlipmodel`](@ref) for a full description of the return values.
+
+This function is one of a family of helper functions.
+Also see [`bacterialblight`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref) and
+[`tungro`](@ref).
 
 ## Examples
 
@@ -125,16 +138,6 @@ julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 julia> brownspot(w, emergence)
 ```
-
-## Returns
-
-A `DataFrame` with predictions for brown spot severity.
-Latitude and longitude are included for mapping purposes if they are present in the input weather data.
-See [`hlipmodel`](@ref) for a full description of the return values.
-
-## Also see
-
-[`bacterialblight`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref), [`tungro`](@ref)
 """
 function brownspot(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
@@ -183,15 +186,28 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
-## Arguments
+## Input
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `wth` -- `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with predictions for leaf blast severity.
+Latitude and longitude are included for mapping purposes if they are present in the input
+weather data.
+See [`hlipmodel`](@ref) for a full description of the return values.
+
+## Notes
+
+This is one of a family of helper functions.
+Also see [`bacterialblight`](@ref), [`brownspot`](@ref), [`sheathblight`](@ref) and
+[`tungro`](@ref).
 
 ## Examples
 
@@ -210,16 +226,6 @@ julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 julia> leafblast(w, emergence)
 ```
-
-## Returns
-
-A `DataFrame` with predictions for leaf blast severity.
-Latitude and longitude are included for mapping purposes if they are present in the input weather data.
-See [`hlipmodel`](@ref) for a full description of the return values.
-
-## Also see
-
-[`bacterialblight`](@ref), [`brownspot`](@ref), [`sheathblight`](@ref), [`tungro`](@ref)
 """
 function leafblast(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
@@ -278,15 +284,28 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
-## Arguments
+## Input
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `wth` -- `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with predictions for sheath blight severity.
+Latitude and longitude are included for mapping purposes if they are present in the input
+weather data.
+See [`hlipmodel`](@ref) for a full description of the return values.
+
+## Notes
+
+This is one of a family of helper functions.
+Also see [`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref) and
+[`tungro`](@ref).
 
 ## Examples
 
@@ -305,16 +324,6 @@ julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
 julia> sheathblight(w, emergence)
 ```
-
-## Returns
-
-A `DataFrame` with predictions for sheath blight severity.
-Latitude and longitude are included for mapping purposes if they are present in the input weather data.
-See [`hlipmodel`](@ref) for a full description of the return values.
-
-## Also see
-
-[`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref), [`tungro`](@ref)
 """
 function sheathblight(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
@@ -371,15 +380,28 @@ Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data a
 curve values for rice tungro disease caused by _Rice Tungro Spherical_ and
 _Rice Tungro Bacilliform_ viruses.
 
-## Arguments
+## Input
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+- `wth` -- `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- expected date of plant emergence as a `Date` object. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with predictions for tungro incidence.
+Latitude and longitude are included for mapping purposes if they are present in the input
+weather data.
+See [`hlipmodel`](@ref) for a full description of the return values.
+
+## Notes
+
+This is one of a family of helper functions.
+Also see [`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref) and
+[`sheathblight`](@ref).
 
 ## Examples
 
@@ -399,15 +421,6 @@ julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 julia> tungro(w, emergence)
 ```
 
-## Returns
-
-A `DataFrame` with predictions for tungro incidence.
-Latitude and longitude are included for mapping purposes if they are present in the input weather data.
-See [`hlipmodel`](@ref) for a full description of the return values.
-
-## Also see
-
-[`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref)
 """
 function tungro(wth::DataFrames.AbstractDataFrame, emergence::Dates.Date)
 
