@@ -4,7 +4,7 @@
 
 ### Major changes
 
-* Enforce data types for user-provided parameter inputs
+* Enforce data types for user-provided inputs
 
 * Helper functions now use positional arguments rather than keyword
 
