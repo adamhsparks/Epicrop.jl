@@ -7,7 +7,7 @@ using Test
 
 @testset "hlipmodel tests" begin
 
-    w=CSV.read("../data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
+    w=CSV.read(string(pkgdir(Epicrop), "/data/POWER_data_LB_PHI_2000_ws.csv"), DataFrame)
 
     emergence = Dates.Date("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
