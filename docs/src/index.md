@@ -12,7 +12,7 @@ Documentation for [Epicrop](https://github.com/adamhsparks/Epicrop.jl).
 
 ## Helper Functions
 
-Quickly and easily model bacterial blight, brown spot, leaf blast, sheath blight, tungro.
+Quickly and easily model bacterial blight, brown spot, leaf blast, sheath blight and tungro.
 These functions provide the basic values necessary as published in Savary _et al._ (2012) to model these diseases with just daily weather data that spans the growing season of interest and growing season start date as values.
 
 ### Bacterial Blight
