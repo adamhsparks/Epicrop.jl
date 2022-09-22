@@ -78,49 +78,56 @@ It provides a single function, `hlipmodel`, which takes the following arguments 
 # Example
 
 Provide `RcA` and `RcT` values suitable for brown spot severity and fetch weather data for the year 2000 wet season at the IRRI Zeigler Experiment Station in Los Baños, Philippines.
-In this example, we will download weather data for the International Rice Research Institute (IRRI) from the [NASA POWER](https://power.larc.nasa.gov) database using a pre-defined API call for this location for the 2010 wet season.
+In this example, we demonstrate the use of the model with weather data for the International Rice Research Institute (IRRI) downloaded from the [NASA POWER](https://power.larc.nasa.gov/) database using a pre-defined API call for this location for the 2000 wet season.
 
 ```julia
-using Epicrop, TypedTable, Dates, CSV, Downloads
+julia> using DataFrames
 
-w = CSV.read(
-  Downloads.download(
-    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,RH2M&community=ag&start=20100701&end=20101028&latitude=14.6774&longitude=121.25562&format=csv&time_standard=utc&user=Epicropjl"),
-    Table, header = 12)
+julia> using CSV
 
-# rename the columns to match the expected column names for hlipmodel
-rename!(w, :RH2M => :RHUM, :T2M => :TEMP, :PRECTOTCORR => :RAIN)
+julia> using Dates
 
-# add columns for YYYYMMDD and lat/lon
-insertcols!(w, 1, :YYYYMMDD => range(Date(2010, 06, 30); step = Day(1), length = 120))
-insertcols!(w, :LAT => 14.6774, :LON => 121.25562)
+julia> w=CSV.read("data/POWER_data_LB_PHI_2000_ws.csv", DataFrame)
 
-emergence = Dates.Date.("2010-07-01", Dates.DateFormat("yyyy-mm-dd"))
+julia> emergence=Dates.Date.("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
 
-RcA = [0 0.35; 20 0.35; 40 0.35; 60 0.47; 80 0.59; 100 0.71; 120 1]
+julia> RcA=[0 0.35;
+            20 0.35;
+            40 0.35;
+            60 0.47;
+            80 0.59;
+            100 0.71;
+            120 1.0]
 
-RcT = [15 0; 20 0.06; 25 1.0; 30 0.85; 35 0.16; 40 0]
+julia> RcT=[15 0.0;
+            20 0.06;
+            25 1.0;
+            30 0.85;
+            35 0.16;
+            40 0.0]
 
-bs = hlipmodel(
-		wth = w,
-		emergence = emergence,
-		onset = 20,
-		duration = 120,
-		rhlim = 90,
-		rainlim = 5,
-		H0 = 600,
-		I0 = 1,
-		RcA = RcA,
-		RcT = RcT,
-		RcOpt = 0.61,
-		p = 6,
-		i = 19,
-		Sx = 100000,
-		a = 1,
-		RRS = 0.01,
-		RRG = 0.1
+julia> bs=hlipmodel(;
+        wth=w,
+        emergence=emergence,
+        onset=20,
+        duration=120,
+        rhlim=90,
+        rainlim=5,
+        H0=600,
+        I0=1,
+        RcA=RcA,
+        RcT=RcT,
+        RcOpt=0.61,
+        p=6,
+        i=19,
+        Sx=100000,
+        a=1.0,
+        RRS=0.01,
+        RRG=0.1
 )
 ```
+
 # References
+
 Savary, S., Nelson, A., Willocquet, L., Pangga, I., and Aunario,  J. Modeling and mapping potential epidemics of rice diseases globally. _Crop Protection_, Volume 34, 2012, Pages 6-
 17, ISSN 0261-2194 DOI: [10.1016/j.cropro.2011.11.009](http://dx.doi.org/10.1016/j.cropro.2011.11.009).

@@ -107,7 +107,7 @@ version = "0.27.23"
 deps = ["CSV", "DataFrames", "Dates", "Interpolations"]
 path = ".."
 uuid = "d615ab0b-2698-48af-b78f-a26123a77087"
-version = "0.1.0"
+version = "0.2.1"
 
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]

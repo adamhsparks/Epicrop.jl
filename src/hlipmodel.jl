@@ -1,22 +1,19 @@
 """
-    hlipmodel(
-        wth::DataFrames.AbstractDataFrame,
-        emergence::Dates.Date,
-        onset::Int,
-        duration::Int,
-        rhlim::Int,
-        rainlim::Int,
-        H0::Int,
-        I0::Int,
-        RcA::Matrix{Float64},
-        RcT::Matrix{Float64},
-        RcOpt::Float64,
-        p::Int,
-        i::Int,
-        Sx::Int,
-        a::Float64,
-        RRS::Float64,
-        RRG::Float64,
+    hlipmodel(;
+    wth::DataFrames.AbstractDataFrame,
+    rhlim::Int,
+    rainlim::Int,
+    H0::Int,
+    I0::Int,
+    RcA::Matrix{Float64},
+    RcT::Matrix{Float64},
+    RcOpt::Float64,
+    p::Int,
+    i::Int,
+    Sx::Int,
+    a::Float64,
+    RRS::Float64,
+    RRG::Float64,
     )
 
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
@@ -24,10 +21,10 @@ curve values for respective crop diseases.
 
 ## Keywords
 
-- `wth`: `DataFrames:DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
+- `wth`: a `DataFrames::AbstractDataFrame` of weather on a daily time-step containing data with the following values.
     - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY``:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)`
+    - `DOY`:  Consecutive day of year, commonly called "Julian date"
+    - `TEMP`: Mean daily temperature (°C)
     - `RHUM`: Mean daily relative humidity (%)
     - `RAIN`: Mean daily rainfall (mm)
 - `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
@@ -99,27 +96,45 @@ julia> bs=hlipmodel(;
 
 ## Returns
 
-A `DataFrame` with the model's output. Latitude and longitude are included for mapping
-purposes if they are present in the input weather data.
+A `DataFrame` with the model's output with the following fields and values.
+
+| Field | Value |
+|-------|-------------|
+|simday | Zero indexed day of simulation that was run |
+|dates |  Date of simulation |
+|sites | Total number of sites present on day "x" |
+|latent | Number of latent sites present on day "x" |
+|infectious | Number of infectious sites present on day "x" |
+|removed | Number of removed sites present on day "x" |
+|senesced | Number of senesced sites present on day "x" |
+|rateinf | Rate of infection |
+|rtransfer | Rate of transfer from latent to infectious sites |
+|rgrowth | Rate of growth of healthy sites |
+|rsenesced | Rate of senescence of healthy sites |
+|diseased | Number of diseased (latent + infectious + removed) sites |
+|intensity | Number of diseased sites as a proportion of total sites |
+|audpc | Area under the disease progress curve for the whole of simulated season |
+|lat | Latitude value as provided by `wth` object |
+|lon | Longitude value as provided by `wth` object |
 """
 function hlipmodel(;
-    wth::DataFrames.AbstractDataFrame,
-    emergence::Dates.Date,
-    onset::Int,
-    duration::Int,
-    rhlim::Int,
-    rainlim::Int,
-    H0::Int,
-    I0::Int,
-    RcA::Matrix{Float64},
-    RcT::Matrix{Float64},
-    RcOpt::Float64,
-    p::Int,
-    i::Int,
-    Sx::Int,
-    a::Float64,
-    RRS::Float64,
-    RRG::Float64,
+ wth::DataFrames.DataFrame,
+        emergence::Dates.Date,
+        onset::Int64,
+        duration::Int64,
+        rhlim::Int64,
+        rainlim::Int64,
+        H0::Int64,
+        I0::Int64,
+        RcA::Matrix{Float64},
+        RcT::Matrix{Float64},
+        RcOpt::Float64,
+        p::Int64,
+        i::Int64,
+        Sx::Int64,
+        a::Float64,
+        RRS::Float64,
+        RRG::Float64,
 )
 
     final_day=emergence + Dates.Day(duration - 1)
@@ -143,7 +158,7 @@ function hlipmodel(;
 
 
     return (
-        _hliploop(
+        _hliploop(;
         season=season,
         season_wth=season_wth,
         onset=onset,
