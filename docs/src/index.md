@@ -73,9 +73,8 @@ tungro
 
 ## Advanced Use
 
-
-Epicrop.jl provides a basic function, `hlipmodel`, that can be used to predict unmanaged plant disease epidemics given the proper inputs.
-Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight, tungro and are included as helper functions that simplify running the model, [`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref), and [`tungro`](@ref).
+Epicrop.jl provides a basic function, `hlipmodel`, that can be used to predict unmanaged plant disease epidemics given the proper input.
+Predefined values for the EPIRICE model can be found in Savary _et al._ (2012) for the following diseases of rice: bacterial blight, brown spot, leaf blast, sheath blight and tungro and are included as helper functions, [`bacterialblight`](@ref), [`brownspot`](@ref), [`leafblast`](@ref), [`sheathblight`](@ref), and [`tungro`](@ref), that simplify using the model's interface.
 Given other parameters, the model framework is capable of modelling other diseases using the methods as described by Savary _et al._ (2012).
 
 ```@docs
