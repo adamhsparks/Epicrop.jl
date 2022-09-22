@@ -19,29 +19,53 @@
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for respective crop diseases.
 
-## Keywords
+## Input
 
-- `wth`: a `DataFrames::AbstractDataFrame` of weather on a daily time-step containing data with the following values.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601)
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
-- `onset`: `Int`,  expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
-- `duration`: `Int`,  simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
-- `rhlim`: `Int`, threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
-- `rainlim`: `Int`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
-- `H0`: `Int`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
-- `I0`: `Int`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: `Matrix{Float64}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
-- `p`: `Int`, duration of latent period. From Table 1 Savary _et al._ 2012.
-- `Sx`: `Int`, maximum number of sites. From Table 1 Savary _et al._ 2012.
-- `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
-- `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
-- `RRG`: `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `wth` -- a `DataFrames::AbstractDataFrame` of weather on a daily time-step containing data with the following values.
+    - `YYYYMMDD` -- Date as Year Month Day, YYYY-MM-DD, (ISO8601)
+    - `DOY` --  Consecutive day of year, commonly called "Julian date"
+    - `TEMP` -- Mean daily temperature (°C)
+    - `RHUM` -- Mean daily relative humidity (%)
+    - `RAIN` -- Mean daily rainfall (mm)
+- `emergence` -- `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
+- `onset` -- `Int`,  expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration` -- `Int`,  simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
+- `rhlim` -- `Int`, threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim` -- `Int`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `H0` -- `Int`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
+- `I0` -- `Int`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
+- `RcA` -- `Matrix{Float64}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT` -- `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt` -- `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `p` -- `Int`, duration of latent period. From Table 1 Savary _et al._ 2012.
+- `Sx` -- `Int`, maximum number of sites. From Table 1 Savary _et al._ 2012.
+- `a` -- `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS` -- `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG` -- `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.
+
+## Output
+
+A `DataFrame` with the model's output with the following fields and values.
+
+| Field | Value |
+|-------|-------------|
+|simday | Zero indexed day of simulation that was run |
+|dates |  Date of simulation |
+|sites | Total number of sites present on day "x" |
+|latent | Number of latent sites present on day "x" |
+|infectious | Number of infectious sites present on day "x" |
+|removed | Number of removed sites present on day "x" |
+|senesced | Number of senesced sites present on day "x" |
+|rateinf | Rate of infection |
+|rtransfer | Rate of transfer from latent to infectious sites |
+|rgrowth | Rate of growth of healthy sites |
+|rsenesced | Rate of senescence of healthy sites |
+|diseased | Number of diseased (latent + infectious + removed) sites |
+|intensity | Number of diseased sites as a proportion of total sites |
+|audpc | Area under the disease progress curve for the whole of simulated season |
+|lat | Latitude value as provided by `wth` object |
+|lon | Longitude value as provided by `wth` object |
+
 
 ## Examples
 
@@ -94,28 +118,6 @@ julia> bs=hlipmodel(;
 )
 ```
 
-## Returns
-
-A `DataFrame` with the model's output with the following fields and values.
-
-| Field | Value |
-|-------|-------------|
-|simday | Zero indexed day of simulation that was run |
-|dates |  Date of simulation |
-|sites | Total number of sites present on day "x" |
-|latent | Number of latent sites present on day "x" |
-|infectious | Number of infectious sites present on day "x" |
-|removed | Number of removed sites present on day "x" |
-|senesced | Number of senesced sites present on day "x" |
-|rateinf | Rate of infection |
-|rtransfer | Rate of transfer from latent to infectious sites |
-|rgrowth | Rate of growth of healthy sites |
-|rsenesced | Rate of senescence of healthy sites |
-|diseased | Number of diseased (latent + infectious + removed) sites |
-|intensity | Number of diseased sites as a proportion of total sites |
-|audpc | Area under the disease progress curve for the whole of simulated season |
-|lat | Latitude value as provided by `wth` object |
-|lon | Longitude value as provided by `wth` object |
 """
 function hlipmodel(;
  wth::DataFrames.DataFrame,
