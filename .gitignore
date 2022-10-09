@@ -18,3 +18,5 @@ docs/build/index.html
 docs/build/search_index.js
 
 docs/build/search/index.html
+test/Manifest.toml
+docs/build/assets/README/index.html

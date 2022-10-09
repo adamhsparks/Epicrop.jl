@@ -1,15 +1,19 @@
 
-using CSV
-using Dates
 using DataFrames
+using DelimitedFiles
 using Epicrop
 using Test
 
 @testset "hlipmodel tests" begin
+    data, header = readdlm(joinpath(
+                                    dirname(pathof(Epicrop)),
+                                        "..", "docs", "src", "assets",
+                                            "POWER_data_LB_PHI_2000_ws.csv"),
+                                    ',', header=true)
 
-    w=CSV.read(string(pkgdir(Epicrop), "/data/POWER_data_LB_PHI_2000_ws.csv"), DataFrame)
+    w = DataFrame(data, vec(header))
 
-    emergence = Dates.Date("2000-07-01", Dates.DateFormat("yyyy-mm-dd"))
+    emergence = "2000-07-01"
 
     RcA = [0 0.35;
             20 0.35;
@@ -49,33 +53,10 @@ using Test
     @test ncol(bs) == 16
     @test isapprox(bs[120, 13], 0.03413, atol=0.0001)
 
-    # check for stop if supplied args are inappropriate
-    @testset "emergence is a Date object" begin
-        @test_throws TypeError hlipmodel(;
-            wth=w,
-            emergence="2000-07-01",
-            onset=20,
-            duration=120,
-            rhlim=90,
-            rainlim=5,
-            H0=600,
-            I0=1,
-            RcA=RcA,
-            RcT=RcT,
-            RcOpt=0.61,
-            p=6,
-            i=19,
-            Sx=100000,
-            a=1.0,
-            RRS=0.01,
-            RRG=0.1
-        )
-    end
-
     @testset "weather data align with duration and emergence" begin
         @test_throws DomainError hlipmodel(;
             wth=w,
-            emergence=Dates.Date("2001-07-01", Dates.DateFormat("yyyy-mm-dd")),
+            emergence="2001-07-01",
             onset=20,
             duration=120,
             rhlim=90,

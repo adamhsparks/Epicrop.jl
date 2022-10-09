@@ -1,9 +1,9 @@
 
 module Epicrop
 
-using CSV
 using DataFrames
 using Dates
+using DelimitedFiles
 using Interpolations
 
 include("hlipmodel.jl")
