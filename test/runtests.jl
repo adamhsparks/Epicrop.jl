@@ -2,7 +2,10 @@
 using DataFrames
 using DelimitedFiles
 using Epicrop
+using Aqua
 using Test
+
+Aqua.test_all(Epicrop)
 
 @testset "hlipmodel tests" begin
     data, header = readdlm(joinpath(
