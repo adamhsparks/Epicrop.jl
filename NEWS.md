@@ -6,7 +6,13 @@
 
 * Enforce data types for user-provided inputs
 
-* Helper functions now use positional arguments rather than keyword
+* Helper functions now use positional arguments rather than keyword for greater simplicty
+
+* Helper functions allow for the use of season durations but default to 120 days
+
+* Remove CSV.jl from package examples for quicker compilation times
+
+* `emergence` no longer must be encoded as a `Dates.Date` but rather just an `AbstractString` value
 
 ### Bug fixes
 
