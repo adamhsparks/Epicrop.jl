@@ -121,9 +121,6 @@ julia> bs = hlipmodel(;
         RRS=0.01,
         RRG=0.1
 )
-
-# output
-
 ```
 
 """
