@@ -45,25 +45,25 @@ curve values for respective crop diseases.
 
 ## Output
 
-A `DataFrames.AbstractDataFrame` with the model's output with the following columns and
+A `DataFrames.AbstractDataFrame` with the model's output with the following fields and
 values.
 
-- simday: Zero indexed day of simulation that was run.
-- dates:  Date of simulation.
-- sites: Total number of sites present on day "x".
-- latent: Number of latent sites present on day "x".
-- infectious: Number of infectious sites present on day "x".
-- removed: Number of removed sites present on day "x".
-- senesced: Number of senesced sites present on day "x".
-- rateinf: Rate of infection.
-- rtransfer: Rate of transfer from latent to infectious sites.
-- rgrowth: Rate of growth of healthy sites.
-- rsenesced: Rate of senescence of healthy sites.
-- diseased: Number of diseased (latent + infectious + removed) sites.
-- intensity: Number of diseased sites as a proportion of total sites.
-- audpc: Area under the disease progress curve for the whole of simulated season.
-- lat: Latitude value as provided by `wth` object.
-- lon: Longitude value as provided by `wth` object.
+- `simday::Int64`: the zero indexed day of simulation that was run.
+- `dates::Dates.Date`: the date of the simulation.
+- `sites::Float64`: the otal number of sites present on day "x".
+- `latent::Float64`: the number of latent sites present on day "x".
+- `infectious::Float64`:: the number of infectious sites present on day "x".
+- `removed::Float64`: the number of removed sites present on day "x".
+- `senesced::Float64`: the number of senesced sites present on day "x".
+- `rateinf::Float64`: the rate of infection.
+- `rtransfer::Float64`: the rate of transfer from latent to infectious sites.
+- `rgrowth::Float64`: the rate of growth of healthy sites.
+- `rsenesced::Float64`: the rate of senescence of healthy sites.
+- `diseased::Float64`: the number of diseased (latent + infectious + removed) sites.
+- `intensity::Float64`: the number of diseased sites as a proportion of total sites.
+- `audpc::Float64`: the area under the disease progress curve for the whole of simulated season.
+- `lat::Float64`: the latitude value as provided by `wth` object.
+- `lon::Float64`: the longitude value as provided by `wth` object.
 
 ## Examples
 
