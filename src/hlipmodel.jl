@@ -38,7 +38,7 @@ curve values for respective crop diseases.
 - `RcT`: `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
 - `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
 - `p`: `Integer`, duration of latent period. From Table 1 Savary _et al._ 2012.
-- `Sx`: `Integer`, maximum number of sites. From Table 1 Savary _et al._ 2012.
+- `Sx::Int64`: the maximum number of sites. From Table 1 Savary _et al._ 2012.
 - `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
 - `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
 - `RRG`: `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.

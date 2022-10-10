@@ -5,18 +5,18 @@
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice bacterial blight _Xanthomonas oryzae_ pv. _oryzae_.
 
-## Input
+## Arguments
 
-- `wth`: `DataFrames.DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601) format either as an `AbstractString` or `Dates.Date`
-    - `DOY`: Consecutive day of year, commonly called "Julian date" as an `Int64`
-    - `TEMP`: Mean daily temperature (°C) as aa `Float64`
-    - `RHUM`: Mean daily relative humidity (%) as a `Float64`
-    - `RAIN`: Mean daily rainfall (mm) as a `Float64`
-- `emergence`: expected date of plant emergence as an `AbstractString`. From Table 1 Savary _et al._ 2012.
-- `duration`: duration of the growing season in days as an `Int64` value, defaults to 120 as in Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days), defaults to 120 as in Savary _et al._ 2012. From Table 1 Savary _et al._ 2012.
 
-## Output
+## Returns
 
 A `DataFrames.DataFrame` with predictions for bacterial blight severity.
 Latitude and longitude are included for mapping purposes if they are present in the input
@@ -108,18 +108,18 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice brown spot caused by _Cochliobolus miyabeanus_.
 
-## Input
+## Arguments
 
-- `wth`: `DataFrames.DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601) format either as an `AbstractString` or `Dates.Date`
-    - `DOY`: Consecutive day of year, commonly called "Julian date" as an `Int64`
-    - `TEMP`: Mean daily temperature (°C) as aa `Float64`
-    - `RHUM`: Mean daily relative humidity (%) as a `Float64`
-    - `RAIN`: Mean daily rainfall (mm) as a `Float64`
-- `emergence`: expected date of plant emergence as an `AbstractString`. From Table 1 Savary _et al._ 2012.
-- `duration`: duration of the growing season in days as an `Int64` value, defaults to 120 as in Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days), defaults to 120 as in Savary _et al._ 2012. From Table 1 Savary _et al._ 2012.
 
-## Output
+## Returns
 
 A `DataFrames.DataFrame` with predictions for brown spot severity.
 Latitude and longitude are included for mapping purposes if they are present in the input weather data.
@@ -200,18 +200,18 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice leaf blast caused by _Magnaporthe oryzae_.
 
-## Input
+## Arguments
 
-- `wth`: `DataFrames.DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601) format either as an `AbstractString` or `Dates.Date`
-    - `DOY`: Consecutive day of year, commonly called "Julian date" as an `Int64`
-    - `TEMP`: Mean daily temperature (°C) as aa `Float64`
-    - `RHUM`: Mean daily relative humidity (%) as a `Float64`
-    - `RAIN`: Mean daily rainfall (mm) as a `Float64`
-- `emergence`: expected date of plant emergence as an `AbstractString`. From Table 1 Savary _et al._ 2012.
-- `duration`: duration of the growing season in days as an `Int64` value, defaults to 120 as in Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days), defaults to 120 as in Savary _et al._ 2012. From Table 1 Savary _et al._ 2012.
 
-## Output
+## Returns
 
 A `DataFrames.DataFrame` with predictions for leaf blast severity.
 Latitude and longitude are included for mapping purposes if they are present in the input
@@ -305,18 +305,18 @@ end
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for rice sheath blight caused by _Rhizoctonia solani_ AG1-1A Kühn.
 
-## Input
+## Arguments
 
-- `wth`: `DataFrames.DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601) format either as an `AbstractString` or `Dates.Date`
-    - `DOY`: Consecutive day of year, commonly called "Julian date" as an `Int64`
-    - `TEMP`: Mean daily temperature (°C) as aa `Float64`
-    - `RHUM`: Mean daily relative humidity (%) as a `Float64`
-    - `RAIN`: Mean daily rainfall (mm) as a `Float64`
-- `emergence`: expected date of plant emergence as an `AbstractString`. From Table 1 Savary _et al._ 2012.
-- `duration`: duration of the growing season in days as an `Int64` value, defaults to 120 as in Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days), defaults to 120 as in Savary _et al._ 2012. From Table 1 Savary _et al._ 2012.
 
-## Output
+## Returns
 
 A `DataFrames.DataFrame` with predictions for sheath blight severity.
 Latitude and longitude are included for mapping purposes if they are present in the input
@@ -408,18 +408,18 @@ Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data a
 curve values for rice tungro disease caused by _Rice Tungro Spherical_ and
 _Rice Tungro Bacilliform_ viruses.
 
-## Input
+## Arguments
 
-- `wth`: `DataFrames.DataFrame` a data frame of weather on a daily time-step containing data with the following field names.
-    - `YYYYMMDD`: Date as Year Month Day, YYYY-MM-DD, (ISO8601) format either as an `AbstractString` or `Dates.Date`
-    - `DOY`: Consecutive day of year, commonly called "Julian date" as an `Int64`
-    - `TEMP`: Mean daily temperature (°C) as aa `Float64`
-    - `RHUM`: Mean daily relative humidity (%) as a `Float64`
-    - `RAIN`: Mean daily rainfall (mm) as a `Float64`
-- `emergence`: expected date of plant emergence as an `AbstractString`. From Table 1 Savary _et al._ 2012.
-- `duration`: duration of the growing season in days as an `Int64` value, defaults to 120 as in Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days), defaults to 120 as in Savary _et al._ 2012. From Table 1 Savary _et al._ 2012.
 
-## Output
+## Returns
 
 A `DataFrames.DataFrame` with predictions for tungro incidence.
 Latitude and longitude are included for mapping purposes if they are present in the input
@@ -452,8 +452,6 @@ julia> w = DataFrame(data, vec(header))
 julia> emergence = "2000-07-01"
 
 julia> tungro(w, emergence)
-
-# output
 ```
 
 """
