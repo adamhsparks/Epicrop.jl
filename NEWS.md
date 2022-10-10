@@ -6,7 +6,7 @@
 
 * Enforce data types for user-provided inputs
 
-* Helper functions now use positional arguments rather than keyword for greater simplicty
+* Helper functions now use positional arguments rather than keyword for greater simplicity
 
 * Helper functions allow for the use of season durations but default to 120 days
 
