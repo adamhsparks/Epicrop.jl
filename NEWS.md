@@ -12,7 +12,7 @@
 
 * Remove CSV.jl from package examples for quicker compilation times
 
-* `emergence` no longer must be encoded as a `Dates.Date` but rather just an `AbstractString` value
+* `emergence` no longer must be encoded as a `Dates.Date` an `AbstractString` value is also accepted
 
 ### Bug fixes
 
