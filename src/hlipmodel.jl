@@ -19,33 +19,34 @@
 Run a healthy-latent-infectious-postinfectious (HLIP) model using weather data and optimal
 curve values for respective crop diseases.
 
-## Input
+## Keywords
 
-- `wth`: a `Matrix{Any}` of weather on a daily time-step containing data with the following values.
-    - `YYYYMMDD`: Date as in ISO8601 format, _i.e._, YYYY-MM-DD
-    - `DOY`:  Consecutive day of year, commonly called "Julian date"
-    - `TEMP`: Mean daily temperature (°C)
-    - `RHUM`: Mean daily relative humidity (%)
-    - `RAIN`: Mean daily rainfall (mm)
-- `emergence`: `Dates.Date` expected date of plant emergence entered as a `Dates.Date` object. From Table 1 Savary _et al._ 2012.
-- `onset`: `Integer`,  expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
-- `duration`: `Integer`,  simulation duration (growing season length). From Table 1 Savary _et al._ 2012.
-- `rhlim`: `Integer`, threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
-- `rainlim`: `Integer`, threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
-- `H0`: `Integer`, initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
-- `I0`: `Integer`, initial number of infective sites. From Table 1 Savary _et al._ 2012.
-- `RcA`: `Matrix{Float64}`, crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcT`: `Matrix{Float64}`, temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
-- `RcOpt`: `Float64`, potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
-- `p`: `Integer`, duration of latent period. From Table 1 Savary _et al._ 2012.
+- `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
+    - `TEMP::AbstractFloat`: the mean daily temperature (°C)
+    - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
+    - `RAIN::AbstractFloat`: the mean daily rainfall (mm)
+- `emergence::Union{AbstractString, Dates.Date}`: the expected date of plant emergence. From Table 1 Savary _et al._ 2012.
+- `onset::Int64`: the expected number of days until the onset of disease after emergence date. From Table 1 Savary _et al._ 2012.
+- `duration::Int64`: the simulation duration (growing season length in days). From Table 1 Savary _et al._ 2012.
+- `rhlim::Int64`: the threshold to decide whether leaves are wet or not (usually 90%). From Table 1 Savary _et al._ 2012.
+- `rainlim::Int64`: the threshold to decide whether leaves are wet or not. From Table 1 Savary _et al._ 2012.
+- `H0::Int64`: the initial number of plant's healthy sites. From Table 1 Savary _et al._ 2012.
+- `I0::Int64`: the initial number of infective sites. From Table 1 Savary _et al._ 2012.
+- `RcA::Matrix{Float64}`: a crop age modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcT::Matrix{Float64}`: a temperature modifier for *Rc* (the basic infection rate corrected for removals). From Table 1 Savary _et al._ 2012.
+- `RcOpt::Float64`: the potential basic infection rate corrected for removals. From Table 1 Savary _et al._ 2012.
+- `p::Int64`: the duration of latent period. From Table 1 Savary _et al._ 2012.
 - `Sx::Int64`: the maximum number of sites. From Table 1 Savary _et al._ 2012.
-- `a`: `Float64`, aggregation coefficient. From Table 1 Savary _et al._ 2012.
-- `RRS`: `Float64`, relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
-- `RRG`: `Float64`, relative rate of growth. From Table 1 Savary _et al._ 2012.
+- `a::Float64`: an aggregation coefficient. From Table 1 Savary _et al._ 2012.
+- `RRS::Float64`: the relative rate of physiological senescence. From Table 1 Savary _et al._ 2012.
+- `RRG::Float64`: the relative rate of growth. From Table 1 Savary _et al._ 2012.
 
 ## Output
 
-A `Matrix{Any}` with the model's output with the following columns and values.
+A `DataFrames.AbstractDataFrame` with the model's output with the following columns and
+values.
 
 - simday: Zero indexed day of simulation that was run.
 - dates:  Date of simulation.
@@ -126,7 +127,7 @@ julia> bs = hlipmodel(;
 """
 function hlipmodel(;
         wth::DataFrames.AbstractDataFrame,
-        emergence::AbstractString,
+        emergence::Union{AbstractString, Dates.Date},
         onset::Int64,
         duration::Int64,
         rhlim::Int64,
@@ -144,7 +145,10 @@ function hlipmodel(;
         RRG::Float64,
 )
 
-    emergence = Dates.Date(emergence, Dates.DateFormat("yyyy-mm-dd"))
+    if !(emergence isa Dates.Date)
+        emergence = Dates.Date(emergence, Dates.DateFormat("yyyy-mm-dd"))
+    end
+
     final_day = emergence + Dates.Day(duration - 1)
     season = Base.collect(emergence:Dates.Day(1):final_day)
 
@@ -167,7 +171,6 @@ function hlipmodel(;
     end
 
     season_wth = wth[Base.in(season).(wth[:, 1]), :]
-
 
     return (
         _hliploop(;
