@@ -1,7 +1,7 @@
 name = "Epicrop"
 uuid = "d615ab0b-2698-48af-b78f-a26123a77087"
 authors = ["Adam H. Sparks"]
-version = "0.2.1"
+version = "1.0.0"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
