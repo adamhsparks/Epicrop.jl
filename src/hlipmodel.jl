@@ -72,8 +72,6 @@ Using data downloaded and saved from NASA POWER for Los Baños, Calabarzon, PH.
 ```julia
 julia> using Epicrop
 
-julia> using CSV
-
 julia> using DelimitedFiles
 
 julia> using DataFrames
@@ -82,11 +80,11 @@ julia> data, header = readdlm(joinpath(
                                 dirname(pathof(Epicrop)),
                                     "..", "docs", "src", "assets",
                                         "POWER_data_LB_PHI_2000_ws.csv"),
-                                ',', header=true)
+                                ',', header=true);
 
-julia> w = DataFrame(data, vec(header))
+julia> w = DataFrame(data, vec(header));
 
-julia> emergence = "2000-07-01"
+julia> emergence = "2000-07-01";
 
 julia> RcA = [0 0.35;
             20 0.35;
@@ -94,14 +92,14 @@ julia> RcA = [0 0.35;
             60 0.47;
             80 0.59;
             100 0.71;
-            120 1.0]
+            120 1.0];
 
 julia> RcT = [15 0.0;
             20 0.06;
             25 1.0;
             30 0.85;
             35 0.16;
-            40 0.0]
+            40 0.0];
 
 julia> bs = hlipmodel(;
         wth=w,
@@ -120,8 +118,29 @@ julia> bs = hlipmodel(;
         Sx=100000,
         a=1.0,
         RRS=0.01,
-        RRG=0.1
-)
+        RRG=0.1)
+
+        120×16 DataFrame
+        Row │ simday  dates       sites      latent    infectious  removed   senesced ⋯
+            │ Int64   Date        Float64    Float64   Float64     Float64   Float64  ⋯
+       ─────┼──────────────────────────────────────────────────────────────────────────
+          1 │      1  2000-07-01    600.0       0.0         0.0      0.0         0.0  ⋯
+          2 │      2  2000-07-02    653.64      0.0         0.0      0.0         6.0
+          3 │      3  2000-07-03    712.04      0.0         0.0      0.0        12.53
+          4 │      4  2000-07-04    775.617     0.0         0.0      0.0        19.65
+          5 │      5  2000-07-05    844.821     0.0         0.0      0.0        27.41 ⋯
+          6 │      6  2000-07-06    920.141     0.0         0.0      0.0        35.86
+          7 │      7  2000-07-07   1002.11      0.0         0.0      0.0        45.06
+          8 │      8  2000-07-08   1091.29      0.0         0.0      0.0        55.08
+            │   ⋮         ⋮           ⋮         ⋮          ⋮          ⋮          ⋮    ⋱
+        114 │    114  2000-10-22  87883.5    1038.79      454.187   70.2366  49807.5  ⋯
+        115 │    115  2000-10-23  87923.0     941.617     542.256   79.3388  50695.5
+        116 │    116  2000-10-24  87958.1     825.098     648.67    89.4445  51584.8
+        117 │    117  2000-10-25  87988.2     686.497     775.218  101.498   52476.4
+        118 │    118  2000-10-26  87594.1     959.018     936.18   101.498   53356.3  ⋯
+        119 │    119  2000-10-27  87095.0    1332.85     1097.35   101.498   54232.2
+        120 │    120  2000-10-28  86500.7    1797.92     1259.08   101.498   55103.2
+                                                        10 columns and 105 rows omitted
 ```
 
 """
