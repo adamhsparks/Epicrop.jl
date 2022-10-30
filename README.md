@@ -29,7 +29,7 @@ You can copy and paste all commands to the REPL including the leading `julia>` p
 ## Using Epicrop.jl
 
 Epicrop.jl is a package that can be used to simulate disease epidemics.
-It provides a main function, `hlipmodel()` and five helper functions that enable users to quickly model bacterial blight, `bacterialblight()`; brown spot, `brownspot()`; leaf blast, `leafblast()`; sheath blight, `sheathblight()`; and tungro, `tungro()`, which require only two arguments to run, an object containing the weather data and the start of season date.
+It provides a main function, `hlipmodel()` and five helper functions that enable users to quickly model bacterial blight, `bacterialblight()`; brown spot, `brownspot()`; leaf blast, `leafblast()`; sheath blight, `sheathblight()`; and tungro, `tungro()`, which require only three arguments to run, an object containing the weather data, the start of season date and duration of the season.
 
 Please see the [documentation](https://adamhsparks.github.io/Epicrop.jl) for a full description of how to use the package.
 
