@@ -22,7 +22,7 @@ curve values for respective crop diseases.
 ## Keywords
 
 - `wth::DataFrames.AbstractDataFrame`: weather data on a daily time-step containing data with the following values.
-    - `YYYYMMDD::Union{AbstractString, Dates.Date}: the date in ISO8601 format, _i.e._, YYYY-MM-DD
+    - `YYYYMMDD::Union{AbstractString, Dates.Date}`: the date in ISO8601 format, _i.e._, YYYY-MM-DD
     - `DOY::Int64`: the consecutive day of year, commonly called "Julian date"
     - `TEMP::AbstractFloat`: the mean daily temperature (°C)
     - `RHUM::AbstractFloat`: the mean daily relative humidity (%)
