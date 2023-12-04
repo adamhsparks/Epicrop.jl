@@ -1,8 +1,12 @@
+
+# ATTENTION!
+
+All active development has ceased in this repository due to GitHub's continued pivot towards AI. It has moved to https://codeberg.org/adamhsparks/Epicrop.jl. This repository will be deleted in the future.
+
 # Epicrop.jl
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://adamhsparks.github.io/Epicrop.jl/stable/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://adamhsparks.github.io/Epicrop.jl/dev/)
-[![CI](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/adamhsparks/Epicrop.jl/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/adamhsparks/Epicrop.jl/branch/main/graph/badge.svg?token=Mmj7JbzCQK)](https://codecov.io/gh/adamhsparks/Epicrop.jl)
 [![DOI](https://zenodo.org/badge/347936071.svg)](https://zenodo.org/badge/latestdoi/347936071)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
